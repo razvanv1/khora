@@ -101,7 +101,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Brand Name */}
+          {/* Brand Name - H1 for SEO */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -112,18 +112,19 @@ export default function Home() {
             <span className="text-white">KH</span>
             <span style={{ color: '#00d4aa' }}>O</span>
             <span className="text-white">RA</span>
+            <span className="sr-only"> - Aplicație Premium de Nutriție Vegană</span>
           </motion.h1>
 
-          {/* Tagline */}
-          <motion.p
+          {/* Tagline - H2 for SEO */}
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-white/50 text-lg md:text-xl mb-10 text-center max-w-md"
+            className="text-white/50 text-lg md:text-xl mb-10 text-center max-w-md font-normal"
             style={{ fontFamily: 'Inter, sans-serif' }}
           >
-            Holistic Nutrition, Spatially Reimagined
-          </motion.p>
+            Nutriție Vegană Holistică, Reimaginată Spațial
+          </motion.h2>
 
           {/* CTA Button */}
           <motion.div
@@ -150,7 +151,8 @@ export default function Home() {
         </section>
 
         {/* Features Grid */}
-        <section className="px-6 pb-44">
+        <section className="px-6 pb-44" aria-label="Funcționalități principale">
+          <h2 className="sr-only">Funcționalitățile Aplicației Khora - Generator Rețete Vegane, Hidratare și Suplimente</h2>
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -276,7 +278,7 @@ function FeatureCard({
       >
         <span style={{ color }}>{icon}</span>
       </div>
-      <h3 className="text-white font-semibold text-lg mb-2">{title}</h3>
+      <h3 className="text-white font-semibold text-lg mb-2" role="heading" aria-level={3}>{title}</h3>
       <p className="text-white/50 text-sm leading-relaxed">{description}</p>
     </motion.div>
   );
