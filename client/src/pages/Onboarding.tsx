@@ -100,7 +100,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
 
   return (
     <div className="min-h-screen bg-[#0a1628] relative overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style={{ backgroundImage: 'url(/images/khora_onboarding.png)' }} />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style={{ backgroundImage: 'url(/images/khora_onboarding_bg.png)' }} />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/70 via-[#0a1628]/90 to-[#0a1628]" />
 
       <div className="relative z-10 min-h-screen px-6 pt-12 pb-24">

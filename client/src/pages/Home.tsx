@@ -54,7 +54,7 @@ export default function Home() {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
-        style={{ backgroundImage: 'url(/images/khora_hero_home.png)' }}
+        style={{ backgroundImage: 'url(/images/khora_hero_bg.png)' }}
       />
       
       {/* Gradient Overlay */}
