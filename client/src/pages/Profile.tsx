@@ -1,206 +1,265 @@
 /*
- * KHORA Profile Page
- * Design: Cosmic Nebula Interface - User settings & taste profile
+ * KHORA Profile Page - Premium Apple VisionOS 2026
+ * Design: Cosmic Blue + Golden Accent + Glassmorphism
+ * Limba: Română
+ * Features: Acces la onboarding, setări profil, statistici personalizate
  */
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { User, Settings, Target, Palette, Bell, LogOut } from "lucide-react";
-import CosmicBackground from "@/components/CosmicBackground";
+import { Link } from "wouter";
+import { 
+  User, 
+  Settings, 
+  RefreshCw, 
+  Activity,
+  Droplets,
+  Flame,
+  Target,
+  ChevronRight,
+  BookOpen,
+  LogOut
+} from "lucide-react";
 import Navigation from "@/components/Navigation";
-
-const tasteProfiles = [
-  { id: "sweet", label: "Sweet", emoji: "🍯", color: "#fbbf24", value: 3 },
-  { id: "sour", label: "Sour", emoji: "🍋", color: "#84cc16", value: 2 },
-  { id: "spicy", label: "Spicy", emoji: "🌶️", color: "#ef4444", value: 4 },
-  { id: "bitter", label: "Bitter", emoji: "🥬", color: "#22c55e", value: 2 },
-  { id: "umami", label: "Umami", emoji: "🍄", color: "#f59e0b", value: 5 },
-];
-
-const healthGoals = [
-  { id: "energy", label: "Energy & Vitality", emoji: "⚡", active: true },
-  { id: "detox", label: "Detox & Clarity", emoji: "🧘", active: false },
-  { id: "muscle", label: "Strength & Muscle", emoji: "💪", active: true },
-  { id: "relax", label: "Relaxation & Sleep", emoji: "😴", active: false },
-];
+import { useUserProfile, calculateMetrics } from "@/hooks/useUserProfile";
 
 export default function Profile() {
-  const [tastes, setTastes] = useState(tasteProfiles);
-  const [goals, setGoals] = useState(healthGoals);
+  const { profile, clearProfile } = useUserProfile();
+  const metrics = profile ? calculateMetrics(profile) : null;
 
-  const updateTaste = (id: string, value: number) => {
-    setTastes(prev => prev.map(t => t.id === id ? { ...t, value } : t));
-  };
-
-  const toggleGoal = (id: string) => {
-    setGoals(prev => prev.map(g => g.id === id ? { ...g, active: !g.active } : g));
+  const handleResetOnboarding = () => {
+    if (confirm('Vrei să refaci quiz-ul de personalizare? Datele actuale vor fi șterse.')) {
+      clearProfile();
+      window.location.href = '/onboarding';
+    }
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <CosmicBackground />
+    <div className="min-h-screen bg-[#0a1628] relative overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
+        style={{ backgroundImage: 'url(/images/khora_profile.png)' }}
+      />
       
-      <main className="relative z-10 min-h-screen pb-44">
-        <motion.header
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/60 via-[#0a1628]/80 to-[#0a1628]" />
+
+      {/* Content */}
+      <div className="relative z-10 min-h-screen px-6 pt-12 pb-32">
+        
+        {/* Header */}
+        <motion.header 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="pt-8 px-6"
+          className="text-center mb-8"
         >
-          <h1 className="text-3xl font-bold text-white mb-2" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
-            Profile
-          </h1>
-          <p className="text-white/50 text-sm">Customize your experience</p>
+          <h1 className="text-2xl font-light text-white mb-1">Profilul Meu</h1>
+          <p className="text-white/50 text-sm">Setări și personalizare</p>
         </motion.header>
 
-        {/* User Card */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+        {/* Profile Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="px-6 py-6"
+          className="p-6 rounded-3xl mb-6"
+          style={{
+            background: 'rgba(255, 255, 255, 0.04)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+          }}
         >
-          <div 
-            className="p-6 rounded-2xl flex items-center gap-4"
-            style={{
-              background: 'rgba(255, 255, 255, 0.06)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-            }}
-          >
+          {/* Avatar */}
+          <div className="flex items-center gap-4 mb-6">
             <div 
               className="w-16 h-16 rounded-full flex items-center justify-center"
-              style={{
-                background: 'linear-gradient(135deg, #00d4aa 0%, #00a388 100%)',
+              style={{ 
+                background: 'linear-gradient(135deg, rgba(212, 165, 116, 0.3) 0%, rgba(45, 212, 191, 0.3) 100%)',
+                border: '2px solid rgba(212, 165, 116, 0.5)'
               }}
             >
-              <User className="w-8 h-8 text-[#0a0f1a]" />
+              <User className="w-8 h-8 text-[#d4a574]" />
             </div>
             <div>
-              <h2 className="text-white font-semibold text-lg">Khora User</h2>
-              <p className="text-white/50 text-sm">Premium Member</p>
+              <h2 className="text-white font-medium text-lg">
+                {profile?.name || 'Utilizator'}
+              </h2>
+              <p className="text-white/50 text-sm">{profile?.email || 'Fără email'}</p>
             </div>
           </div>
-        </motion.section>
 
-        {/* Taste Profile */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="px-6 py-4"
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <Palette className="w-5 h-5 text-[#00d4aa]" />
-            <h2 className="text-white font-semibold">Taste Profile</h2>
-          </div>
-          
-          <div 
-            className="p-4 rounded-2xl space-y-4"
-            style={{
-              background: 'rgba(255, 255, 255, 0.04)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-            }}
-          >
-            {tastes.map(taste => (
-              <div key={taste.id} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-white/80 text-sm flex items-center gap-2">
-                    <span>{taste.emoji}</span>
-                    {taste.label}
-                  </span>
-                  <span className="text-white/40 text-xs">{taste.value}/5</span>
-                </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="5"
-                  value={taste.value}
-                  onChange={(e) => updateTaste(taste.id, parseInt(e.target.value))}
-                  className="w-full h-2 rounded-full appearance-none cursor-pointer"
-                  style={{
-                    background: `linear-gradient(to right, ${taste.color} 0%, ${taste.color} ${(taste.value / 5) * 100}%, rgba(255,255,255,0.1) ${(taste.value / 5) * 100}%, rgba(255,255,255,0.1) 100%)`,
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Health Goals */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="px-6 py-4"
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <Target className="w-5 h-5 text-[#ffb347]" />
-            <h2 className="text-white font-semibold">Health Goals</h2>
-          </div>
-          
-          <div className="grid grid-cols-2 gap-3">
-            {goals.map(goal => (
-              <motion.button
-                key={goal.id}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => toggleGoal(goal.id)}
-                className="p-4 rounded-xl text-left transition-all"
-                style={{
-                  background: goal.active 
-                    ? 'rgba(0, 212, 170, 0.15)' 
-                    : 'rgba(255, 255, 255, 0.04)',
-                  border: goal.active 
-                    ? '1px solid rgba(0, 212, 170, 0.3)' 
-                    : '1px solid rgba(255, 255, 255, 0.08)',
-                }}
+          {/* Stats Grid */}
+          {metrics && (
+            <div className="grid grid-cols-2 gap-3">
+              <div 
+                className="p-4 rounded-2xl"
+                style={{ background: 'rgba(255, 255, 255, 0.04)' }}
               >
-                <span className="text-2xl mb-2 block">{goal.emoji}</span>
-                <span className={`text-sm ${goal.active ? 'text-white' : 'text-white/60'}`}>
-                  {goal.label}
-                </span>
-              </motion.button>
-            ))}
-          </div>
-        </motion.section>
+                <div className="flex items-center gap-2 mb-2">
+                  <Flame className="w-4 h-4 text-[#d4a574]" />
+                  <span className="text-white/50 text-xs">BMR</span>
+                </div>
+                <p className="text-white font-semibold">{metrics.bmr} kcal</p>
+              </div>
+              
+              <div 
+                className="p-4 rounded-2xl"
+                style={{ background: 'rgba(255, 255, 255, 0.04)' }}
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <Activity className="w-4 h-4 text-[#2dd4bf]" />
+                  <span className="text-white/50 text-xs">TDEE</span>
+                </div>
+                <p className="text-white font-semibold">{metrics.tdee} kcal</p>
+              </div>
+              
+              <div 
+                className="p-4 rounded-2xl"
+                style={{ background: 'rgba(255, 255, 255, 0.04)' }}
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <Target className="w-4 h-4 text-green-400" />
+                  <span className="text-white/50 text-xs">Calorii Zilnice</span>
+                </div>
+                <p className="text-white font-semibold">{metrics.targetCalories} kcal</p>
+              </div>
+              
+              <div 
+                className="p-4 rounded-2xl"
+                style={{ background: 'rgba(255, 255, 255, 0.04)' }}
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <Droplets className="w-4 h-4 text-blue-400" />
+                  <span className="text-white/50 text-xs">Hidratare</span>
+                </div>
+                <p className="text-white font-semibold">{(metrics.dailyWaterMl / 1000).toFixed(1)} L</p>
+              </div>
+            </div>
+          )}
+        </motion.div>
 
-        {/* Settings */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="px-6 py-4"
+        {/* Menu Items */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="space-y-3"
         >
-          <div className="flex items-center gap-2 mb-4">
-            <Settings className="w-5 h-5 text-white/60" />
-            <h2 className="text-white font-semibold">Settings</h2>
-          </div>
-          
-          <div 
-            className="rounded-2xl overflow-hidden"
+          {/* Refă Quiz */}
+          <button
+            onClick={handleResetOnboarding}
+            className="w-full p-4 rounded-2xl flex items-center justify-between group"
             style={{
               background: 'rgba(255, 255, 255, 0.04)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
               border: '1px solid rgba(255, 255, 255, 0.08)',
             }}
           >
-            <button className="w-full p-4 flex items-center justify-between text-white/80 hover:bg-white/5 transition-colors">
-              <span className="flex items-center gap-3">
-                <Bell className="w-5 h-5" />
-                Notifications
-              </span>
-              <span className="text-white/40">→</span>
-            </button>
-            <div className="h-px bg-white/5" />
-            <button className="w-full p-4 flex items-center justify-between text-red-400 hover:bg-white/5 transition-colors">
-              <span className="flex items-center gap-3">
-                <LogOut className="w-5 h-5" />
-                Sign Out
-              </span>
-            </button>
-          </div>
-        </motion.section>
-      </main>
+            <div className="flex items-center gap-3">
+              <div 
+                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                style={{ background: 'rgba(212, 165, 116, 0.15)' }}
+              >
+                <RefreshCw className="w-5 h-5 text-[#d4a574]" />
+              </div>
+              <div className="text-left">
+                <h3 className="text-white font-medium text-sm">Refă Quiz-ul</h3>
+                <p className="text-white/40 text-xs">Actualizează preferințele tale</p>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors" />
+          </button>
 
+          {/* Blog */}
+          <Link href="/blog">
+            <div 
+              className="p-4 rounded-2xl flex items-center justify-between group cursor-pointer"
+              style={{
+                background: 'rgba(255, 255, 255, 0.04)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <div 
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ background: 'rgba(34, 197, 94, 0.15)' }}
+                >
+                  <BookOpen className="w-5 h-5 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-white font-medium text-sm">Blog Nutriție</h3>
+                  <p className="text-white/40 text-xs">Articole educative vegane</p>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors" />
+            </div>
+          </Link>
+
+          {/* Setări */}
+          <div 
+            className="p-4 rounded-2xl flex items-center justify-between group cursor-pointer opacity-50"
+            style={{
+              background: 'rgba(255, 255, 255, 0.04)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <div 
+                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                style={{ background: 'rgba(255, 255, 255, 0.1)' }}
+              >
+                <Settings className="w-5 h-5 text-white/60" />
+              </div>
+              <div>
+                <h3 className="text-white font-medium text-sm">Setări</h3>
+                <p className="text-white/40 text-xs">În curând</p>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-white/30" />
+          </div>
+
+          {/* Deconectare */}
+          <button
+            onClick={handleResetOnboarding}
+            className="w-full p-4 rounded-2xl flex items-center justify-between group"
+            style={{
+              background: 'rgba(239, 68, 68, 0.1)',
+              border: '1px solid rgba(239, 68, 68, 0.2)',
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <div 
+                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                style={{ background: 'rgba(239, 68, 68, 0.15)' }}
+              >
+                <LogOut className="w-5 h-5 text-red-400" />
+              </div>
+              <div className="text-left">
+                <h3 className="text-red-400 font-medium text-sm">Resetează Profilul</h3>
+                <p className="text-red-400/60 text-xs">Șterge toate datele</p>
+              </div>
+            </div>
+          </button>
+        </motion.div>
+
+        {/* Version */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-center text-white/20 text-xs mt-8"
+        >
+          KHORA v1.0 - Nutriție Holistică Vegană
+        </motion.p>
+      </div>
+
+      {/* Navigation */}
       <Navigation />
     </div>
   );
