@@ -86,7 +86,7 @@ export default function Pantry() {
     <div className="min-h-screen relative overflow-hidden">
       <CosmicBackground />
       
-      <main className="relative z-10 min-h-screen pb-32">
+      <main className="relative z-10 min-h-screen pb-44">
         {/* Header */}
         <motion.header
           initial={{ opacity: 0, y: -20 }}

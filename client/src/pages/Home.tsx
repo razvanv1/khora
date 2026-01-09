@@ -150,7 +150,7 @@ export default function Home() {
         </section>
 
         {/* Features Grid */}
-        <section className="px-6 pb-32">
+        <section className="px-6 pb-44">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}

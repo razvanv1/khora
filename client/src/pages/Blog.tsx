@@ -19,7 +19,7 @@ export default function Blog() {
     <div className="min-h-screen relative overflow-hidden">
       <CosmicBackground />
       
-      <main className="relative z-10 pb-32">
+      <main className="relative z-10 pb-44">
         {/* Header */}
         <motion.header
           initial={{ opacity: 0, y: -20 }}

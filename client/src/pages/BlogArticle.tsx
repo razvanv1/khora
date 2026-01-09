@@ -44,7 +44,7 @@ export default function BlogArticle() {
     <div className="min-h-screen relative overflow-hidden">
       <CosmicBackground />
       
-      <main className="relative z-10 pb-32">
+      <main className="relative z-10 pb-44">
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
