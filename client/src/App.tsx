@@ -9,6 +9,7 @@ import Pantry from "./pages/Pantry";
 import Blender from "./pages/Blender";
 import Recipes from "./pages/Recipes";
 import Hydration from "./pages/Hydration";
+import Supplements from "./pages/Supplements";
 import Profile from "./pages/Profile";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
@@ -21,11 +22,11 @@ function Router() {
       <Route path={"/blender"} component={Blender} />
       <Route path={"/recipes"} component={Recipes} />
       <Route path={"/hydrate"} component={Hydration} />
+      <Route path={"/supplements"} component={Supplements} />
       <Route path={"/profile"} component={Profile} />
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/:slug"} component={BlogArticle} />
       <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
   );

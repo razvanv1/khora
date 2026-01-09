@@ -17,11 +17,29 @@ import {
   categories, 
   getIngredientsByCategory, 
   searchIngredients, 
-  getHealthScoreColor,
-  getHealthScoreLabel,
-  getProcessingLabel,
   type Ingredient 
 } from "@/data/ingredients";
+
+// Helper functions for health score display
+function getHealthScoreColor(score: number): string {
+  if (score >= 9) return '#00d4aa';
+  if (score >= 7) return '#22c55e';
+  if (score >= 5) return '#fbbf24';
+  if (score >= 3) return '#f97316';
+  return '#ef4444';
+}
+
+function getHealthScoreLabel(score: number): string {
+  if (score >= 9) return 'Superfood';
+  if (score >= 7) return 'Sănătos';
+  if (score >= 5) return 'Moderat';
+  if (score >= 3) return 'Limitat';
+  return 'Evită';
+}
+
+function getProcessingLabel(isJunkFood: boolean): string {
+  return isJunkFood ? 'Ultra-procesat' : 'Minim procesat';
+}
 
 export default function Pantry() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -265,7 +283,7 @@ export default function Pantry() {
                       boxShadow: `0 0 30px ${category.color}30`,
                     }}
                   />
-                  <span className="text-3xl mb-2 block">{category.emoji}</span>
+                  <span className="text-3xl mb-2 block">{category.icon}</span>
                   <span className="text-white/80 text-xs font-medium">{category.name}</span>
                 </motion.button>
               ))}
@@ -621,7 +639,7 @@ export default function Pantry() {
                 </div>
 
                 {/* Junk Food Warning */}
-                {selectedIngredient.isJunkFood && selectedIngredient.warningNote && (
+                {selectedIngredient.isJunkFood && (
                   <div 
                     className="p-4 rounded-2xl mb-6"
                     style={{
@@ -632,8 +650,8 @@ export default function Pantry() {
                     <div className="flex items-start gap-3">
                       <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
                       <div>
-                        <p className="text-red-400 font-medium text-sm mb-1">⚠️ Atenție: Junk Food Vegan</p>
-                        <p className="text-white/60 text-sm">{selectedIngredient.warningNote}</p>
+                        <p className="text-red-400 font-medium text-sm mb-1">Atenție: Junk Food Vegan</p>
+                        <p className="text-white/60 text-sm">Acest produs este ultra-procesat. Consumă cu moderație.</p>
                       </div>
                     </div>
                   </div>
@@ -671,31 +689,29 @@ export default function Pantry() {
                 >
                   <span className="text-white/50 text-sm">Nivel de procesare</span>
                   <p className="text-white font-medium mt-1">
-                    {getProcessingLabel(selectedIngredient.processingLevel)}
+                    {getProcessingLabel(selectedIngredient.isJunkFood)}
                   </p>
                 </div>
 
-                {/* Nutritional Highlight */}
-                {selectedIngredient.nutritionalHighlight && (
-                  <div 
-                    className="p-4 rounded-xl mb-6"
+                {/* Health Score Highlight */}
+                <div 
+                  className="p-4 rounded-xl mb-6"
+                  style={{ 
+                    background: selectedIngredient.isJunkFood 
+                      ? 'rgba(239, 68, 68, 0.1)' 
+                      : 'rgba(0, 212, 170, 0.1)' 
+                  }}
+                >
+                  <span className="text-white/50 text-sm">Evaluare nutrițională</span>
+                  <p 
+                    className="font-medium mt-1"
                     style={{ 
-                      background: selectedIngredient.isJunkFood 
-                        ? 'rgba(239, 68, 68, 0.1)' 
-                        : 'rgba(0, 212, 170, 0.1)' 
+                      color: getHealthScoreColor(selectedIngredient.healthScore) 
                     }}
                   >
-                    <span className="text-white/50 text-sm">Punct forte nutrițional</span>
-                    <p 
-                      className="font-medium mt-1"
-                      style={{ 
-                        color: selectedIngredient.isJunkFood ? '#ef4444' : '#00d4aa' 
-                      }}
-                    >
-                      {selectedIngredient.nutritionalHighlight}
-                    </p>
-                  </div>
-                )}
+                    {getHealthScoreLabel(selectedIngredient.healthScore)} - Score {selectedIngredient.healthScore}/10
+                  </p>
+                </div>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-6">

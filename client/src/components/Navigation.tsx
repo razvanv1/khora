@@ -1,7 +1,6 @@
 /*
  * KHORA Navigation Component
- * Design: Cosmic Nebula Interface - Glassmorphism floating nav
- * Position: Fixed bottom for mobile-first
+ * Design: Premium Apple Glass - Clean navigation
  */
 
 import { Link, useLocation } from "wouter";
@@ -10,7 +9,7 @@ import {
   Compass, 
   ChefHat, 
   Droplets, 
-  User,
+  Pill,
   Sparkles,
   BookOpen
 } from "lucide-react";
@@ -18,9 +17,9 @@ import {
 const navItems = [
   { path: "/", icon: Compass, label: "Acasă" },
   { path: "/pantry", icon: Sparkles, label: "Cămară" },
-  { path: "/blender", icon: ChefHat, label: "Blender" },
+  { path: "/blender", icon: ChefHat, label: "Rețete" },
   { path: "/hydrate", icon: Droplets, label: "Hidratare" },
-  { path: "/blog", icon: BookOpen, label: "Blog" },
+  { path: "/supplements", icon: Pill, label: "Suplimente" },
 ];
 
 export default function Navigation() {
@@ -42,8 +41,7 @@ export default function Navigation() {
           boxShadow: '0 4px 24px -1px rgba(0, 0, 0, 0.3)',
         }}>
         {navItems.map((item) => {
-          const isActive = location === item.path || 
-            (item.path === "/blog" && location.startsWith("/blog"));
+          const isActive = location === item.path;
           const Icon = item.icon;
           
           return (

@@ -5,7 +5,28 @@
 
 import { motion } from "framer-motion";
 import { AlertTriangle, Star, Flame, Dumbbell } from "lucide-react";
-import { getHealthScoreColor, getHealthScoreLabel, getProcessingLabel, type Ingredient } from "@/data/ingredients";
+import type { Ingredient } from "@/data/ingredients";
+
+// Helper functions
+function getHealthScoreColor(score: number): string {
+  if (score >= 9) return '#00d4aa';
+  if (score >= 7) return '#22c55e';
+  if (score >= 5) return '#fbbf24';
+  if (score >= 3) return '#f97316';
+  return '#ef4444';
+}
+
+function getHealthScoreLabel(score: number): string {
+  if (score >= 9) return 'Superfood';
+  if (score >= 7) return 'Sănătos';
+  if (score >= 5) return 'Moderat';
+  if (score >= 3) return 'Limitat';
+  return 'Evită';
+}
+
+function getProcessingLabel(isJunkFood: boolean): string {
+  return isJunkFood ? 'Ultra-procesat' : 'Minim procesat';
+}
 
 interface HealthBadgeProps {
   ingredient: Ingredient;
@@ -60,10 +81,8 @@ export default function HealthBadge({ ingredient, size = "md", showDetails = fal
         >
           <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
           <div>
-            <p className="text-red-400 font-medium text-sm">⚠️ Junk Food Vegan</p>
-            {ingredient.warningNote && (
-              <p className="text-white/50 text-xs mt-1">{ingredient.warningNote}</p>
-            )}
+            <p className="text-red-400 font-medium text-sm">Junk Food Vegan</p>
+            <p className="text-white/50 text-xs mt-1">Produs ultra-procesat. Consumă cu moderație.</p>
           </div>
         </motion.div>
       )}
@@ -107,17 +126,11 @@ export default function HealthBadge({ ingredient, size = "md", showDetails = fal
           <span 
             className="px-2 py-0.5 rounded-full"
             style={{
-              background: ingredient.processingLevel === 'whole' ? 'rgba(0, 212, 170, 0.2)' :
-                         ingredient.processingLevel === 'minimal' ? 'rgba(34, 197, 94, 0.2)' :
-                         ingredient.processingLevel === 'processed' ? 'rgba(245, 158, 11, 0.2)' :
-                         'rgba(239, 68, 68, 0.2)',
-              color: ingredient.processingLevel === 'whole' ? '#00d4aa' :
-                     ingredient.processingLevel === 'minimal' ? '#22c55e' :
-                     ingredient.processingLevel === 'processed' ? '#f59e0b' :
-                     '#ef4444',
+              background: ingredient.isJunkFood ? 'rgba(239, 68, 68, 0.2)' : 'rgba(0, 212, 170, 0.2)',
+              color: ingredient.isJunkFood ? '#ef4444' : '#00d4aa',
             }}
           >
-            {getProcessingLabel(ingredient.processingLevel)}
+            {getProcessingLabel(ingredient.isJunkFood)}
           </span>
         </div>
       )}
