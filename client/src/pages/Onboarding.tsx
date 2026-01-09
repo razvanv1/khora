@@ -203,8 +203,12 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
               >
                 <Mail className="w-8 h-8 text-[#00d4aa]" />
               </div>
-              <h2 className="text-2xl font-bold text-white mb-2">Bine ai venit la Khora</h2>
-              <p className="text-white/60">Să începem cu datele tale de bază</p>
+              <h1 className="text-2xl font-bold text-white mb-2">Bine ai venit la Khora</h1>
+              <p className="text-white/60">Aplicație premium de nutriție vegană - Să începem cu datele tale de bază</p>
+            </div>
+            {/* SEO Keywords - Hidden but crawlable */}
+            <div className="sr-only">
+              <h2>Nutriție vegană, rețete vegane, plant-based, hidratare, suplimente vegane, superfoods, proteine vegetale</h2>
             </div>
 
             <div>
