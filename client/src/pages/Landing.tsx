@@ -87,8 +87,8 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          {/* Tagline */}
-          <motion.p
+          {/* Tagline - H2 for SEO */}
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -97,7 +97,7 @@ export default function Landing() {
             Dezvață ce ai crezut despre nutriția vegană.
             <br />
             <span className="text-[#d4a574]">Învață ce contează cu adevărat.</span>
-          </motion.p>
+          </motion.h2>
 
           {/* CTA Buttons */}
           <motion.div
