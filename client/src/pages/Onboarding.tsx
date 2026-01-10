@@ -444,34 +444,140 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <label className="text-white/70 text-sm block">Ce îți place?</label>
-                {[
-                  { key: 'breakfast', label: 'Mic dejun consistent' },
-                  { key: 'smoothies', label: 'Smoothie-uri' },
-                  { key: 'soups', label: 'Supe cremă' }
-                ].map((pref) => (
-                  <button
-                    key={pref.key}
-                    onClick={() => setFormData(prev => ({
-                      ...prev,
-                      mealPreferences: { 
-                        ...prev.mealPreferences, 
-                        [pref.key]: !prev.mealPreferences[pref.key as keyof typeof prev.mealPreferences] 
-                      }
-                    }))}
-                    className={`w-full p-3 rounded-xl text-left transition-all flex items-center justify-between ${
-                      formData.mealPreferences[pref.key as keyof typeof formData.mealPreferences]
-                        ? 'bg-[#d4a574]/20 border-[#d4a574]/50'
-                        : 'bg-white/5 border-white/10 hover:bg-white/10'
-                    } border`}
-                  >
-                    <span className="text-white">{pref.label}</span>
-                    {formData.mealPreferences[pref.key as keyof typeof formData.mealPreferences] && (
-                      <Check className="w-5 h-5 text-[#d4a574]" />
-                    )}
-                  </button>
-                ))}
+              {/* Mic dejun */}
+              <div className="space-y-2">
+                <label className="text-white/70 text-sm block">Mic dejun preferat</label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { key: 'smoothie', label: 'Smoothie' },
+                    { key: 'porridge', label: 'Porridge / Terci' },
+                    { key: 'toast', label: 'Toast / Pâine' },
+                    { key: 'fruits', label: 'Fructe proaspete' },
+                    { key: 'pancakes', label: 'Clătite vegane' },
+                    { key: 'granola', label: 'Granola' },
+                    { key: 'overnight-oats', label: 'Overnight oats' },
+                    { key: 'nothing', label: 'Nu mănânc dimineața' }
+                  ].map((pref) => (
+                    <button
+                      key={pref.key}
+                      onClick={() => setFormData(prev => ({
+                        ...prev,
+                        mealPreferences: { 
+                          ...prev.mealPreferences, 
+                          breakfastType: pref.key
+                        }
+                      }))}
+                      className={`p-3 rounded-xl text-center transition-all text-sm ${
+                        (formData.mealPreferences as any).breakfastType === pref.key
+                          ? 'bg-[#d4a574]/20 border-[#d4a574]/50 text-white'
+                          : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'
+                      } border`}
+                    >
+                      {pref.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Prânz */}
+              <div className="space-y-2">
+                <label className="text-white/70 text-sm block">Prânz preferat</label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { key: 'salad', label: 'Salată' },
+                    { key: 'soup', label: 'Supă / Ciorbă' },
+                    { key: 'sandwich', label: 'Sandwich / Wrap' },
+                    { key: 'bowl', label: 'Buddha Bowl' },
+                    { key: 'pasta', label: 'Paste' },
+                    { key: 'stir-fry', label: 'Stir-fry / Wok' },
+                    { key: 'curry', label: 'Curry / Tocăniță' },
+                    { key: 'rice', label: 'Orez cu legume' }
+                  ].map((pref) => (
+                    <button
+                      key={pref.key}
+                      onClick={() => setFormData(prev => ({
+                        ...prev,
+                        mealPreferences: { 
+                          ...prev.mealPreferences, 
+                          lunchType: pref.key
+                        }
+                      }))}
+                      className={`p-3 rounded-xl text-center transition-all text-sm ${
+                        (formData.mealPreferences as any).lunchType === pref.key
+                          ? 'bg-[#d4a574]/20 border-[#d4a574]/50 text-white'
+                          : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'
+                      } border`}
+                    >
+                      {pref.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Cină */}
+              <div className="space-y-2">
+                <label className="text-white/70 text-sm block">Cină preferată</label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { key: 'cooked', label: 'Gătit cald' },
+                    { key: 'salad', label: 'Salată ușoară' },
+                    { key: 'soup', label: 'Supă cremă' },
+                    { key: 'raw', label: 'Raw / Crude' },
+                    { key: 'roasted', label: 'Legume la cuptor' },
+                    { key: 'light', label: 'Ceva ușor' }
+                  ].map((pref) => (
+                    <button
+                      key={pref.key}
+                      onClick={() => setFormData(prev => ({
+                        ...prev,
+                        mealPreferences: { 
+                          ...prev.mealPreferences, 
+                          dinnerType: pref.key
+                        }
+                      }))}
+                      className={`p-3 rounded-xl text-center transition-all text-sm ${
+                        (formData.mealPreferences as any).dinnerType === pref.key
+                          ? 'bg-[#d4a574]/20 border-[#d4a574]/50 text-white'
+                          : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'
+                      } border`}
+                    >
+                      {pref.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Gustări */}
+              <div className="space-y-2">
+                <label className="text-white/70 text-sm block">Gustări preferate</label>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { key: 'fruits', label: 'Fructe' },
+                    { key: 'nuts', label: 'Nuci și semințe' },
+                    { key: 'dried', label: 'Fructe uscate' },
+                    { key: 'bars', label: 'Batoane energetice' },
+                    { key: 'hummus', label: 'Hummus cu legume' },
+                    { key: 'none', label: 'Nu ronțăi între mese' }
+                  ].map((pref) => (
+                    <button
+                      key={pref.key}
+                      onClick={() => setFormData(prev => ({
+                        ...prev,
+                        mealPreferences: { 
+                          ...prev.mealPreferences, 
+                          snackType: pref.key
+                        }
+                      }))}
+                      className={`p-3 rounded-xl text-center transition-all text-sm ${
+                        (formData.mealPreferences as any).snackType === pref.key
+                          ? 'bg-[#d4a574]/20 border-[#d4a574]/50 text-white'
+                          : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10'
+                      } border`}
+                    >
+                      {pref.label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <div>

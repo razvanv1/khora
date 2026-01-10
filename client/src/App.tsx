@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -14,10 +14,12 @@ import Profile from "./pages/Profile";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import Onboarding from "./pages/Onboarding";
+import Landing from "./pages/Landing";
 import { useUserProfile, UserProfile } from "./hooks/useUserProfile";
 
 function AppContent() {
   const { profile, isLoading, needsOnboarding, saveProfile } = useUserProfile();
+  const [location] = useLocation();
 
   const handleOnboardingComplete = (newProfile: UserProfile) => {
     saveProfile(newProfile);
@@ -26,24 +28,39 @@ function AppContent() {
   // Show loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0a0f1a] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a1628] flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 rounded-full border-4 border-[#00d4aa]/20 border-t-[#00d4aa] animate-spin mx-auto mb-4" />
+          <div className="w-16 h-16 rounded-full border-4 border-[#2dd4bf]/20 border-t-[#2dd4bf] animate-spin mx-auto mb-4" />
           <p className="text-white/60">Se încarcă...</p>
         </div>
       </div>
     );
   }
 
-  // Show onboarding if not completed
+  // If user needs onboarding and is not on landing or onboarding page, show Landing
   if (needsOnboarding) {
-    return <Onboarding onComplete={handleOnboardingComplete} />;
+    // Allow access to landing, onboarding, and blog pages without onboarding
+    if (location === '/onboarding') {
+      return <Onboarding onComplete={handleOnboardingComplete} />;
+    }
+    if (location.startsWith('/blog')) {
+      return (
+        <Switch>
+          <Route path={"/blog"} component={Blog} />
+          <Route path={"/blog/:slug"} component={BlogArticle} />
+          <Route component={Landing} />
+        </Switch>
+      );
+    }
+    // Show Landing page for new users
+    return <Landing />;
   }
 
-  // Main app router
+  // Main app router for users who completed onboarding
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/landing"} component={Landing} />
       <Route path={"/pantry"} component={Pantry} />
       <Route path={"/blender"} component={Blender} />
       <Route path={"/recipes"} component={Recipes} />
