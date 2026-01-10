@@ -16,6 +16,10 @@ import BlogArticle from "./pages/BlogArticle";
 import Onboarding from "./pages/Onboarding";
 import Landing from "./pages/Landing";
 import Admin from "./pages/Admin";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import Cookies from "./pages/Cookies";
+import Contact from "./pages/Contact";
 import { useUserProfile, UserProfile } from "./hooks/useUserProfile";
 
 function AppContent() {
@@ -52,6 +56,11 @@ function AppContent() {
         </Switch>
       );
     }
+    // Allow access to legal pages without onboarding
+    if (location === '/terms') return <Terms />;
+    if (location === '/privacy') return <Privacy />;
+    if (location === '/cookies') return <Cookies />;
+    if (location === '/contact') return <Contact />;
     // Show Landing page for new users
     return <Landing />;
   }
@@ -74,6 +83,10 @@ function AppContent() {
         <Onboarding onComplete={handleOnboardingComplete} />
       </Route>
       <Route path={"/admin"} component={Admin} />
+      <Route path={"/terms"} component={Terms} />
+      <Route path={"/privacy"} component={Privacy} />
+      <Route path={"/cookies"} component={Cookies} />
+      <Route path={"/contact"} component={Contact} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
