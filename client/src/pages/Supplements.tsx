@@ -191,8 +191,8 @@ export default function Supplements() {
         {/* Add Modal */}
         <AnimatePresence>
           {showAddModal && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: 'rgba(0,0,0,0.6)' }} onClick={() => setShowAddModal(false)}>
-              <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', damping: 25 }} className="w-full max-w-lg p-6 rounded-t-3xl max-h-[85vh] overflow-y-auto" style={{ background: '#0f1729', border: '1px solid rgba(255, 255, 255, 0.1)' }} onClick={e => e.stopPropagation()}>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ background: 'rgba(0,0,0,0.6)' }} onClick={() => setShowAddModal(false)}>
+              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} transition={{ type: 'spring', damping: 25 }} className="w-full max-w-lg p-6 rounded-2xl max-h-[80vh] overflow-y-auto" style={{ background: '#0f1729', border: '1px solid rgba(255, 255, 255, 0.1)' }} onClick={e => e.stopPropagation()}>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-medium text-white">Adaugă Supliment</h2>
                   <button onClick={() => setShowAddModal(false)} className="text-white/50 hover:text-white"><X className="w-6 h-6" /></button>
