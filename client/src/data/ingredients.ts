@@ -13,6 +13,8 @@ export interface Ingredient {
   healthScore: number;
   calories: number;
   protein: number;
+  fat?: number;      // grăsimi per 100g (opțional)
+  fiber?: number;    // fibre per 100g (opțional)
   isJunkFood: boolean;
   tags: string[];
 }
@@ -51,6 +53,13 @@ export const categories: Category[] = [
   { id: "bauturi", name: "Băuturi", color: "#3b82f6", icon: "☕" },
   { id: "suplimente", name: "Suplimente", color: "#a855f7", icon: "💊" },
   { id: "junk-vegan", name: "Junk Food Vegan", color: "#ef4444", icon: "⚠️" },
+  { id: "ingrosatori", name: "Îngroșători", color: "#8b5cf6", icon: "🧪" },
+  { id: "baze-supe", name: "Baze Supe", color: "#f59e0b", icon: "🍲" },
+  { id: "panificatie", name: "Panificație", color: "#d97706", icon: "🍞" },
+  { id: "snackuri", name: "Snackuri", color: "#f59e0b", icon: "🥣" },
+  { id: "dulciuri", name: "Dulciuri", color: "#78350f", icon: "🍫" },
+  { id: "plante-medicinale", name: "Plante Medicinale", color: "#059669", icon: "🌿" },
+  { id: "cheese-vegan", name: "Cheese Vegan", color: "#fbbf24", icon: "🧀" },
 ];
 
 export const ingredients: Ingredient[] = [
@@ -367,6 +376,173 @@ export const ingredients: Ingredient[] = [
   { id: "jf009", name: "Băuturi energizante vegane", category: "junk-vegan", emoji: "⚠️", color: "#ef4444", healthScore: 1, calories: 45, protein: 0, isJunkFood: true, tags: ["zahăr", "cofeină", "aditivi"] },
   { id: "jf010", name: "Bacon vegan", category: "junk-vegan", emoji: "⚠️", color: "#ef4444", healthScore: 2, calories: 300, protein: 10, isJunkFood: true, tags: ["procesat", "sodiu", "aditivi"] },
   { id: "jf011", name: "Burgeri vegani", category: "junk-vegan", emoji: "⚠️", color: "#ef4444", healthScore: 4, calories: 250, protein: 19, isJunkFood: true, tags: ["procesat", "rapid"] },
+
+  // ===== OȚET & AROME =====
+  { id: "oa001", name: "Oțet de vin roșu", category: "otet-arome", emoji: "🍷", color: "#7c3aed", healthScore: 7, calories: 19, protein: 0, isJunkFood: false, tags: ["acid", "vinaigrette"] },
+  { id: "oa002", name: "Oțet balsamic", category: "otet-arome", emoji: "🍷", color: "#7c3aed", healthScore: 7, calories: 88, protein: 0.5, isJunkFood: false, tags: ["italian", "dulce-acid"] },
+  { id: "oa003", name: "Oțet de mere", category: "otet-arome", emoji: "🍎", color: "#7c3aed", healthScore: 8, calories: 21, protein: 0, isJunkFood: false, tags: ["digestie", "detox"] },
+  { id: "oa004", name: "Mirin", category: "otet-arome", emoji: "🍶", color: "#7c3aed", healthScore: 5, calories: 241, protein: 0.3, isJunkFood: false, tags: ["japonez", "dulce"] },
+  { id: "oa005", name: "Esență de vanilie", category: "otet-arome", emoji: "🌸", color: "#7c3aed", healthScore: 6, calories: 288, protein: 0.1, isJunkFood: false, tags: ["deserturi", "aromat"] },
+  { id: "oa006", name: "Extract de migdale", category: "otet-arome", emoji: "🥜", color: "#7c3aed", healthScore: 6, calories: 288, protein: 0.1, isJunkFood: false, tags: ["deserturi", "aromat"] },
+  { id: "oa007", name: "Vin roșu pentru gătit", category: "otet-arome", emoji: "🍷", color: "#7c3aed", healthScore: 5, calories: 85, protein: 0.1, isJunkFood: false, tags: ["sosuri", "francez"] },
+  { id: "oa008", name: "Vin alb pentru gătit", category: "otet-arome", emoji: "🍷", color: "#7c3aed", healthScore: 5, calories: 82, protein: 0.1, isJunkFood: false, tags: ["sosuri", "risotto"] },
+
+  // ===== ÎNGROȘĂTORI & GELIFIANTI =====
+  { id: "ig001", name: "Pectină", category: "ingrosatori", emoji: "🧪", color: "#8b5cf6", healthScore: 7, calories: 162, protein: 0, isJunkFood: false, tags: ["gem", "gelifiant"] },
+  { id: "ig002", name: "Xanthan gum", category: "ingrosatori", emoji: "🧪", color: "#8b5cf6", healthScore: 6, calories: 333, protein: 0, isJunkFood: false, tags: ["stabilizator", "fără-gluten"] },
+  { id: "ig003", name: "Guar gum", category: "ingrosatori", emoji: "🧪", color: "#8b5cf6", healthScore: 6, calories: 0, protein: 0, isJunkFood: false, tags: ["fibre", "stabilizator"] },
+  { id: "ig004", name: "Amidon de porumb", category: "ingrosatori", emoji: "🧪", color: "#8b5cf6", healthScore: 5, calories: 381, protein: 0.3, isJunkFood: false, tags: ["îngroșător", "sosuri"] },
+  { id: "ig005", name: "Amidon de cartof", category: "ingrosatori", emoji: "🧪", color: "#8b5cf6", healthScore: 5, calories: 357, protein: 0.1, isJunkFood: false, tags: ["îngroșător", "fără-gluten"] },
+  { id: "ig006", name: "Gellan gum", category: "ingrosatori", emoji: "🧪", color: "#8b5cf6", healthScore: 6, calories: 0, protein: 0, isJunkFood: false, tags: ["gelifiant", "vegan"] },
+
+  // ===== BAZE SUPE & STOCURI =====
+  { id: "bs001", name: "Bulion de legume", category: "baze-supe", emoji: "🍲", color: "#f59e0b", healthScore: 7, calories: 13, protein: 0.5, isJunkFood: false, tags: ["bază", "supe"] },
+  { id: "bs002", name: "Stoc de ciuperci", category: "baze-supe", emoji: "🍲", color: "#f59e0b", healthScore: 8, calories: 15, protein: 0.7, isJunkFood: false, tags: ["umami", "intens"] },
+  { id: "bs003", name: "Cuburi legume", category: "baze-supe", emoji: "🍲", color: "#f59e0b", healthScore: 5, calories: 200, protein: 5, isJunkFood: false, tags: ["rapid", "sare"] },
+  { id: "bs004", name: "Stoc de legume concentrat", category: "baze-supe", emoji: "🍲", color: "#f59e0b", healthScore: 6, calories: 30, protein: 1, isJunkFood: false, tags: ["intens", "bază"] },
+
+  // ===== PANIFICAȚIE & CONSERVARE =====
+  { id: "pa001", name: "Drojdie proaspătă", category: "panificatie", emoji: "🍞", color: "#d97706", healthScore: 8, calories: 105, protein: 8.4, isJunkFood: false, tags: ["pâine", "B-vitamine"] },
+  { id: "pa002", name: "Drojdie uscată activă", category: "panificatie", emoji: "🍞", color: "#d97706", healthScore: 8, calories: 325, protein: 40.4, isJunkFood: false, tags: ["pâine", "depozitare"] },
+  { id: "pa003", name: "Bicarbonat de sodiu", category: "panificatie", emoji: "🍞", color: "#d97706", healthScore: 5, calories: 0, protein: 0, isJunkFood: false, tags: ["afânător", "curățare"] },
+  { id: "pa004", name: "Praf de copt", category: "panificatie", emoji: "🍞", color: "#d97706", healthScore: 5, calories: 53, protein: 0, isJunkFood: false, tags: ["afânător", "prăjituri"] },
+  { id: "pa005", name: "Malț de orz", category: "panificatie", emoji: "🍞", color: "#d97706", healthScore: 6, calories: 361, protein: 10.3, isJunkFood: false, tags: ["pâine", "îndulcitor"] },
+  { id: "pa006", name: "Lapte vegetal praf", category: "panificatie", emoji: "🍞", color: "#d97706", healthScore: 6, calories: 496, protein: 26.3, isJunkFood: false, tags: ["depozitare", "prăjituri"] },
+
+  // ===== SNACKURI & TOPPINGURI =====
+  { id: "sn001", name: "Granola", category: "snackuri", emoji: "🥣", color: "#f59e0b", healthScore: 7, calories: 489, protein: 10.5, isJunkFood: false, tags: ["mic-dejun", "fibre"] },
+  { id: "sn002", name: "Muesli fără miere", category: "snackuri", emoji: "🥣", color: "#f59e0b", healthScore: 8, calories: 340, protein: 9.7, isJunkFood: false, tags: ["mic-dejun", "raw"] },
+  { id: "sn003", name: "Fulgi de cocos", category: "snackuri", emoji: "🥥", color: "#f59e0b", healthScore: 7, calories: 660, protein: 6.9, isJunkFood: false, tags: ["topping", "tropical"] },
+  { id: "sn004", name: "Chipsuri de kale", category: "snackuri", emoji: "🥬", color: "#f59e0b", healthScore: 9, calories: 200, protein: 10, isJunkFood: false, tags: ["snack-sănătos", "fibre"] },
+  { id: "sn005", name: "Crackers integrali", category: "snackuri", emoji: "🍘", color: "#f59e0b", healthScore: 6, calories: 440, protein: 9.5, isJunkFood: false, tags: ["snack", "fibre"] },
+  { id: "sn006", name: "Migdale prăjite", category: "snackuri", emoji: "🥜", color: "#f59e0b", healthScore: 8, calories: 598, protein: 21, isJunkFood: false, tags: ["snack", "proteine"] },
+  { id: "sn007", name: "Semințe de mac", category: "snackuri", emoji: "🌱", color: "#f59e0b", healthScore: 8, calories: 525, protein: 18, isJunkFood: false, tags: ["topping", "calciu"] },
+  { id: "sn008", name: "Linte prăjită crunch", category: "snackuri", emoji: "🫘", color: "#f59e0b", healthScore: 9, calories: 352, protein: 25, isJunkFood: false, tags: ["snack-sănătos", "proteine"] },
+
+  // ===== DULCIURI & COFETĂRIE =====
+  { id: "du001", name: "Cacao pudră", category: "dulciuri", emoji: "🍫", color: "#78350f", healthScore: 9, calories: 228, protein: 19.6, isJunkFood: false, tags: ["antioxidanți", "magneziu"] },
+  { id: "du002", name: "Ciocolată neagră 70%", category: "dulciuri", emoji: "🍫", color: "#78350f", healthScore: 7, calories: 598, protein: 7.8, isJunkFood: false, tags: ["antioxidanți", "desert"] },
+  { id: "du003", name: "Chipsuri ciocolată vegane", category: "dulciuri", emoji: "🍫", color: "#78350f", healthScore: 5, calories: 479, protein: 4.5, isJunkFood: false, tags: ["prăjituri", "desert"] },
+  { id: "du004", name: "Zahăr pudră", category: "dulciuri", emoji: "🍬", color: "#78350f", healthScore: 3, calories: 389, protein: 0, isJunkFood: false, tags: ["glazură", "desert"] },
+  { id: "du005", name: "Cremă de caju deserturi", category: "dulciuri", emoji: "🍨", color: "#78350f", healthScore: 7, calories: 553, protein: 18, isJunkFood: false, tags: ["raw", "cremos"] },
+  { id: "du006", name: "Nibs de cacao", category: "dulciuri", emoji: "🍫", color: "#78350f", healthScore: 10, calories: 228, protein: 14, isJunkFood: false, tags: ["raw", "antioxidanți", "superfood"] },
+
+  // ===== PLANTE MEDICINALE & ADAPTOGENI =====
+  { id: "pm001", name: "Ginseng", category: "plante-medicinale", emoji: "🌿", color: "#059669", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["adaptogen", "energie", "cognitiv"] },
+  { id: "pm002", name: "Reishi", category: "plante-medicinale", emoji: "🍄", color: "#059669", healthScore: 10, calories: 0, protein: 0, isJunkFood: false, tags: ["adaptogen", "imunitate", "somn"] },
+  { id: "pm003", name: "Lion's Mane", category: "plante-medicinale", emoji: "🍄", color: "#059669", healthScore: 10, calories: 0, protein: 0, isJunkFood: false, tags: ["cognitiv", "nervos", "focus"] },
+  { id: "pm004", name: "Cordyceps", category: "plante-medicinale", emoji: "🍄", color: "#059669", healthScore: 10, calories: 0, protein: 0, isJunkFood: false, tags: ["energie", "sport", "rezistență"] },
+  { id: "pm005", name: "Chaga", category: "plante-medicinale", emoji: "🍄", color: "#059669", healthScore: 10, calories: 0, protein: 0, isJunkFood: false, tags: ["antioxidanți", "imunitate"] },
+  { id: "pm006", name: "Mucuna pruriens", category: "plante-medicinale", emoji: "🌿", color: "#059669", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["dopamină", "stare", "hormoni"] },
+  { id: "pm007", name: "Schisandra", category: "plante-medicinale", emoji: "🫐", color: "#059669", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["adaptogen", "ficat", "energie"] },
+  { id: "pm008", name: "Tulsi (Busuioc Sfânt)", category: "plante-medicinale", emoji: "🌿", color: "#059669", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["stres", "adaptogen", "ayurveda"] },
+  { id: "pm009", name: "Gotu Kola", category: "plante-medicinale", emoji: "🌿", color: "#059669", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["cognitiv", "piele", "circulație"] },
+  { id: "pm010", name: "Eleuthero", category: "plante-medicinale", emoji: "🌿", color: "#059669", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["adaptogen", "rezistență", "energie"] },
+  { id: "pm011", name: "Astragalus", category: "plante-medicinale", emoji: "🌿", color: "#059669", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["imunitate", "longevitate", "TCM"] },
+  { id: "pm012", name: "Shatavari", category: "plante-medicinale", emoji: "🌿", color: "#059669", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["hormoni", "feminin", "ayurveda"] },
+
+  // ===== INGREDIENTE PENTRU CHEESE VEGAN =====
+  { id: "cv001", name: "Caju crud înmuiat", category: "cheese-vegan", emoji: "🧀", color: "#fbbf24", healthScore: 9, calories: 553, protein: 18, isJunkFood: false, tags: ["bază-cheese", "cremos"] },
+  { id: "cv002", name: "Migdale înmuiate", category: "cheese-vegan", emoji: "🧀", color: "#fbbf24", healthScore: 9, calories: 579, protein: 21, isJunkFood: false, tags: ["bază-cheese", "ricotta"] },
+  { id: "cv003", name: "Tapioca pentru elasticitate", category: "cheese-vegan", emoji: "🧀", color: "#fbbf24", healthScore: 5, calories: 358, protein: 0.2, isJunkFood: false, tags: ["mozzarella", "stretchy"] },
+  { id: "cv004", name: "Lapte cocos cremă", category: "cheese-vegan", emoji: "🧀", color: "#fbbf24", healthScore: 7, calories: 230, protein: 2.3, isJunkFood: false, tags: ["cremos", "deserturi"] },
+  { id: "cv005", name: "Culturi lactice vegane", category: "cheese-vegan", emoji: "🧀", color: "#fbbf24", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["fermentare", "iaurt"] },
+
+  // ===== LEGUME SUPLIMENTARE =====
+  { id: "le001", name: "Anghinare", category: "legume-fructe", emoji: "🌿", color: "#22c55e", healthScore: 9, calories: 47, protein: 3.3, isJunkFood: false, tags: ["fibre", "ficat", "prebiotice"] },
+  { id: "le002", name: "Sparanghel", category: "legume-fructe", emoji: "🌿", color: "#22c55e", healthScore: 10, calories: 20, protein: 2.2, isJunkFood: false, tags: ["folat", "detox", "premium"] },
+  { id: "le003", name: "Avocado", category: "legume-fructe", emoji: "🥑", color: "#22c55e", healthScore: 10, calories: 160, protein: 2, isJunkFood: false, tags: ["grăsimi-sănătoase", "potasiu", "superfood"] },
+  { id: "le004", name: "Țelină tulpină", category: "legume-fructe", emoji: "🥬", color: "#22c55e", healthScore: 9, calories: 16, protein: 0.7, isJunkFood: false, tags: ["hidratare", "low-cal", "detox"] },
+  { id: "le005", name: "Fenicul bulb", category: "legume-fructe", emoji: "🌿", color: "#22c55e", healthScore: 9, calories: 31, protein: 1.2, isJunkFood: false, tags: ["digestie", "aromat"] },
+  { id: "le006", name: "Pak choi", category: "legume-frunze", emoji: "🥬", color: "#22c55e", healthScore: 10, calories: 13, protein: 1.5, isJunkFood: false, tags: ["calciu", "asiatic", "vitamina-K"] },
+  { id: "le007", name: "Bok choy", category: "legume-frunze", emoji: "🥬", color: "#22c55e", healthScore: 10, calories: 13, protein: 1.5, isJunkFood: false, tags: ["calciu", "asiatic"] },
+  { id: "le008", name: "Radicchio", category: "legume-frunze", emoji: "🥬", color: "#a855f7", healthScore: 9, calories: 23, protein: 1.4, isJunkFood: false, tags: ["amar", "italian", "antioxidanți"] },
+  { id: "le009", name: "Andive", category: "legume-frunze", emoji: "🥬", color: "#22c55e", healthScore: 9, calories: 17, protein: 1.3, isJunkFood: false, tags: ["amar", "belgian", "fibre"] },
+  { id: "le010", name: "Frunze de nap", category: "legume-frunze", emoji: "🥬", color: "#22c55e", healthScore: 10, calories: 32, protein: 1.5, isJunkFood: false, tags: ["calciu", "vitamina-K"] },
+  { id: "le011", name: "Swiss chard", category: "legume-frunze", emoji: "🥬", color: "#22c55e", healthScore: 10, calories: 19, protein: 1.8, isJunkFood: false, tags: ["magneziu", "fier", "colorat"] },
+  { id: "le012", name: "Collard greens", category: "legume-frunze", emoji: "🥬", color: "#22c55e", healthScore: 10, calories: 32, protein: 3, isJunkFood: false, tags: ["calciu", "vitamina-K", "southern"] },
+  { id: "le013", name: "Broccolini", category: "legume-radacinoase", emoji: "🥦", color: "#22c55e", healthScore: 10, calories: 35, protein: 3.7, isJunkFood: false, tags: ["vitamina-C", "premium"] },
+  { id: "le014", name: "Romanesco", category: "legume-radacinoase", emoji: "🥦", color: "#22c55e", healthScore: 10, calories: 25, protein: 2.5, isJunkFood: false, tags: ["vitamina-C", "fractal", "premium"] },
+  { id: "le015", name: "Kohlrabi", category: "legume-radacinoase", emoji: "🥬", color: "#22c55e", healthScore: 9, calories: 27, protein: 1.7, isJunkFood: false, tags: ["vitamina-C", "low-carb"] },
+
+  // ===== FRUCTE SUPLIMENTARE =====
+  { id: "fx001", name: "Papaya", category: "fructe", emoji: "🍈", color: "#f97316", healthScore: 9, calories: 43, protein: 0.5, isJunkFood: false, tags: ["enzime", "digestie", "tropical"] },
+  { id: "fx002", name: "Guava", category: "fructe", emoji: "🍈", color: "#22c55e", healthScore: 10, calories: 68, protein: 2.6, isJunkFood: false, tags: ["vitamina-C-maxim", "tropical"] },
+  { id: "fx003", name: "Passion fruit", category: "fructe", emoji: "🍇", color: "#a855f7", healthScore: 9, calories: 97, protein: 2.2, isJunkFood: false, tags: ["fibre", "tropical", "aromat"] },
+  { id: "fx004", name: "Dragon fruit", category: "fructe", emoji: "🍈", color: "#ec4899", healthScore: 8, calories: 60, protein: 1.2, isJunkFood: false, tags: ["antioxidanți", "exotic"] },
+  { id: "fx005", name: "Lychee", category: "fructe", emoji: "🍇", color: "#f472b6", healthScore: 7, calories: 66, protein: 0.8, isJunkFood: false, tags: ["vitamina-C", "asiatic"] },
+  { id: "fx006", name: "Rambutan", category: "fructe", emoji: "🍇", color: "#ef4444", healthScore: 7, calories: 82, protein: 0.7, isJunkFood: false, tags: ["exotic", "asiatic"] },
+  { id: "fx007", name: "Durian", category: "fructe", emoji: "🍈", color: "#fbbf24", healthScore: 7, calories: 147, protein: 1.5, isJunkFood: false, tags: ["exotic", "energie", "controversat"] },
+  { id: "fx008", name: "Carambola (Star fruit)", category: "fructe", emoji: "⭐", color: "#fbbf24", healthScore: 8, calories: 31, protein: 1, isJunkFood: false, tags: ["vitamina-C", "decorativ"] },
+  { id: "fx009", name: "Caise", category: "fructe", emoji: "🍑", color: "#f97316", healthScore: 9, calories: 48, protein: 1.4, isJunkFood: false, tags: ["beta-caroten", "potasiu"] },
+  { id: "fx010", name: "Piersici", category: "fructe", emoji: "🍑", color: "#f97316", healthScore: 8, calories: 39, protein: 0.9, isJunkFood: false, tags: ["vitamina-C", "vară"] },
+  { id: "fx011", name: "Nectarine", category: "fructe", emoji: "🍑", color: "#f97316", healthScore: 8, calories: 44, protein: 1.1, isJunkFood: false, tags: ["vitamina-C", "vară"] },
+  { id: "fx012", name: "Cireșe", category: "fructe", emoji: "🍒", color: "#dc2626", healthScore: 9, calories: 63, protein: 1.1, isJunkFood: false, tags: ["antioxidanți", "somn", "melatonină"] },
+  { id: "fx013", name: "Vișine", category: "fructe", emoji: "🍒", color: "#dc2626", healthScore: 9, calories: 50, protein: 1, isJunkFood: false, tags: ["antiinflamator", "recuperare"] },
+  { id: "fx014", name: "Prune proaspete", category: "fructe", emoji: "🍇", color: "#6b21a8", healthScore: 8, calories: 46, protein: 0.7, isJunkFood: false, tags: ["digestie", "fibre"] },
+  { id: "fx015", name: "Rodii", category: "fructe", emoji: "🍎", color: "#dc2626", healthScore: 10, calories: 83, protein: 1.7, isJunkFood: false, tags: ["antioxidanți", "inimă", "superfood"] },
+  { id: "fx016", name: "Coacăze negre", category: "fructe", emoji: "🫐", color: "#1e1b4b", healthScore: 10, calories: 63, protein: 1.4, isJunkFood: false, tags: ["vitamina-C", "antioxidanți"] },
+  { id: "fx017", name: "Coacăze roșii", category: "fructe", emoji: "🍇", color: "#dc2626", healthScore: 9, calories: 56, protein: 1.4, isJunkFood: false, tags: ["vitamina-C", "fibre"] },
+  { id: "fx018", name: "Agrișe", category: "fructe", emoji: "🍇", color: "#22c55e", healthScore: 9, calories: 44, protein: 0.9, isJunkFood: false, tags: ["vitamina-C", "fibre"] },
+
+  // ===== CIUPERCI SUPLIMENTARE =====
+  { id: "cx001", name: "Ciuperci cremini", category: "ciuperci", emoji: "🍄", color: "#a8a29e", healthScore: 9, calories: 22, protein: 3.1, isJunkFood: false, tags: ["umami", "versatil"] },
+  { id: "cx002", name: "King oyster", category: "ciuperci", emoji: "🍄", color: "#a8a29e", healthScore: 9, calories: 35, protein: 3.3, isJunkFood: false, tags: ["textură-carne", "asiatic"] },
+  { id: "cx003", name: "Chanterelle", category: "ciuperci", emoji: "🍄", color: "#fbbf24", healthScore: 9, calories: 38, protein: 1.5, isJunkFood: false, tags: ["gourmet", "aromat"] },
+  { id: "cx004", name: "Morel", category: "ciuperci", emoji: "🍄", color: "#a8a29e", healthScore: 9, calories: 31, protein: 3.1, isJunkFood: false, tags: ["gourmet", "rar", "premium"] },
+  { id: "cx005", name: "Black truffle", category: "ciuperci", emoji: "🍄", color: "#1e1b4b", healthScore: 8, calories: 284, protein: 5.5, isJunkFood: false, tags: ["luxury", "aromat", "premium"] },
+  { id: "cx006", name: "Ciuperci de pădure mix", category: "ciuperci", emoji: "🍄", color: "#a8a29e", healthScore: 9, calories: 30, protein: 2.5, isJunkFood: false, tags: ["wild", "aromat"] },
+
+  // ===== CONDIMENTE SUPLIMENTARE =====
+  { id: "co017", name: "Cardamom", category: "condimente", emoji: "🌶️", color: "#22c55e", healthScore: 9, calories: 311, protein: 10.8, isJunkFood: false, tags: ["aromat", "indian", "digestie"] },
+  { id: "co018", name: "Nucșoară", category: "condimente", emoji: "🌶️", color: "#a16207", healthScore: 8, calories: 525, protein: 5.8, isJunkFood: false, tags: ["aromat", "deserturi"] },
+  { id: "co019", name: "Sumac", category: "condimente", emoji: "🌶️", color: "#dc2626", healthScore: 9, calories: 239, protein: 5, isJunkFood: false, tags: ["acid", "oriental", "antioxidanți"] },
+  { id: "co020", name: "Za'atar", category: "condimente", emoji: "🌶️", color: "#22c55e", healthScore: 9, calories: 276, protein: 9.1, isJunkFood: false, tags: ["oriental", "amestec"] },
+  { id: "co021", name: "Harissa", category: "condimente", emoji: "🌶️", color: "#dc2626", healthScore: 8, calories: 77, protein: 3, isJunkFood: false, tags: ["picant", "african-nord"] },
+  { id: "co022", name: "Ras el hanout", category: "condimente", emoji: "🌶️", color: "#f97316", healthScore: 8, calories: 300, protein: 10, isJunkFood: false, tags: ["marocan", "amestec"] },
+  { id: "co023", name: "Berbere", category: "condimente", emoji: "🌶️", color: "#dc2626", healthScore: 8, calories: 300, protein: 10, isJunkFood: false, tags: ["etiopian", "amestec"] },
+  { id: "co024", name: "Chimion negru (Nigella)", category: "condimente", emoji: "🌶️", color: "#1e1b4b", healthScore: 9, calories: 345, protein: 16.4, isJunkFood: false, tags: ["imunitate", "oriental"] },
+  { id: "co025", name: "Fenugreek", category: "condimente", emoji: "🌶️", color: "#fbbf24", healthScore: 9, calories: 323, protein: 23, isJunkFood: false, tags: ["indian", "glicemie"] },
+  { id: "co026", name: "Chili flakes", category: "condimente", emoji: "🌶️", color: "#dc2626", healthScore: 8, calories: 314, protein: 12, isJunkFood: false, tags: ["picant", "topping"] },
+  { id: "co027", name: "Cayenne", category: "condimente", emoji: "🌶️", color: "#dc2626", healthScore: 8, calories: 318, protein: 12, isJunkFood: false, tags: ["picant", "metabolism"] },
+  { id: "co028", name: "Piper alb", category: "condimente", emoji: "🌶️", color: "#f5f5f4", healthScore: 8, calories: 296, protein: 10.4, isJunkFood: false, tags: ["asiatic", "subtil"] },
+
+  // ===== BĂUTURI SUPLIMENTARE =====
+  { id: "ba009", name: "Ceai de mentă", category: "bauturi", emoji: "🍵", color: "#22c55e", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["digestie", "răcoritor"] },
+  { id: "ba010", name: "Ceai de ghimbir", category: "bauturi", emoji: "🍵", color: "#fbbf24", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["digestie", "antiinflamator"] },
+  { id: "ba011", name: "Ceai de hibiscus", category: "bauturi", emoji: "🌺", color: "#dc2626", healthScore: 9, calories: 0, protein: 0, isJunkFood: false, tags: ["tensiune", "antioxidanți"] },
+  { id: "ba012", name: "Ceai de lavandă", category: "bauturi", emoji: "💜", color: "#a855f7", healthScore: 8, calories: 0, protein: 0, isJunkFood: false, tags: ["relaxare", "somn"] },
+  { id: "ba013", name: "Apă de cocos", category: "bauturi", emoji: "🥥", color: "#f5f5f4", healthScore: 9, calories: 19, protein: 0.7, isJunkFood: false, tags: ["hidratare", "electroliți"] },
+  { id: "ba014", name: "Suc de țelină", category: "bauturi", emoji: "🥬", color: "#22c55e", healthScore: 9, calories: 16, protein: 0.7, isJunkFood: false, tags: ["detox", "alcalin"] },
+
+  // ===== TOMATE & DERIVATE =====
+  { id: "tx001", name: "Roșii uscate", category: "legume-fructe", emoji: "🍅", color: "#dc2626", healthScore: 9, calories: 258, protein: 14.1, isJunkFood: false, tags: ["umami", "licopen", "italian"] },
+  { id: "tx002", name: "Roșii San Marzano", category: "legume-fructe", emoji: "🍅", color: "#dc2626", healthScore: 9, calories: 18, protein: 0.9, isJunkFood: false, tags: ["italian", "sosuri", "premium"] },
+  { id: "so015", name: "Passata de roșii", category: "sosuri", emoji: "🍅", color: "#dc2626", healthScore: 8, calories: 24, protein: 1.3, isJunkFood: false, tags: ["italian", "bază"] },
+
+  // ===== JUNK FOOD VEGAN SUPLIMENTAR =====
+  { id: "jf012", name: "Maioneză vegană comercială", category: "junk-vegan", emoji: "⚠️", color: "#ef4444", healthScore: 2, calories: 680, protein: 0.5, isJunkFood: true, tags: ["procesat", "grăsimi", "aditivi"] },
+  { id: "jf013", name: "Cream cheese vegan", category: "junk-vegan", emoji: "⚠️", color: "#ef4444", healthScore: 3, calories: 250, protein: 2, isJunkFood: true, tags: ["procesat", "aditivi"] },
+  { id: "jf014", name: "Salam vegan", category: "junk-vegan", emoji: "⚠️", color: "#ef4444", healthScore: 2, calories: 290, protein: 15, isJunkFood: true, tags: ["procesat", "sodiu", "aditivi"] },
+  { id: "jf015", name: "Hot dogs vegani", category: "junk-vegan", emoji: "⚠️", color: "#ef4444", healthScore: 2, calories: 260, protein: 12, isJunkFood: true, tags: ["procesat", "sodiu"] },
+  { id: "jf016", name: "Prăjituri vegane comerciale", category: "junk-vegan", emoji: "⚠️", color: "#ef4444", healthScore: 2, calories: 400, protein: 4, isJunkFood: true, tags: ["zahăr", "procesat"] },
+  { id: "jf017", name: "Cereale dulci vegane", category: "junk-vegan", emoji: "⚠️", color: "#ef4444", healthScore: 3, calories: 380, protein: 6, isJunkFood: true, tags: ["zahăr", "procesat"] },
+  { id: "jf018", name: "Batoane proteice vegane", category: "junk-vegan", emoji: "⚠️", color: "#ef4444", healthScore: 4, calories: 250, protein: 20, isJunkFood: true, tags: ["procesat", "îndulcitori"] },
+  { id: "jf019", name: "Smoothie-uri comerciale", category: "junk-vegan", emoji: "⚠️", color: "#ef4444", healthScore: 4, calories: 150, protein: 2, isJunkFood: true, tags: ["zahăr", "procesat"] },
+
+  // ===== LEGUMINOASE SUPLIMENTARE =====
+  { id: "l013", name: "Fasole mung", category: "leguminoase", emoji: "🫘", color: "#84cc16", healthScore: 10, calories: 347, protein: 23.9, isJunkFood: false, tags: ["asiatic", "germeni", "proteine"] },
+  { id: "l014", name: "Fasole adzuki", category: "leguminoase", emoji: "🫘", color: "#84cc16", healthScore: 10, calories: 329, protein: 19.9, isJunkFood: false, tags: ["japonez", "deserturi", "proteine"] },
+  { id: "l015", name: "Fasole lima", category: "leguminoase", emoji: "🫘", color: "#84cc16", healthScore: 9, calories: 338, protein: 21.5, isJunkFood: false, tags: ["fibre", "fier"] },
+  { id: "l016", name: "Fasole pinto", category: "leguminoase", emoji: "🫘", color: "#84cc16", healthScore: 9, calories: 347, protein: 21.4, isJunkFood: false, tags: ["mexican", "fibre"] },
+  { id: "l017", name: "Linte beluga", category: "leguminoase", emoji: "🫘", color: "#1e1b4b", healthScore: 10, calories: 352, protein: 25, isJunkFood: false, tags: ["premium", "proteine", "elegant"] },
+  { id: "l018", name: "Linte du Puy", category: "leguminoase", emoji: "🫘", color: "#22c55e", healthScore: 10, calories: 352, protein: 25, isJunkFood: false, tags: ["francez", "premium"] },
+
+  // ===== NUCI SUPLIMENTARE =====
+  { id: "n015", name: "Nuci macadamia", category: "nuci-seminte", emoji: "🥜", color: "#a16207", healthScore: 8, calories: 718, protein: 7.9, isJunkFood: false, tags: ["grăsimi-sănătoase", "premium"] },
+  { id: "n016", name: "Fistic", category: "nuci-seminte", emoji: "🥜", color: "#22c55e", healthScore: 9, calories: 562, protein: 20.2, isJunkFood: false, tags: ["proteine", "snack"] },
+  { id: "n017", name: "Castane", category: "nuci-seminte", emoji: "🌰", color: "#a16207", healthScore: 8, calories: 213, protein: 2.4, isJunkFood: false, tags: ["carbohidrați", "fibre", "iarnă"] },
+  { id: "n018", name: "Pinoli (semințe de pin)", category: "nuci-seminte", emoji: "🌱", color: "#a16207", healthScore: 9, calories: 673, protein: 13.7, isJunkFood: false, tags: ["pesto", "italian", "premium"] },
 ];
 
 // Helper functions

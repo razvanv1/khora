@@ -2,8 +2,10 @@
  * KHORA Blog Page
  * Design: Cosmic Nebula Interface - Apple VisionOS 2026 Aesthetic
  * Educational content about healthy vegan nutrition
+ * Includes Schema.org structured data for SEO
  */
 
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Clock, Calendar, BookOpen } from "lucide-react";
@@ -11,9 +13,133 @@ import CosmicBackground from "@/components/CosmicBackground";
 import Navigation from "@/components/Navigation";
 import { blogArticles, getFeaturedArticle } from "@/data/blogArticles";
 
+// Generate Schema.org Blog structured data
+function generateBlogSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blog Khora - Educație Vegană",
+    "description": "Articole educative despre nutriție vegană sănătoasă, bazate pe cercetări științifice",
+    "url": "https://khora.app/blog",
+    "inLanguage": "ro-RO",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Khora - The Unlearning School",
+      "url": "https://khora.app",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://khora.app/images/khora-logo.png"
+      }
+    },
+    "blogPost": blogArticles.map(article => ({
+      "@type": "BlogPosting",
+      "headline": article.title,
+      "description": article.excerpt,
+      "image": article.heroImage,
+      "datePublished": article.publishDate,
+      "url": `https://khora.app/blog/${article.slug}`,
+      "author": {
+        "@type": "Organization",
+        "name": "Khora"
+      },
+      "keywords": article.tags.join(", ")
+    }))
+  };
+}
+
+// Generate ItemList schema for article collection
+function generateArticleListSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Articole Blog Khora",
+    "description": "Lista completă de articole educative despre nutriție vegană",
+    "numberOfItems": blogArticles.length,
+    "itemListElement": blogArticles.map((article, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "BlogPosting",
+        "name": article.title,
+        "url": `https://khora.app/blog/${article.slug}`
+      }
+    }))
+  };
+}
+
+// Generate Organization schema
+function generateOrganizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Khora",
+    "alternateName": "Khora - Nutriție Vegană Personalizată",
+    "url": "https://khora.app",
+    "logo": "https://khora.app/images/khora-logo.png",
+    "description": "Aplicație premium de nutriție vegană cu rețete personalizate, tracking hidratare și educație bazată pe știință",
+    "sameAs": [
+      "https://www.facebook.com/khora.app",
+      "https://www.instagram.com/khora.app"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@dezvatare.ro",
+      "telephone": "+40722598346",
+      "contactType": "customer service",
+      "availableLanguage": ["Romanian", "English"]
+    }
+  };
+}
+
 export default function Blog() {
   const featuredArticle = getFeaturedArticle();
   const otherArticles = blogArticles.filter(a => !a.featured);
+
+  // Inject Schema.org structured data
+  useEffect(() => {
+    // Remove existing schema scripts
+    const existingSchemas = document.querySelectorAll('script[data-schema="blog"]');
+    existingSchemas.forEach(el => el.remove());
+
+    // Add Blog schema
+    const blogSchema = document.createElement('script');
+    blogSchema.type = 'application/ld+json';
+    blogSchema.setAttribute('data-schema', 'blog');
+    blogSchema.textContent = JSON.stringify(generateBlogSchema());
+    document.head.appendChild(blogSchema);
+
+    // Add ItemList schema
+    const listSchema = document.createElement('script');
+    listSchema.type = 'application/ld+json';
+    listSchema.setAttribute('data-schema', 'blog');
+    listSchema.textContent = JSON.stringify(generateArticleListSchema());
+    document.head.appendChild(listSchema);
+
+    // Add Organization schema
+    const orgSchema = document.createElement('script');
+    orgSchema.type = 'application/ld+json';
+    orgSchema.setAttribute('data-schema', 'blog');
+    orgSchema.textContent = JSON.stringify(generateOrganizationSchema());
+    document.head.appendChild(orgSchema);
+
+    // Update page title and meta
+    document.title = "Blog Khora - Educație Vegană | Articole despre Nutriție";
+    
+    // Update meta description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.setAttribute('name', 'description');
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute('content', 'Articole educative despre nutriție vegană sănătoasă, bazate pe cercetări științifice. Învață despre B12, proteine vegetale, superfoods și multe altele.');
+
+    // Cleanup on unmount
+    return () => {
+      const schemas = document.querySelectorAll('script[data-schema="blog"]');
+      schemas.forEach(el => el.remove());
+    };
+  }, []);
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -57,20 +183,27 @@ export default function Blog() {
             className="px-6 mb-8"
           >
             <Link href={`/blog/${featuredArticle.slug}`}>
-              <div 
+              <article 
                 className="relative rounded-3xl overflow-hidden group cursor-pointer max-w-4xl mx-auto"
                 style={{
                   background: 'rgba(255, 255, 255, 0.04)',
                   backdropFilter: 'blur(20px)',
                   border: '1px solid rgba(255, 255, 255, 0.08)',
                 }}
+                itemScope
+                itemType="https://schema.org/BlogPosting"
               >
+                <meta itemProp="headline" content={featuredArticle.title} />
+                <meta itemProp="description" content={featuredArticle.excerpt} />
+                <meta itemProp="datePublished" content={featuredArticle.publishDate} />
+                
                 {/* Hero Image */}
                 <div className="relative h-48 md:h-64 overflow-hidden">
                   <img 
                     src={featuredArticle.heroImage} 
                     alt={featuredArticle.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    itemProp="image"
                   />
                   <div 
                     className="absolute inset-0"
@@ -101,7 +234,9 @@ export default function Blog() {
                     </span>
                     <span className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
-                      {new Date(featuredArticle.publishDate).toLocaleDateString('ro-RO')}
+                      <time dateTime={featuredArticle.publishDate} itemProp="datePublished">
+                        {new Date(featuredArticle.publishDate).toLocaleDateString('ro-RO')}
+                      </time>
                     </span>
                     <span 
                       className="px-2 py-0.5 rounded-full text-xs"
@@ -109,15 +244,16 @@ export default function Blog() {
                         background: 'rgba(0, 212, 170, 0.1)',
                         color: '#00d4aa',
                       }}
+                      itemProp="articleSection"
                     >
                       {featuredArticle.category}
                     </span>
                   </div>
 
-                  <h2 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-[#00d4aa] transition-colors">
+                  <h2 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-[#00d4aa] transition-colors" itemProp="headline">
                     {featuredArticle.title}
                   </h2>
-                  <p className="text-white/50 text-sm mb-4 line-clamp-2">
+                  <p className="text-white/50 text-sm mb-4 line-clamp-2" itemProp="description">
                     {featuredArticle.excerpt}
                   </p>
 
@@ -126,7 +262,7 @@ export default function Blog() {
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
-              </div>
+              </article>
             </Link>
           </motion.section>
         )}
@@ -151,13 +287,15 @@ export default function Blog() {
                 transition={{ delay: 0.5 + index * 0.1 }}
               >
                 <Link href={`/blog/${article.slug}`}>
-                  <div 
+                  <article 
                     className="rounded-2xl overflow-hidden group cursor-pointer h-full transition-all duration-300 hover:scale-[1.02]"
                     style={{
                       background: 'rgba(255, 255, 255, 0.04)',
                       backdropFilter: 'blur(20px)',
                       border: '1px solid rgba(255, 255, 255, 0.08)',
                     }}
+                    itemScope
+                    itemType="https://schema.org/BlogPosting"
                   >
                     {/* Image */}
                     <div className="relative h-32 overflow-hidden">
@@ -165,6 +303,7 @@ export default function Blog() {
                         src={article.heroImage} 
                         alt={article.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        itemProp="image"
                       />
                       <div 
                         className="absolute inset-0"
@@ -186,19 +325,21 @@ export default function Blog() {
                             background: 'rgba(0, 212, 170, 0.1)',
                             color: '#00d4aa',
                           }}
+                          itemProp="articleSection"
                         >
                           {article.category}
                         </span>
                       </div>
 
-                      <h3 className="text-white font-semibold text-sm mb-2 line-clamp-2 group-hover:text-[#00d4aa] transition-colors">
+                      <h3 className="text-white font-semibold text-sm mb-2 line-clamp-2 group-hover:text-[#00d4aa] transition-colors" itemProp="headline">
                         {article.title}
                       </h3>
-                      <p className="text-white/40 text-xs line-clamp-2">
+                      <p className="text-white/40 text-xs line-clamp-2" itemProp="description">
                         {article.excerpt}
                       </p>
+                      <meta itemProp="datePublished" content={article.publishDate} />
                     </div>
-                  </div>
+                  </article>
                 </Link>
               </motion.div>
             ))}

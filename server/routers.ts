@@ -22,6 +22,7 @@ import {
   getUserProfile
 } from "./db";
 import { notifyOwner } from "./_core/notification";
+import { sendWelcomeEmail, sendAdminNewUserEmail } from "./email";
 
 // Admin-only procedure
 const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
@@ -83,7 +84,30 @@ export const appRouter = router({
         });
 
         if (subscriber) {
-          // Notify admin about new subscriber
+          // Send welcome email to user
+          const welcomeEmailSent = await sendWelcomeEmail(
+            input.email,
+            input.name || null,
+            input.calculatedMetrics ? {
+              dailyCalories: input.calculatedMetrics.dailyCalories,
+              dailyWater: input.calculatedMetrics.dailyWater,
+              proteinGrams: input.calculatedMetrics.proteinGrams,
+            } : undefined
+          );
+
+          // Send notification email to admin
+          const adminEmailSent = await sendAdminNewUserEmail(
+            'hello@dezvatare.ro',
+            {
+              email: input.email,
+              name: input.name,
+              goal: input.goal,
+              dietaryStyle: input.dietaryStyle,
+              registeredAt: new Date(),
+            }
+          );
+
+          // Create admin notification in dashboard
           await createAdminNotification({
             type: 'new_subscriber',
             title: 'Abonat nou',
@@ -97,13 +121,22 @@ export const appRouter = router({
             content: `${input.name || 'Utilizator'} (${input.email}) s-a înscris.\n\nObiectiv: ${input.goal || 'nespecificat'}\nStil: ${input.dietaryStyle || 'nespecificat'}`
           });
 
-          // Log the welcome email (will be sent separately)
+          // Log the welcome email
           await createEmailLog({
             recipientEmail: input.email,
             recipientName: input.name || null,
             emailType: 'welcome',
             subject: 'Bine ai venit la Khora!',
-            status: 'pending'
+            status: welcomeEmailSent ? 'sent' : 'failed'
+          });
+
+          // Log the admin notification email
+          await createEmailLog({
+            recipientEmail: 'hello@dezvatare.ro',
+            recipientName: 'Admin',
+            emailType: 'admin_notification',
+            subject: `Utilizator nou: ${input.name || input.email}`,
+            status: adminEmailSent ? 'sent' : 'failed'
           });
         }
 

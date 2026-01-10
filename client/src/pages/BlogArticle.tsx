@@ -2,8 +2,10 @@
  * KHORA Blog Article Page
  * Design: Cosmic Nebula Interface - Apple VisionOS 2026 Aesthetic
  * Individual article view with full content
+ * Includes Schema.org structured data for SEO
  */
 
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, Clock, Calendar, Share2, BookOpen } from "lucide-react";
@@ -12,9 +14,137 @@ import CosmicBackground from "@/components/CosmicBackground";
 import Navigation from "@/components/Navigation";
 import { getArticleBySlug, blogArticles } from "@/data/blogArticles";
 
+// Schema.org Article structured data
+function generateArticleSchema(article: ReturnType<typeof getArticleBySlug>) {
+  if (!article) return null;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": article.title,
+    "description": article.excerpt,
+    "image": article.heroImage,
+    "datePublished": article.publishDate,
+    "dateModified": article.publishDate,
+    "author": {
+      "@type": "Organization",
+      "name": "Khora - The Unlearning School",
+      "url": "https://khora.app"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Khora",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://khora.app/images/khora-logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://khora.app/blog/${article.slug}`
+    },
+    "keywords": article.tags.join(", "),
+    "articleSection": article.category,
+    "wordCount": article.content.join(" ").split(/\s+/).length,
+    "inLanguage": "ro-RO"
+  };
+}
+
+// Schema.org BreadcrumbList
+function generateBreadcrumbSchema(article: ReturnType<typeof getArticleBySlug>) {
+  if (!article) return null;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Acasă",
+        "item": "https://khora.app"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://khora.app/blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": article.title,
+        "item": `https://khora.app/blog/${article.slug}`
+      }
+    ]
+  };
+}
+
 export default function BlogArticle() {
   const params = useParams<{ slug: string }>();
   const article = getArticleBySlug(params.slug || "");
+
+  // Inject Schema.org structured data
+  useEffect(() => {
+    if (!article) return;
+
+    // Remove existing schema scripts
+    const existingSchemas = document.querySelectorAll('script[data-schema="article"]');
+    existingSchemas.forEach(el => el.remove());
+
+    // Add Article schema
+    const articleSchema = document.createElement('script');
+    articleSchema.type = 'application/ld+json';
+    articleSchema.setAttribute('data-schema', 'article');
+    articleSchema.textContent = JSON.stringify(generateArticleSchema(article));
+    document.head.appendChild(articleSchema);
+
+    // Add Breadcrumb schema
+    const breadcrumbSchema = document.createElement('script');
+    breadcrumbSchema.type = 'application/ld+json';
+    breadcrumbSchema.setAttribute('data-schema', 'article');
+    breadcrumbSchema.textContent = JSON.stringify(generateBreadcrumbSchema(article));
+    document.head.appendChild(breadcrumbSchema);
+
+    // Update page title and meta
+    document.title = `${article.title} | Khora Blog`;
+    
+    // Update meta description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.setAttribute('name', 'description');
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute('content', article.excerpt);
+
+    // Update Open Graph meta tags
+    const ogTags = [
+      { property: 'og:title', content: article.title },
+      { property: 'og:description', content: article.excerpt },
+      { property: 'og:image', content: article.heroImage },
+      { property: 'og:type', content: 'article' },
+      { property: 'og:url', content: `https://khora.app/blog/${article.slug}` },
+      { property: 'article:published_time', content: article.publishDate },
+      { property: 'article:section', content: article.category },
+    ];
+
+    ogTags.forEach(({ property, content }) => {
+      let tag = document.querySelector(`meta[property="${property}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    });
+
+    // Cleanup on unmount
+    return () => {
+      const schemas = document.querySelectorAll('script[data-schema="article"]');
+      schemas.forEach(el => el.remove());
+    };
+  }, [article]);
 
   if (!article) {
     return (
@@ -107,11 +237,13 @@ export default function BlogArticle() {
               </span>
               <span className="flex items-center gap-1">
                 <Calendar className="w-4 h-4" />
-                {new Date(article.publishDate).toLocaleDateString('ro-RO', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
+                <time dateTime={article.publishDate}>
+                  {new Date(article.publishDate).toLocaleDateString('ro-RO', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
               </span>
               <button 
                 className="ml-auto flex items-center gap-1 hover:text-white transition-colors"
@@ -147,7 +279,14 @@ export default function BlogArticle() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
           className="px-6"
+          itemScope
+          itemType="https://schema.org/Article"
         >
+          <meta itemProp="headline" content={article.title} />
+          <meta itemProp="description" content={article.excerpt} />
+          <meta itemProp="datePublished" content={article.publishDate} />
+          <meta itemProp="image" content={article.heroImage} />
+          
           <div 
             className="max-w-3xl mx-auto p-6 md:p-8 rounded-3xl"
             style={{
@@ -156,7 +295,7 @@ export default function BlogArticle() {
               border: '1px solid rgba(255, 255, 255, 0.08)',
             }}
           >
-            <div className="prose prose-invert prose-lg max-w-none">
+            <div className="prose prose-invert prose-lg max-w-none" itemProp="articleBody">
               {article.content.map((paragraph, index) => (
                 <div key={index} className="mb-4">
                   <Streamdown>{paragraph}</Streamdown>
