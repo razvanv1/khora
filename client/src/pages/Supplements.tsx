@@ -10,6 +10,7 @@ import { Pill, Plus, Clock, Check, X, Trash2, Info, Sun, Zap, Brain, Heart, Leaf
 import Navigation from "@/components/Navigation";
 import StarRating from "@/components/StarRating";
 import SupplementFeedbackModal from "@/components/SupplementFeedbackModal";
+import ShareButton from "@/components/ShareButton";
 import { useSupplementFeedback, type SupplementFeedback } from "@/hooks/useSupplementFeedback";
 
 const supplementSuggestions: Record<string, string[]> = {
@@ -129,9 +130,19 @@ export default function Supplements() {
 
       <div className="relative z-10 min-h-screen px-6 pt-12 pb-32">
         {/* Header */}
-        <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-6">
-          <h1 className="text-2xl font-light text-white mb-1">Suplimente</h1>
-          <p className="text-white/50 text-sm">Tracking zilnic vitamine și minerale</p>
+        <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
+          <div className="flex items-center justify-between">
+            <div className="text-center flex-1">
+              <h1 className="text-2xl font-light text-white mb-1">Suplimente</h1>
+              <p className="text-white/50 text-sm">Tracking zilnic vitamine și minerale</p>
+            </div>
+            <ShareButton
+              title="Khora - Suplimente Esențiale pentru Vegani"
+              description="Descoperă ce suplimente sunt esențiale pentru o dietă vegană sănătoasă: B12, D3, Omega-3 din alge și multe altele."
+              url={`${window.location.origin}/supplements`}
+              hashtags={["Khora", "Vegan", "Suplimente", "B12", "NutritieVegana"]}
+            />
+          </div>
         </motion.header>
 
         {/* Progress */}

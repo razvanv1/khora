@@ -66,3 +66,17 @@
 - [x] Dashboard admin: statistici useri
 - [x] Dashboard admin: lista contacte/emailuri
 - [x] Credențiale admin documentate (ADMIN_ACCESS.md)
+
+
+## Share Suplimente Social Media
+- [x] Componentă ShareButton cu opțiuni Facebook, Twitter, WhatsApp, LinkedIn, Copy Link
+- [x] Integrare în pagina Supplements
+- [x] Preview image pentru share (foloseste OG image global)
+
+
+## FAQ Section SEO/GEO
+- [x] Creare pagină FAQ dedicată (/faq)
+- [x] Schema.org FAQPage extins (15 întrebări)
+- [x] Întrebări relevante pentru nutriție vegană România
+- [x] Categorii: Nutriție Vegană, Suplimente, Hidratare, Rețete, Aplicație
+- [x] Căutare și filtrare FAQ
