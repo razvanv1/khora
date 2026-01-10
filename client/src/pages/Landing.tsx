@@ -90,6 +90,7 @@ export default function Landing() {
             <h1 className="text-6xl md:text-7xl font-light tracking-wider mb-2">
               KH<span className="text-[#2dd4bf]">O</span>RA
               <span className="block text-lg md:text-xl font-normal text-white/60 mt-2">{t.landing.subtitle}</span>
+              <span className="sr-only">Khora - Aplicație Premium de Nutriție Vegană pentru România</span>
             </h1>
             <p className="text-white/40 text-sm tracking-[0.3em] uppercase">
               χώρα · Spațiul Transformării
