@@ -74,8 +74,7 @@ export default function Home() {
           className="text-center mb-8"
         >
           <h1 className="text-4xl font-light tracking-wider text-white mb-2">
-            KH<span className="text-[#d4a574]">O</span>RA
-            <span className="sr-only"> - Aplicație Premium de Nutriție Vegană</span>
+            Khora - Nutriție Vegană Premium
           </h1>
           <p className="text-white/60 text-sm tracking-wide">
             Nutriție Holistică Vegană
@@ -95,7 +94,7 @@ export default function Home() {
           className="text-center mb-10"
         >
           <h2 className="text-2xl font-light text-white mb-3 leading-relaxed">
-            Cămara Ta Digitală
+            Cămara Ta Digitală de Rețete Vegane
           </h2>
           <p className="text-white/50 text-sm max-w-xs mx-auto">
             Transformă bucătăria într-o experiență de spatial computing. 
