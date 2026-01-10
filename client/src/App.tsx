@@ -31,6 +31,9 @@ const FAQ = lazy(() => import("./pages/FAQ"));
 function PageLoader() {
   return (
     <div className="min-h-screen bg-[#0a1628] flex items-center justify-center">
+      {/* SEO Headings - always present in DOM */}
+      <h1 className="sr-only">Khora - Aplicație Premium de Nutriție Vegană România</h1>
+      <h2 className="sr-only">Dezvață ce ai crezut despre nutriția vegană. Învață ce contează cu adevărat.</h2>
       <div className="text-center">
         <div className="w-12 h-12 rounded-full border-3 border-[#2dd4bf]/20 border-t-[#2dd4bf] animate-spin mx-auto mb-3" />
         <p className="text-white/50 text-sm">Se încarcă...</p>
