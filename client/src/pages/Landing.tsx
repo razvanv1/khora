@@ -88,7 +88,8 @@ export default function Landing() {
             className="mb-6"
           >
             <h1 className="text-6xl md:text-7xl font-light tracking-wider mb-2">
-              KH<span className="text-[#2dd4bf]">O</span>RA
+              <span aria-hidden="true">KH<span className="text-[#2dd4bf]">O</span>RA</span>
+              <span className="sr-only">KHORA - Aplicație de Nutriție Vegană România</span>
               <span className="block text-lg md:text-xl font-normal text-white/60 mt-2">Aplicație de Nutriție Vegană</span>
             </h1>
             <p className="text-white/60 text-sm tracking-[0.3em] uppercase">
