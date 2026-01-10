@@ -7,9 +7,10 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Plus, X, ChefHat, AlertTriangle, Star, Leaf, Filter, SlidersHorizontal, Flame, Dumbbell, Wheat } from "lucide-react";
+import { Search, Plus, X, ChefHat, AlertTriangle, Star, Leaf, Filter, SlidersHorizontal, Flame, Dumbbell, Wheat, Scan } from "lucide-react";
 import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
+import BarcodeScanner from "@/components/BarcodeScanner";
 import { ingredients, categories, getIngredientsByCategory, searchIngredients, type Ingredient } from "@/data/ingredients";
 
 const getHealthScoreColor = (score: number): string => {
@@ -52,6 +53,30 @@ export default function Pantry() {
   const [healthScoreFilter, setHealthScoreFilter] = useState("all");
   const [minProtein, setMinProtein] = useState(0);
   const [maxCalories, setMaxCalories] = useState(1000);
+  const [showScanner, setShowScanner] = useState(false);
+
+  // Handler pentru produse scanate
+  const handleScannedProduct = (product: { barcode: string; name: string; brand?: string; category?: string; nutrients?: { calories?: number; protein?: number; carbs?: number; fat?: number; fiber?: number } }) => {
+    // Căutăm un ingredient similar în baza de date
+    const searchTerm = product.name.toLowerCase();
+    const matchingIngredient = ingredients.find(i => 
+      i.name.toLowerCase().includes(searchTerm) || 
+      searchTerm.includes(i.name.toLowerCase()) ||
+      (product.category && i.category.toLowerCase().includes(product.category.toLowerCase()))
+    );
+    
+    if (matchingIngredient) {
+      // Adăugăm ingredientul găsit
+      if (!pantryItems.includes(matchingIngredient.id)) {
+        togglePantryItem(matchingIngredient.id);
+      }
+      setSelectedIngredient(matchingIngredient);
+    } else {
+      // Afișăm alert că produsul nu a fost găsit în baza noastră
+      alert(`Produsul "${product.name}" a fost găsit, dar nu avem un ingredient similar în baza de date. Caută manual un ingredient similar.`);
+      setSearchQuery(product.name.split(' ')[0]);
+    }
+  };
 
   const displayedIngredients = useMemo(() => {
     let result: Ingredient[] = [];
@@ -128,14 +153,26 @@ export default function Pantry() {
               <h1 className="text-2xl font-light text-white">Cămara Digitală</h1>
               <p className="text-white/50 text-sm">{pantryItems.length} ingrediente selectate • {displayedIngredients.length} afișate</p>
             </div>
-            {pantryItems.length > 0 && (
-              <Link href="/blender">
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-4 py-2 rounded-xl flex items-center gap-2 font-medium text-sm" style={{ background: 'linear-gradient(135deg, #d4a574 0%, #e8c9a8 100%)', color: '#0a1628' }}>
-                  <ChefHat className="w-4 h-4" />
-                  Gătește
-                </motion.button>
-              </Link>
-            )}
+            <div className="flex items-center gap-2">
+              <motion.button 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }} 
+                onClick={() => setShowScanner(true)}
+                className="p-2 rounded-xl flex items-center justify-center" 
+                style={{ background: 'rgba(45, 212, 191, 0.2)', border: '1px solid rgba(45, 212, 191, 0.3)' }}
+                title="Scanează cod de bare"
+              >
+                <Scan className="w-5 h-5 text-[#2dd4bf]" />
+              </motion.button>
+              {pantryItems.length > 0 && (
+                <Link href="/blender">
+                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-4 py-2 rounded-xl flex items-center gap-2 font-medium text-sm" style={{ background: 'linear-gradient(135deg, #d4a574 0%, #e8c9a8 100%)', color: '#0a1628' }}>
+                    <ChefHat className="w-4 h-4" />
+                    Gătește
+                  </motion.button>
+                </Link>
+              )}
+            </div>
           </div>
 
           {/* Search */}
@@ -541,6 +578,13 @@ export default function Pantry() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Barcode Scanner */}
+      <BarcodeScanner 
+        isOpen={showScanner} 
+        onClose={() => setShowScanner(false)} 
+        onProductFound={handleScannedProduct} 
+      />
 
       <Navigation />
     </div>

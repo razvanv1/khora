@@ -132,3 +132,18 @@
 - [ ] Extindere articole blog (minim 5 articole noi)
 - [ ] Extindere FAQ (minim 10 întrebări noi)
 - [ ] Avertisment că datele sunt stocate local în browser
+
+
+## Scanare Coduri de Bare
+- [x] Instalare bibliotecă html5-qrcode pentru scanare
+- [x] Componentă BarcodeScanner cu acces cameră
+- [x] Integrare Open Food Facts API pentru căutare produse
+- [x] Adăugare buton scanare în Pantry (icon Scan)
+- [x] Mapare produs scanat la ingrediente existente
+
+## Remindere Push Browser
+- [x] Cerere permisiune notificări browser (buton Activează)
+- [x] Setare ore remindere hidratare (3 remindere: 08:00, 12:00, 16:00)
+- [x] Setare ore remindere suplimente (B12, D3, Omega-3)
+- [x] Scheduler pentru notificări la orele setate (verificare la fiecare minut)
+- [x] UI pentru configurare remindere în Settings (toggle, oră, zile)
