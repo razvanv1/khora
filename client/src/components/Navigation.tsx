@@ -12,7 +12,8 @@ import {
   Droplets, 
   Pill,
   Sparkles,
-  User
+  User,
+  HelpCircle
 } from "lucide-react";
 import { useLanguage } from "@/i18n";
 
@@ -27,6 +28,7 @@ export default function Navigation() {
     { path: "/hydrate", icon: Droplets, label: t.nav.hydrate },
     { path: "/supplements", icon: Pill, label: t.nav.supplements },
     { path: "/profile", icon: User, label: t.nav.profile },
+    { path: "/faq", icon: HelpCircle, label: "FAQ" },
   ];
 
   return (

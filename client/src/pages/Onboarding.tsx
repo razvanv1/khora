@@ -111,7 +111,17 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
 
   // Calculează rezultatele
   const getResults = () => {
+    // Validare strictă pentru toate câmpurile necesare
+    const weight = parseFloat(formData.weight);
+    const height = parseFloat(formData.height);
+    const age = parseInt(formData.age);
+    
     if (!formData.weight || !formData.height || !formData.age || !formData.sex || !formData.activityLevel || !formData.goal) {
+      return null;
+    }
+    
+    // Verifică că valorile numerice sunt valide
+    if (isNaN(weight) || isNaN(height) || isNaN(age) || weight <= 0 || height <= 0 || age <= 0) {
       return null;
     }
     
@@ -119,9 +129,9 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
       email: formData.email,
       name: formData.name,
       sex: formData.sex as 'male' | 'female',
-      age: parseInt(formData.age),
-      weight: parseFloat(formData.weight),
-      height: parseFloat(formData.height),
+      age: age,
+      weight: weight,
+      height: height,
       activityLevel: formData.activityLevel as UserProfile['activityLevel'],
       goal: formData.goal as UserProfile['goal'],
       dietaryStyle: formData.dietaryStyle,
@@ -695,7 +705,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                 <Apple className="w-5 h-5 text-[#f97316]" />
               </div>
               <div>
-                <p className="text-white font-medium">{Math.round(results.targetCalories)} kcal/zi</p>
+                <p className="text-white font-medium">{isNaN(results.targetCalories) ? '2000' : Math.round(results.targetCalories)} kcal/zi</p>
                 <p className="text-white/40 text-xs">Energie zilnică</p>
               </div>
             </div>
@@ -711,7 +721,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                 <Droplets className="w-5 h-5 text-[#60a5fa]" />
               </div>
               <div>
-                <p className="text-white font-medium">{(results.dailyWaterMl / 1000).toFixed(1)} litri/zi</p>
+                <p className="text-white font-medium">{isNaN(results.dailyWaterMl) ? '2.0' : (results.dailyWaterMl / 1000).toFixed(1)} litri/zi</p>
                 <p className="text-white/40 text-xs">Hidratare</p>
               </div>
             </div>
@@ -727,7 +737,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                 <Dumbbell className="w-5 h-5 text-[#a78bfa]" />
               </div>
               <div>
-                <p className="text-white font-medium">{Math.round(results.proteinGrams)} g/zi</p>
+                <p className="text-white font-medium">{isNaN(results.proteinGrams) ? '60' : Math.round(results.proteinGrams)} g/zi</p>
                 <p className="text-white/40 text-xs">Proteine</p>
               </div>
             </div>
@@ -743,7 +753,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                 <Leaf className="w-5 h-5 text-[#22c55e]" />
               </div>
               <div>
-                <p className="text-white font-medium">{Math.round(results.fiberGrams)} g/zi</p>
+                <p className="text-white font-medium">{isNaN(results.fiberGrams) ? '28' : Math.round(results.fiberGrams)} g/zi</p>
                 <p className="text-white/40 text-xs">Fibre</p>
               </div>
             </div>

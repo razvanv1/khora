@@ -363,11 +363,40 @@ export function useUserProfile() {
   }, []);
 
   // Save profile to localStorage
-  const saveProfile = useCallback((newProfile: UserProfile) => {
+  const saveProfile = useCallback(async (newProfile: UserProfile) => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newProfile));
       setProfile(newProfile);
-      setMetrics(calculateMetrics(newProfile));
+      const calculatedMetrics = calculateMetrics(newProfile);
+      setMetrics(calculatedMetrics);
+      
+      // Trimite la server pentru notificări (fire and forget)
+      if (newProfile.onboardingCompleted && newProfile.email) {
+        const payload = {
+          email: newProfile.email,
+          name: newProfile.name,
+          gender: newProfile.sex,
+          age: newProfile.age,
+          weight: newProfile.weight,
+          height: newProfile.height,
+          activityLevel: newProfile.activityLevel,
+          goal: newProfile.goal,
+          dietaryStyle: newProfile.dietaryStyle,
+          calculatedMetrics: {
+            dailyCalories: calculatedMetrics.targetCalories,
+            dailyWater: calculatedMetrics.dailyWaterMl,
+            proteinGrams: calculatedMetrics.proteinGrams,
+          },
+          mealPreferences: newProfile.mealPreferences,
+          allergies: newProfile.allergies,
+        };
+        
+        fetch('/api/trpc/subscriber.create?batch=1', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ "0": { json: payload } })
+        }).catch(err => console.log('Notification error:', err));
+      }
     } catch (error) {
       console.error('Error saving user profile:', error);
     }

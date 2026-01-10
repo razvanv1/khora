@@ -80,3 +80,13 @@
 - [x] Întrebări relevante pentru nutriție vegană România
 - [x] Categorii: Nutriție Vegană, Suplimente, Hidratare, Rețete, Aplicație
 - [x] Căutare și filtrare FAQ
+
+
+## Link FAQ în Navigare
+- [x] Adăugare link FAQ în Navigation (icon HelpCircle)
+- [x] Adăugare link FAQ în Footer (secțiunea Resurse)
+
+
+## URGENT BUGS
+- [x] Fix NaN în calculatorul de energie zilnică și fibre (validare + fallback)
+- [x] Fix notificări la înregistrare user nou (apel server la saveProfile)

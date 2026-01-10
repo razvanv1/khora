@@ -623,6 +623,7 @@ export default function Landing() {
               <h4 className="text-white/60 text-sm font-medium mb-4 uppercase tracking-wider">Resurse</h4>
               <ul className="space-y-2">
                 <li><button onClick={goToBlog} className="text-white/40 text-sm hover:text-white transition-colors">Blog Educațional</button></li>
+                <li><a href="/faq" className="text-white/40 text-sm hover:text-white transition-colors">Întrebări Frecvente</a></li>
                 <li><a href="/contact" className="text-white/40 text-sm hover:text-white transition-colors">Contact</a></li>
                 <li><a href="https://dezvatare.ro" target="_blank" rel="noopener noreferrer" className="text-white/40 text-sm hover:text-white transition-colors">The Unlearning School</a></li>
               </ul>
