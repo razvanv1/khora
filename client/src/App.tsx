@@ -15,12 +15,12 @@ import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import Onboarding from "./pages/Onboarding";
 import Landing from "./pages/Landing";
+import Admin from "./pages/Admin";
 import { useUserProfile, UserProfile } from "./hooks/useUserProfile";
 
 function AppContent() {
   const { profile, isLoading, needsOnboarding, saveProfile } = useUserProfile();
   const [location] = useLocation();
-
   const handleOnboardingComplete = (newProfile: UserProfile) => {
     saveProfile(newProfile);
   };
@@ -57,6 +57,7 @@ function AppContent() {
   }
 
   // Main app router for users who completed onboarding
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
@@ -72,6 +73,7 @@ function AppContent() {
       <Route path={"/onboarding"}>
         <Onboarding onComplete={handleOnboardingComplete} />
       </Route>
+      <Route path={"/admin"} component={Admin} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

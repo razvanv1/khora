@@ -4,6 +4,7 @@
  * Limba: Română
  */
 
+import { useAuth } from "@/_core/hooks/useAuth";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { 
@@ -49,6 +50,8 @@ const features = [
 ];
 
 export default function Home() {
+  const { user, isAuthenticated } = useAuth();
+
   return (
     <div className="min-h-screen bg-[#0a1628] relative overflow-hidden">
       {/* Background Image */}
@@ -76,6 +79,11 @@ export default function Home() {
           <p className="text-white/60 text-sm tracking-wide">
             Nutriție Holistică Vegană
           </p>
+          {isAuthenticated && user && (
+            <p className="text-[#2dd4bf] text-xs mt-2">
+              Bine ai venit, {user.name || 'Utilizator'}
+            </p>
+          )}
         </motion.header>
 
         {/* Hero Section */}
