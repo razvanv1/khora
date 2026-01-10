@@ -25,3 +25,22 @@
 - [x] Actualizare pagina Recipes cu buton favorite funcțional
 - [x] Creare pagină dedicată pentru rețete favorite
 - [x] Integrare în navigație (rută /recipes/favorites)
+
+
+## Actualizare Descriere Fondator
+- [x] Actualizare bio Răzvan: antreprenor în comportamentul schimbării și unlearning, trainer certificat, instructor yoga certificat
+- [x] Eliminare referință Bitdefender
+
+
+## SEO Fix - Home Page
+- [x] Adăugare H1 heading pe pagina principală (/) - existentă cu sr-only text
+- [x] Adăugare H2 headings pe pagina principală (/) - existentă
+
+
+## SEO Tehnic & Performanță
+- [x] Creare sitemap.xml pentru indexare Google
+- [x] Creare robots.txt pentru crawlere
+- [x] Optimizare meta tags (title, description, og:tags)
+- [x] Implementare lazy loading pentru imagini (component LazyImage)
+- [x] Adăugare preconnect/prefetch pentru resurse externe
+- [x] Optimizare Core Web Vitals (LCP, FID, CLS) - build chunks, preload hero

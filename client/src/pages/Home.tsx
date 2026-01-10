@@ -75,6 +75,7 @@ export default function Home() {
         >
           <h1 className="text-4xl font-light tracking-wider text-white mb-2">
             KH<span className="text-[#d4a574]">O</span>RA
+            <span className="sr-only"> - Aplicație Premium de Nutriție Vegană</span>
           </h1>
           <p className="text-white/60 text-sm tracking-wide">
             Nutriție Holistică Vegană
@@ -202,11 +203,6 @@ export default function Home() {
             </div>
           </Link>
         </motion.section>
-
-        {/* SEO Hidden Content */}
-        <div className="sr-only">
-          <h2>Nutriție vegană, rețete vegane, plant-based, hidratare, suplimente vegane, superfoods, proteine vegetale</h2>
-        </div>
       </div>
 
       {/* Navigation */}

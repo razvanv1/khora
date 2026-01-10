@@ -3,46 +3,139 @@
 
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
     <title>Khora - Aplicație Premium de Nutriție Vegană | Rețete și Hidratare</title>
-    <meta name="description" content="Khora - aplicație gratuită de nutriție vegană cu rețete personalizate, tracking hidratare și suplimente. Mănâncă sănătos." />
-    <meta name="keywords" content="nutriție vegană, rețete vegane, aplicație vegan, hidratare, suplimente B12, plant-based" />
-    <meta name="author" content="Khora" />
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#0a0f1a" />
+    <meta name="description" content="Khora - aplicație gratuită de nutriție vegană cu rețete personalizate, tracking hidratare și suplimente. Transformă-ți alimentația cu Khora." />
+    <meta name="keywords" content="nutriție vegană, rețete vegane, aplicație vegan, hidratare, suplimente B12, plant-based, whole food, dezvățare" />
+    <meta name="author" content="The Unlearning School" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#0a1628" />
+    <meta name="color-scheme" content="dark" />
+    
+    <!-- Mobile Web App -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Khora" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Khora" />
     <meta property="og:title" content="Khora - Aplicație Premium de Nutriție Vegană" />
     <meta property="og:description" content="Generator de rețete AI, tracking hidratare și suplimente. Descoperă viitorul alimentației plant-based." />
     <meta property="og:image" content="/images/khora-og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ro_RO" />
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Khora - Nutriție Vegană Premium" />
     <meta name="twitter:description" content="Generator de rețete AI, tracking hidratare și suplimente vegane." />
+    <meta name="twitter:image" content="/images/khora-og.png" />
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="canonical" href="https://khora.app" />
     
-    <!-- Google Fonts - SF Pro alternative (Inter) + Display font -->
+    <!-- DNS Prefetch & Preconnect for Performance -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/images/khora_hero_bg.png" as="image" fetchpriority="high" />
+    
+    <!-- Google Fonts with display=swap for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Critical CSS -->
     <style>
-      /* Prevent FOUC */
-      html {
-        background: #0a0f1a;
+      /* Prevent FOUC and improve LCP */
+      :root {
+        --bg-primary: #0a1628;
+        --text-primary: #ffffff;
+        --accent-teal: #2dd4bf;
+        --accent-gold: #d4a574;
       }
+      
+      html {
+        background: var(--bg-primary);
+        scroll-behavior: smooth;
+      }
+      
       body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
+      
       h1, h2, h3, .display-font {
         font-family: 'Space Grotesk', 'Inter', sans-serif;
       }
+      
+      /* Loading state */
+      #root:empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      
+      #root:empty::after {
+        content: '';
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(45, 212, 191, 0.2);
+        border-top-color: #2dd4bf;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      /* Reduce CLS - reserve space for images */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
     </style>
+    
+    <!-- Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Khora",
+      "description": "Aplicație premium de nutriție vegană cu rețete personalizate, tracking hidratare și suplimente",
+      "url": "https://khora.app",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RON"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "The Unlearning School",
+        "founder": {
+          "@type": "Person",
+          "name": "Răzvan Vâlceanu",
+          "jobTitle": "Antreprenor în comportamentul schimbării și unlearning"
+        }
+      },
+      "inLanguage": "ro-RO"
+    }
+    </script>
   </head>
 
   <body>

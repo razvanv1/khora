@@ -24,6 +24,22 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // Performance optimizations
+    target: 'es2020',
+    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-motion': ['framer-motion'],
+          'vendor-ui': ['lucide-react', '@radix-ui/react-dialog', '@radix-ui/react-tooltip'],
+        },
+      },
+    },
+    // Enable source maps for debugging in production
+    sourcemap: false,
+    // Chunk size warning limit
+    chunkSizeWarningLimit: 500,
   },
   server: {
     host: true,

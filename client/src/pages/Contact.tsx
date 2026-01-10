@@ -132,9 +132,9 @@ export default function Contact() {
               <div className="p-6 rounded-2xl bg-gradient-to-br from-[#d4a574]/10 to-transparent border border-[#d4a574]/20">
                 <h3 className="text-lg font-medium mb-2">Despre Fondator</h3>
                 <p className="text-white/60 text-sm leading-relaxed">
-                  <strong className="text-white">Răzvan Vâlceanu</strong> – fost GM Bitdefender, cu peste 20 de ani 
-                  de experiență în educație, tehnologie și antreprenoriat. Fondator al The Unlearning School, 
-                  o platformă dedicată dezvățării și adaptării profesionale.
+                  <strong className="text-white">Răzvan Vâlceanu</strong> – antreprenor în comportamentul schimbării și unlearning, 
+                  trainer certificat și instructor de yoga certificat. Fondator al The Unlearning School, 
+                  o platformă dedicată dezvățării și transformării personale.
                 </p>
               </div>
             </div>

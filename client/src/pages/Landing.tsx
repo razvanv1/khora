@@ -647,7 +647,7 @@ export default function Landing() {
               © 2026 Khora. Toate drepturile rezervate. Un proiect The Unlearning School.
             </p>
             <p className="text-white/20 text-xs">
-              Fondat de Răzvan Vâlceanu · Fost GM Bitdefender · 20+ ani în educație și tehnologie
+              Fondat de Răzvan Vâlceanu · Antreprenor în comportamentul schimbării și unlearning · Trainer și Instructor Yoga certificat
             </p>
           </div>
         </div>
