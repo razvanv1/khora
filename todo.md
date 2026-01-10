@@ -57,3 +57,12 @@
 - [x] Modal feedback cu rating și comentariu
 - [x] Persistență în localStorage
 - [x] Afișare rating per supliment
+
+
+## URGENT - Email & Admin Panel
+- [x] Fix sistem email - notificări prin Forge API
+- [x] Fix sistem email - admin primește notificări
+- [x] Panou admin cu autentificare (existentă la /admin)
+- [x] Dashboard admin: statistici useri
+- [x] Dashboard admin: lista contacte/emailuri
+- [x] Credențiale admin documentate (ADMIN_ACCESS.md)
