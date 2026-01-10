@@ -13,10 +13,13 @@ import {
 } from "lucide-react";
 import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/i18n";
 
 export default function Landing() {
   const [, setLocation] = useLocation();
   const containerRef = useRef<HTMLDivElement>(null);
+  const { t, language } = useLanguage();
   const { scrollYProgress } = useScroll({ target: containerRef });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   
@@ -58,6 +61,11 @@ export default function Landing() {
   return (
     <div ref={containerRef} className="bg-[#0a1628] text-white">
       
+      {/* Language Switcher - Fixed top right */}
+      <div className="fixed top-4 right-4 z-50">
+        <LanguageSwitcher />
+      </div>
+      
       {/* ==================== HERO SECTION ==================== */}
       <motion.section 
         style={{ opacity: heroOpacity, scale: heroScale }}
@@ -81,7 +89,7 @@ export default function Landing() {
           >
             <h1 className="text-6xl md:text-7xl font-light tracking-wider mb-2">
               KH<span className="text-[#2dd4bf]">O</span>RA
-              <span className="block text-lg md:text-xl font-normal text-white/60 mt-2">Aplicație de Nutriție Vegană</span>
+              <span className="block text-lg md:text-xl font-normal text-white/60 mt-2">{t.landing.subtitle}</span>
             </h1>
             <p className="text-white/40 text-sm tracking-[0.3em] uppercase">
               χώρα · Spațiul Transformării
@@ -95,9 +103,9 @@ export default function Landing() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-white/70 font-light mb-10 leading-relaxed"
           >
-            Dezvață ce ai crezut despre nutriția vegană.
+            {t.landing.tagline}
             <br />
-            <span className="text-[#d4a574]">Învață ce contează cu adevărat.</span>
+            <span className="text-[#d4a574]">{t.landing.taglineHighlight}</span>
           </motion.h2>
 
           {/* CTA Buttons */}
@@ -112,7 +120,7 @@ export default function Landing() {
               className="px-8 py-4 rounded-full text-white font-medium flex items-center gap-3 group"
               style={{ background: 'linear-gradient(135deg, #d4a574, #b8956a)' }}
             >
-              Începe Acum
+              {t.landing.ctaStart}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
@@ -120,7 +128,7 @@ export default function Landing() {
               className="px-8 py-4 rounded-full text-white/70 font-medium flex items-center gap-3 border border-white/20 hover:bg-white/5 transition-colors"
             >
               <BookOpen className="w-5 h-5" />
-              Citește Articolele
+              {t.landing.ctaArticles}
             </button>
           </motion.div>
 
@@ -136,7 +144,7 @@ export default function Landing() {
               transition={{ duration: 2, repeat: Infinity }}
               className="flex flex-col items-center gap-2 text-white/30"
             >
-              <span className="text-xs tracking-wider">Descoperă povestea</span>
+              <span className="text-xs tracking-wider">{t.landing.discoverStory}</span>
               <ArrowDown className="w-4 h-4" />
             </motion.div>
           </motion.div>

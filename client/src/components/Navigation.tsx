@@ -1,7 +1,7 @@
 /*
  * KHORA Navigation Component
  * Design: Premium Apple VisionOS 2026 - Glassmorphism
- * Limba: Română
+ * Bilingual: RO/EN
  */
 
 import { Link, useLocation } from "wouter";
@@ -14,18 +14,20 @@ import {
   Sparkles,
   User
 } from "lucide-react";
-
-const navItems = [
-  { path: "/", icon: Compass, label: "Acasă" },
-  { path: "/pantry", icon: Sparkles, label: "Cămară" },
-  { path: "/blender", icon: ChefHat, label: "Rețete" },
-  { path: "/hydrate", icon: Droplets, label: "Hidratare" },
-  { path: "/supplements", icon: Pill, label: "Suplimente" },
-  { path: "/profile", icon: User, label: "Profil" },
-];
+import { useLanguage } from "@/i18n";
 
 export default function Navigation() {
   const [location] = useLocation();
+  const { t } = useLanguage();
+
+  const navItems = [
+    { path: "/", icon: Compass, label: t.nav.home },
+    { path: "/pantry", icon: Sparkles, label: t.nav.pantry },
+    { path: "/blender", icon: ChefHat, label: t.nav.recipes },
+    { path: "/hydrate", icon: Droplets, label: t.nav.hydrate },
+    { path: "/supplements", icon: Pill, label: t.nav.supplements },
+    { path: "/profile", icon: User, label: t.nav.profile },
+  ];
 
   return (
     <motion.nav

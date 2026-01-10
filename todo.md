@@ -44,3 +44,9 @@
 - [x] Implementare lazy loading pentru imagini (component LazyImage)
 - [x] Adăugare preconnect/prefetch pentru resurse externe
 - [x] Optimizare Core Web Vitals (LCP, FID, CLS) - build chunks, preload hero
+
+
+## Bilingv & Social Media
+- [x] Generare imagine OG 1200x630px pentru social media
+- [x] Implementare sistem i18n bilingv RO/EN
+- [x] Switch de limbă în UI (LanguageSwitcher component)
