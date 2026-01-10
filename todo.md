@@ -99,3 +99,12 @@
 - [x] FAQ section în fiecare articol (People Also Ask optimizat)
 - [x] Sitemap.xml actualizat cu articolele noi
 - [x] Schema.org FAQPage markup în BlogArticle (JSON-LD + microdata)
+
+
+## URL Update & Lighthouse Fixes
+- [x] Actualizare toate URL-urile la https://khora.manus.space
+- [x] OG image URL corect pentru share social media
+- [ ] Fix performanță: optimizare imagini
+- [ ] Fix performanță: reducere JavaScript
+- [x] Fix accesibilitate: link-uri fără nume (adăugat aria-label)
+- [ ] Fix best practices: API-uri depreciate

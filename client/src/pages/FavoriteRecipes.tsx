@@ -53,7 +53,7 @@ export default function FavoriteRecipes() {
 
   const handleShare = async () => {
     const recipeNames = sortedFavorites.map(r => `• ${r.name}`).join('\n');
-    const shareText = `🌱 Rețetele mele vegane favorite din Khora:\n\n${recipeNames}\n\nDescoperă și tu rețete sănătoase pe khora.app`;
+    const shareText = `🌱 Rețetele mele vegane favorite din Khora:\n\n${recipeNames}\n\nDescoperă și tu rețete sănătoase pe khora.manus.space`;
     
     if (navigator.share) {
       try {

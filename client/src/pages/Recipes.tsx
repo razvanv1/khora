@@ -66,7 +66,7 @@ function generateRecipeListSchema() {
       "item": {
         "@type": "Recipe",
         "name": recipe.name,
-        "url": `https://khora.app/recipes/${recipe.id}`
+        "url": `https://khora.manus.space/recipes/${recipe.id}`
       }
     }))
   };

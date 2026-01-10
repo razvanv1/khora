@@ -29,19 +29,19 @@ function generateArticleSchema(article: ReturnType<typeof getArticleBySlug>) {
     "author": {
       "@type": "Organization",
       "name": "Khora - The Unlearning School",
-      "url": "https://khora.app"
+      "url": "https://khora.manus.space"
     },
     "publisher": {
       "@type": "Organization",
       "name": "Khora",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://khora.app/images/khora-logo.png"
+        "url": "https://khora.manus.space/images/khora-logo.png"
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://khora.app/blog/${article.slug}`
+      "@id": `https://khora.manus.space/blog/${article.slug}`
     },
     "keywords": article.tags.join(", "),
     "articleSection": article.category,
@@ -154,7 +154,7 @@ export default function BlogArticle() {
       { property: 'og:description', content: article.excerpt },
       { property: 'og:image', content: article.heroImage },
       { property: 'og:type', content: 'article' },
-      { property: 'og:url', content: `https://khora.app/blog/${article.slug}` },
+      { property: 'og:url', content: `https://khora.manus.space/blog/${article.slug}` },
       { property: 'article:published_time', content: article.publishDate },
       { property: 'article:section', content: article.category },
     ];

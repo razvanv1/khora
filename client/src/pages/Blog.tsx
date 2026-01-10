@@ -20,15 +20,15 @@ function generateBlogSchema() {
     "@type": "Blog",
     "name": "Blog Khora - Educație Vegană",
     "description": "Articole educative despre nutriție vegană sănătoasă, bazate pe cercetări științifice",
-    "url": "https://khora.app/blog",
+    "url": "https://khora.manus.space/blog",
     "inLanguage": "ro-RO",
     "publisher": {
       "@type": "Organization",
       "name": "Khora - The Unlearning School",
-      "url": "https://khora.app",
+      "url": "https://khora.manus.space",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://khora.app/images/khora-logo.png"
+        "url": "https://khora.manus.space/images/khora-logo.png"
       }
     },
     "blogPost": blogArticles.map(article => ({
@@ -37,7 +37,7 @@ function generateBlogSchema() {
       "description": article.excerpt,
       "image": article.heroImage,
       "datePublished": article.publishDate,
-      "url": `https://khora.app/blog/${article.slug}`,
+      "url": `https://khora.manus.space/blog/${article.slug}`,
       "author": {
         "@type": "Organization",
         "name": "Khora"
@@ -61,7 +61,7 @@ function generateArticleListSchema() {
       "item": {
         "@type": "BlogPosting",
         "name": article.title,
-        "url": `https://khora.app/blog/${article.slug}`
+        "url": `https://khora.manus.space/blog/${article.slug}`
       }
     }))
   };
@@ -74,12 +74,12 @@ function generateOrganizationSchema() {
     "@type": "Organization",
     "name": "Khora",
     "alternateName": "Khora - Nutriție Vegană Personalizată",
-    "url": "https://khora.app",
-    "logo": "https://khora.app/images/khora-logo.png",
+    "url": "https://khora.manus.space",
+    "logo": "https://khora.manus.space/images/khora-logo.png",
     "description": "Aplicație premium de nutriție vegană cu rețete personalizate, tracking hidratare și educație bazată pe știință",
     "sameAs": [
-      "https://www.facebook.com/khora.app",
-      "https://www.instagram.com/khora.app"
+      "https://www.facebook.com/khora.manus.space",
+      "https://www.instagram.com/khora.manus.space"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
