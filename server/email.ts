@@ -1,5 +1,42 @@
 import { ENV } from "./_core/env";
 
+/**
+ * Send notification via Manus Forge API
+ * This sends push notifications to the project owner
+ */
+async function sendNotification(title: string, content: string): Promise<boolean> {
+  if (!ENV.forgeApiUrl || !ENV.forgeApiKey) {
+    console.warn("[Email] Forge API not configured");
+    return false;
+  }
+
+  const endpoint = `${ENV.forgeApiUrl.replace(/\/$/, "")}/webdevtoken.v1.WebDevService/SendNotification`;
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        authorization: `Bearer ${ENV.forgeApiKey}`,
+        "content-type": "application/json",
+        "connect-protocol-version": "1",
+      },
+      body: JSON.stringify({ title, content }),
+    });
+
+    if (!response.ok) {
+      console.warn(`[Email] Notification failed (${response.status})`);
+      return false;
+    }
+
+    console.log(`[Email] Notification sent: ${title}`);
+    return true;
+  } catch (error) {
+    console.warn("[Email] Error:", error);
+    return false;
+  }
+}
+
 export type EmailPayload = {
   to: string;
   toName?: string;
@@ -9,52 +46,17 @@ export type EmailPayload = {
 };
 
 /**
- * Send email using Manus Forge API
- * Uses the webdevtoken notification service endpoint
+ * Send email (as notification to owner)
  */
 export async function sendEmail(payload: EmailPayload): Promise<boolean> {
-  if (!ENV.forgeApiUrl || !ENV.forgeApiKey) {
-    console.warn("[Email] Forge API not configured, skipping email send");
-    return false;
-  }
-
-  // Use the notification endpoint to send emails via owner notification
-  // This is a workaround since direct email API may not be available
-  const endpoint = `${ENV.forgeApiUrl.replace(/\/$/, "")}/webdevtoken.v1.WebDevService/SendNotification`;
-
-  try {
-    // Send as notification to owner (admin)
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        authorization: `Bearer ${ENV.forgeApiKey}`,
-        "content-type": "application/json",
-        "connect-protocol-version": "1",
-      },
-      body: JSON.stringify({
-        title: `📧 Email pentru ${payload.to}: ${payload.subject}`,
-        content: `Destinatar: ${payload.to}${payload.toName ? ` (${payload.toName})` : ''}\n\n${payload.text || 'Vezi versiunea HTML'}`,
-      }),
-    });
-
-    if (!response.ok) {
-      const detail = await response.text().catch(() => "");
-      console.warn(`[Email] Failed to send email notification (${response.status}): ${detail}`);
-      return false;
-    }
-
-    console.log(`[Email] Successfully sent email notification for ${payload.to}`);
-    return true;
-  } catch (error) {
-    console.warn("[Email] Error sending email:", error);
-    return false;
-  }
+  return sendNotification(
+    `📧 ${payload.subject}`,
+    `Pentru: ${payload.to}\n\n${payload.text || ''}`
+  );
 }
 
 /**
- * Send welcome email to new user
- * Note: This sends a notification to the admin about the new user
+ * Send welcome notification for new user
  */
 export async function sendWelcomeEmail(
   email: string, 
@@ -65,42 +67,24 @@ export async function sendWelcomeEmail(
     proteinGrams?: number;
   }
 ): Promise<boolean> {
-  const userName = name || "Prieten";
+  const userName = name || "Utilizator";
   
-  const text = `
-🌱 Bine ai venit la Khora, ${userName}!
+  let metricsText = "";
+  if (calculatedMetrics) {
+    metricsText = `\n📊 Metrici calculate:`;
+    if (calculatedMetrics.dailyCalories) metricsText += `\n• Calorii: ${calculatedMetrics.dailyCalories} kcal`;
+    if (calculatedMetrics.dailyWater) metricsText += `\n• Lichide: ${(calculatedMetrics.dailyWater / 1000).toFixed(1)} L`;
+    if (calculatedMetrics.proteinGrams) metricsText += `\n• Proteine: ${calculatedMetrics.proteinGrams}g`;
+  }
 
-Mulțumim că ai ales Khora pentru călătoria ta spre o nutriție vegană echilibrată și conștientă.
-
-${calculatedMetrics ? `
-📊 Recomandările tale personalizate:
-${calculatedMetrics.dailyCalories ? `• Calorii zilnice: ${calculatedMetrics.dailyCalories} kcal` : ''}
-${calculatedMetrics.dailyWater ? `• Lichide zilnice: ${(calculatedMetrics.dailyWater / 1000).toFixed(1)} L` : ''}
-${calculatedMetrics.proteinGrams ? `• Proteine zilnice: ${calculatedMetrics.proteinGrams}g` : ''}
-` : ''}
-
-Ce poți face acum:
-✦ Explorează Cămara Digitală cu 500+ ingrediente vegane
-✦ Generează rețete personalizate din ingredientele tale
-✦ Monitorizează hidratarea și suplimentele
-✦ Citește articolele educative despre nutriția vegană
-
----
-Khora este un proiect The Unlearning School
-Întrebări? Scrie-ne la hello@dezvatare.ro
-  `;
-
-  return sendEmail({
-    to: email,
-    toName: name || undefined,
-    subject: "🌱 Bine ai venit la Khora!",
-    html: "",
-    text,
-  });
+  return sendNotification(
+    `🌱 Welcome: ${userName} s-a înscris!`,
+    `Email: ${email}\nNume: ${userName}${metricsText}\n\n✅ Utilizatorul a completat onboarding-ul și a primit mesajul de bun venit în aplicație.`
+  );
 }
 
 /**
- * Send notification email to admin about new user
+ * Send admin notification about new user
  */
 export async function sendAdminNewUserEmail(
   adminEmail: string,
@@ -112,24 +96,15 @@ export async function sendAdminNewUserEmail(
     registeredAt: Date;
   }
 ): Promise<boolean> {
-  const text = `
-🌱 UTILIZATOR NOU PE KHORA
-
-📧 Email: ${userData.email}
+  return sendNotification(
+    `👤 Utilizator nou: ${userData.name || userData.email}`,
+    `📧 Email: ${userData.email}
 👤 Nume: ${userData.name || 'Nespecificat'}
 🎯 Obiectiv: ${userData.goal || 'Nespecificat'}
-🥗 Stil alimentar: ${userData.dietaryStyle || 'Nespecificat'}
+🥗 Stil: ${userData.dietaryStyle || 'Nespecificat'}
 📅 Data: ${userData.registeredAt.toLocaleString('ro-RO')}
 
 ---
-Verifică dashboard-ul admin pentru mai multe detalii.
-  `;
-
-  return sendEmail({
-    to: adminEmail,
-    toName: "Admin Khora",
-    subject: `🌱 Utilizator nou: ${userData.name || userData.email}`,
-    html: "",
-    text,
-  });
+Verifică /admin pentru detalii complete.`
+  );
 }
