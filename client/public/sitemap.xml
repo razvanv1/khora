@@ -139,4 +139,26 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- Articole Evergreen SEO/GEO/AEO -->
+  <url>
+    <loc>https://hiczfbzyscvcjafya7v3eu.manus.space/blog/ghid-complet-nutritie-vegana-romania-2026</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://hiczfbzyscvcjafya7v3eu.manus.space/blog/vitamina-b12-ghid-complet-vegani</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://hiczfbzyscvcjafya7v3eu.manus.space/blog/proteine-vegetale-complete-surse-combinatii</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>

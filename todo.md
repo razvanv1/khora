@@ -93,11 +93,9 @@
 
 
 ## Articole Evergreen SEO/GEO/AEO
-- [ ] Articol: "Ghid Complet Nutriție Vegană România 2026" (2000+ cuvinte)
-- [ ] Articol: "Suplimente Esențiale pentru Vegani - Tot ce trebuie să știi" (2000+ cuvinte)
-- [ ] Articol: "Proteine Vegetale Complete - Surse și Combinații" (2000+ cuvinte)
-- [ ] Articol: "Vitamina B12 pentru Vegani - Ghid Complet" (2000+ cuvinte)
-- [ ] Articol: "Rețete Vegane Rapide pentru Începători" (2000+ cuvinte)
-- [ ] Schema.org Article markup extins
-- [ ] FAQ section în fiecare articol
-- [ ] People Also Ask optimization
+- [x] Articol: "Ghid Complet Nutriție Vegană România 2026" (2500 cuvinte, 5 FAQ)
+- [x] Articol: "Vitamina B12 pentru Vegani - Ghid Complet" (2200 cuvinte, 5 FAQ)
+- [x] Articol: "Proteine Vegetale Complete - Surse și Combinații" (2000 cuvinte, 5 FAQ)
+- [x] FAQ section în fiecare articol (People Also Ask optimizat)
+- [x] Sitemap.xml actualizat cu articolele noi
+- [x] Schema.org FAQPage markup în BlogArticle (JSON-LD + microdata)

@@ -54,6 +54,8 @@ function generateArticleSchema(article: ReturnType<typeof getArticleBySlug>) {
 function generateBreadcrumbSchema(article: ReturnType<typeof getArticleBySlug>) {
   if (!article) return null;
   
+  const baseUrl = "https://hiczfbzyscvcjafya7v3eu.manus.space";
+  
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -62,21 +64,39 @@ function generateBreadcrumbSchema(article: ReturnType<typeof getArticleBySlug>) 
         "@type": "ListItem",
         "position": 1,
         "name": "Acasă",
-        "item": "https://khora.app"
+        "item": baseUrl
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Blog",
-        "item": "https://khora.app/blog"
+        "item": `${baseUrl}/blog`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": article.title,
-        "item": `https://khora.app/blog/${article.slug}`
+        "item": `${baseUrl}/blog/${article.slug}`
       }
     ]
+  };
+}
+
+// Schema.org FAQPage for articles with FAQ
+function generateFAQSchema(article: ReturnType<typeof getArticleBySlug>) {
+  if (!article || !article.faq || article.faq.length === 0) return null;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": article.faq.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
   };
 }
 
@@ -105,6 +125,16 @@ export default function BlogArticle() {
     breadcrumbSchema.setAttribute('data-schema', 'article');
     breadcrumbSchema.textContent = JSON.stringify(generateBreadcrumbSchema(article));
     document.head.appendChild(breadcrumbSchema);
+
+    // Add FAQ schema if article has FAQ
+    const faqData = generateFAQSchema(article);
+    if (faqData) {
+      const faqSchema = document.createElement('script');
+      faqSchema.type = 'application/ld+json';
+      faqSchema.setAttribute('data-schema', 'article');
+      faqSchema.textContent = JSON.stringify(faqData);
+      document.head.appendChild(faqSchema);
+    }
 
     // Update page title and meta
     document.title = `${article.title} | Khora Blog`;
@@ -304,6 +334,56 @@ export default function BlogArticle() {
             </div>
           </div>
         </motion.article>
+
+        {/* FAQ Section - People Also Ask */}
+        {article.faq && article.faq.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="px-6 mt-8"
+          >
+            <div 
+              className="max-w-3xl mx-auto p-6 rounded-3xl"
+              style={{
+                background: 'rgba(0, 212, 170, 0.05)',
+                border: '1px solid rgba(0, 212, 170, 0.2)',
+              }}
+            >
+              <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <span className="text-2xl">❓</span>
+                Întrebări Frecvente
+              </h2>
+              <div className="space-y-4">
+                {article.faq.map((item, index) => (
+                  <details 
+                    key={index} 
+                    className="group"
+                    itemScope 
+                    itemProp="mainEntity" 
+                    itemType="https://schema.org/Question"
+                  >
+                    <summary 
+                      className="cursor-pointer text-white font-medium py-3 px-4 rounded-xl flex items-center justify-between hover:bg-white/5 transition-colors"
+                      style={{ listStyle: 'none' }}
+                    >
+                      <span itemProp="name">{item.question}</span>
+                      <span className="text-[#00d4aa] group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <div 
+                      className="px-4 pb-4 pt-2 text-white/70"
+                      itemScope 
+                      itemProp="acceptedAnswer" 
+                      itemType="https://schema.org/Answer"
+                    >
+                      <p itemProp="text">{item.answer}</p>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </motion.section>
+        )}
 
         {/* Tags */}
         <motion.div
