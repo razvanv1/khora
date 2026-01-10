@@ -50,3 +50,10 @@
 - [x] Generare imagine OG 1200x630px pentru social media
 - [x] Implementare sistem i18n bilingv RO/EN
 - [x] Switch de limbă în UI (LanguageSwitcher component)
+
+
+## Sistem Feedback & Rating Suplimente
+- [x] Componenta StarRating pentru evaluare
+- [x] Modal feedback cu rating și comentariu
+- [x] Persistență în localStorage
+- [x] Afișare rating per supliment

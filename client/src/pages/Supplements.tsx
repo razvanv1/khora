@@ -6,8 +6,11 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Pill, Plus, Clock, Check, X, Trash2, Info, Sun, Zap, Brain, Heart, Leaf } from "lucide-react";
+import { Pill, Plus, Clock, Check, X, Trash2, Info, Sun, Zap, Brain, Heart, Leaf, MessageSquare, Star } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import StarRating from "@/components/StarRating";
+import SupplementFeedbackModal from "@/components/SupplementFeedbackModal";
+import { useSupplementFeedback, type SupplementFeedback } from "@/hooks/useSupplementFeedback";
 
 const supplementSuggestions: Record<string, string[]> = {
   "Vitamine": ["Vitamina B12", "Vitamina D3", "Vitamina C", "Vitamina E", "Vitamina K2", "Complex B", "Acid Folic"],
@@ -52,6 +55,20 @@ export default function Supplements() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [newSupplement, setNewSupplement] = useState({ name: "", time: "08:00", category: "Vitamine", note: "" });
   const [showSuggestions, setShowSuggestions] = useState(false);
+  
+  // Feedback system
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+  const [selectedSupplementForFeedback, setSelectedSupplementForFeedback] = useState<string | null>(null);
+  const { addFeedback, getFeedback, getAllFeedbacks, getFeedbackCount, getAverageRating } = useSupplementFeedback();
+  
+  const openFeedbackModal = (supplementName: string) => {
+    setSelectedSupplementForFeedback(supplementName);
+    setShowFeedbackModal(true);
+  };
+  
+  const handleFeedbackSubmit = (feedback: SupplementFeedback) => {
+    addFeedback(feedback);
+  };
 
   useEffect(() => {
     localStorage.setItem('khora_supplements_list', JSON.stringify(supplements));
@@ -149,25 +166,42 @@ export default function Supplements() {
                 <div className="space-y-2">
                   {groupedByTime[time].map((supplement) => {
                     const category = supplementCategories.find(c => c.name === supplement.category);
+                    const feedback = getFeedback(supplement.name);
                     return (
-                      <div key={supplement.id} className="flex items-center justify-between p-4 rounded-xl" style={{ background: supplement.taken ? 'rgba(45, 212, 191, 0.1)' : 'rgba(255, 255, 255, 0.04)', border: supplement.taken ? '1px solid rgba(45, 212, 191, 0.3)' : '1px solid rgba(255, 255, 255, 0.08)' }}>
-                        <div className="flex items-center gap-3 flex-1 min-w-0">
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${category?.color || '#666'}20` }}>
-                            <Pill className="w-5 h-5" style={{ color: category?.color || '#666' }} />
+                      <div key={supplement.id} className="p-4 rounded-xl" style={{ background: supplement.taken ? 'rgba(45, 212, 191, 0.1)' : 'rgba(255, 255, 255, 0.04)', border: supplement.taken ? '1px solid rgba(45, 212, 191, 0.3)' : '1px solid rgba(255, 255, 255, 0.08)' }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3 flex-1 min-w-0">
+                            <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${category?.color || '#666'}20` }}>
+                              <Pill className="w-5 h-5" style={{ color: category?.color || '#666' }} />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <p className={`font-medium text-sm truncate ${supplement.taken ? 'text-white/50 line-through' : 'text-white'}`}>{supplement.name}</p>
+                              <p className="text-white/40 text-xs truncate">{supplement.category}{supplement.note && ` • ${supplement.note}`}</p>
+                            </div>
                           </div>
-                          <div className="min-w-0 flex-1">
-                            <p className={`font-medium text-sm truncate ${supplement.taken ? 'text-white/50 line-through' : 'text-white'}`}>{supplement.name}</p>
-                            <p className="text-white/40 text-xs truncate">{supplement.category}{supplement.note && ` • ${supplement.note}`}</p>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <button onClick={() => openFeedbackModal(supplement.name)} className="p-2 rounded-lg hover:bg-white/10" title="Adaugă feedback">
+                              <MessageSquare className={`w-4 h-4 ${feedback ? 'text-[#d4a574]' : 'text-white/30 hover:text-[#d4a574]'}`} />
+                            </button>
+                            <button onClick={() => deleteSupplement(supplement.id)} className="p-2 rounded-lg hover:bg-white/10">
+                              <Trash2 className="w-4 h-4 text-white/30 hover:text-red-400" />
+                            </button>
+                            <button onClick={() => toggleSupplement(supplement.id)} className={`w-8 h-8 rounded-full flex items-center justify-center ${supplement.taken ? 'bg-[#2dd4bf]' : 'bg-white/10 border border-white/20'}`}>
+                              {supplement.taken && <Check className="w-5 h-5 text-[#0a1628]" />}
+                            </button>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <button onClick={() => deleteSupplement(supplement.id)} className="p-2 rounded-lg hover:bg-white/10">
-                            <Trash2 className="w-4 h-4 text-white/30 hover:text-red-400" />
-                          </button>
-                          <button onClick={() => toggleSupplement(supplement.id)} className={`w-8 h-8 rounded-full flex items-center justify-center ${supplement.taken ? 'bg-[#2dd4bf]' : 'bg-white/10 border border-white/20'}`}>
-                            {supplement.taken && <Check className="w-5 h-5 text-[#0a1628]" />}
-                          </button>
-                        </div>
+                        {/* Rating display */}
+                        {feedback && (
+                          <div className="mt-2 pt-2 border-t border-white/5 flex items-center gap-2">
+                            <StarRating rating={feedback.rating} readonly size="sm" />
+                            <span className="text-xs text-white/40">
+                              {feedback.effectiveness === 'very_effective' ? 'Foarte eficient' : 
+                               feedback.effectiveness === 'effective' ? 'Eficient' : 
+                               feedback.effectiveness === 'neutral' ? 'Neutru' : 'Ineficient'}
+                            </span>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
@@ -251,6 +285,18 @@ export default function Supplements() {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Feedback Modal */}
+      <SupplementFeedbackModal
+        isOpen={showFeedbackModal}
+        onClose={() => {
+          setShowFeedbackModal(false);
+          setSelectedSupplementForFeedback(null);
+        }}
+        supplementName={selectedSupplementForFeedback || ''}
+        existingFeedback={selectedSupplementForFeedback ? getFeedback(selectedSupplementForFeedback) : null}
+        onSubmit={handleFeedbackSubmit}
+      />
 
       <Navigation />
     </div>
