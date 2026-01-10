@@ -200,29 +200,31 @@ export default function Profile() {
           </Link>
 
           {/* Setări */}
-          <div 
-            className="p-4 rounded-2xl flex items-center justify-between group cursor-pointer opacity-50"
-            style={{
-              background: 'rgba(255, 255, 255, 0.04)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-            }}
-          >
-            <div className="flex items-center gap-3">
-              <div 
-                className="w-10 h-10 rounded-xl flex items-center justify-center"
-                style={{ background: 'rgba(255, 255, 255, 0.1)' }}
-              >
-                <Settings className="w-5 h-5 text-white/60" />
+          <Link href="/settings">
+            <div 
+              className="p-4 rounded-2xl flex items-center justify-between group cursor-pointer"
+              style={{
+                background: 'rgba(255, 255, 255, 0.04)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <div 
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ background: 'rgba(255, 255, 255, 0.1)' }}
+                >
+                  <Settings className="w-5 h-5 text-white/70" />
+                </div>
+                <div>
+                  <h3 className="text-white font-medium text-sm">Setări</h3>
+                  <p className="text-white/60 text-xs">Notificări, limbă, confidențialitate</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-white font-medium text-sm">Setări</h3>
-                <p className="text-white/60 text-xs">În curând</p>
-              </div>
+              <ChevronRight className="w-4 h-4 text-white/60 group-hover:text-white/60 transition-colors" />
             </div>
-            <ChevronRight className="w-4 h-4 text-white/60" />
-          </div>
+          </Link>
 
           {/* Deconectare */}
           <button

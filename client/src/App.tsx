@@ -26,6 +26,7 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Cookies = lazy(() => import("./pages/Cookies"));
 const Contact = lazy(() => import("./pages/Contact"));
 const FAQ = lazy(() => import("./pages/FAQ"));
+const Settings = lazy(() => import("./pages/Settings"));
 
 // Loading spinner component
 function PageLoader() {
@@ -98,6 +99,7 @@ function AppContent() {
         <Route path={"/hydrate"} component={Hydration} />
         <Route path={"/supplements"} component={Supplements} />
         <Route path={"/profile"} component={Profile} />
+        <Route path={"/settings"} component={Settings} />
         <Route path={"/blog"} component={Blog} />
         <Route path={"/blog/:slug"} component={BlogArticle} />
         <Route path={"/onboarding"}>

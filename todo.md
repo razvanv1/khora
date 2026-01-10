@@ -121,3 +121,14 @@
 ## BUG FIX - Traduceri EN
 - [x] Fix Landing.tsx să folosească traducerile i18n (hero, filosofie, unlearning, CTA)
 - [x] Traduceri complete RO/EN pentru toate secțiunile Landing
+
+
+## Îmbunătățiri Feedback Utilizator
+- [x] Fix NaN kcal în pagina Profil (validare + valori default)
+- [x] Validare robustă date profil (vârstă, greutate, înălțime)
+- [x] Link politică confidențialitate vizibil în onboarding (pasul 1)
+- [x] Disclaimer metodologic: recomandările sunt orientative, nu înlocuiesc consultul medical
+- [x] Activare secțiune Setări funcțională (/settings)
+- [ ] Extindere articole blog (minim 5 articole noi)
+- [ ] Extindere FAQ (minim 10 întrebări noi)
+- [ ] Avertisment că datele sunt stocate local în browser

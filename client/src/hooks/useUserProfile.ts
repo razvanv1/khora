@@ -158,11 +158,19 @@ const goalAdjustments = {
 export function calculateMetrics(profile: UserProfile): CalculatedMetrics {
   const { sex, age, weight, height, activityLevel, goal, dietaryStyle } = profile;
 
+  // Validare date - folosim valori default dacă lipsesc sau sunt invalide
+  const safeAge = (typeof age === 'number' && !isNaN(age) && age > 0) ? age : 30;
+  const safeWeight = (typeof weight === 'number' && !isNaN(weight) && weight > 0) ? weight : 70;
+  const safeHeight = (typeof height === 'number' && !isNaN(height) && height > 0) ? height : 170;
+  const safeSex = sex === 'male' || sex === 'female' ? sex : 'male';
+  const safeActivityLevel = activityMultipliers[activityLevel] ? activityLevel : 'moderate';
+  const safeGoal = goalAdjustments[goal] !== undefined ? goal : 'maintain';
+
   // ==================== BODY COMPOSITION ====================
   
   // BMI Calculation
-  const heightM = height / 100;
-  const bmi = weight / (heightM * heightM);
+  const heightM = safeHeight / 100;
+  const bmi = safeWeight / (heightM * heightM);
   
   let bmiCategory: string;
   if (bmi < 18.5) bmiCategory = 'Subponderal';
@@ -173,9 +181,9 @@ export function calculateMetrics(profile: UserProfile): CalculatedMetrics {
   // Ideal Weight - Devine Formula (1974)
   // Men: 50 + 2.3 × (height in inches - 60)
   // Women: 45.5 + 2.3 × (height in inches - 60)
-  const heightInches = height / 2.54;
+  const heightInches = safeHeight / 2.54;
   let idealWeightBase: number;
-  if (sex === 'male') {
+  if (safeSex === 'male') {
     idealWeightBase = 50 + 2.3 * (heightInches - 60);
   } else {
     idealWeightBase = 45.5 + 2.3 * (heightInches - 60);
@@ -186,10 +194,10 @@ export function calculateMetrics(profile: UserProfile): CalculatedMetrics {
   // Body Fat Estimate (simplified US Navy approximation)
   // This is a rough estimate without waist/neck measurements
   let bodyFatEstimate: number;
-  if (sex === 'male') {
-    bodyFatEstimate = 1.20 * bmi + 0.23 * age - 16.2;
+  if (safeSex === 'male') {
+    bodyFatEstimate = 1.20 * bmi + 0.23 * safeAge - 16.2;
   } else {
-    bodyFatEstimate = 1.20 * bmi + 0.23 * age - 5.4;
+    bodyFatEstimate = 1.20 * bmi + 0.23 * safeAge - 5.4;
   }
   bodyFatEstimate = Math.max(5, Math.min(50, bodyFatEstimate));
 
@@ -199,10 +207,10 @@ export function calculateMetrics(profile: UserProfile): CalculatedMetrics {
   // Men: BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age(y) + 5
   // Women: BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age(y) - 161
   let bmr: number;
-  if (sex === 'male') {
-    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+  if (safeSex === 'male') {
+    bmr = 10 * safeWeight + 6.25 * safeHeight - 5 * safeAge + 5;
   } else {
-    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+    bmr = 10 * safeWeight + 6.25 * safeHeight - 5 * safeAge - 161;
   }
 
   // RMR (Resting Metabolic Rate) - slightly higher than BMR
@@ -210,10 +218,10 @@ export function calculateMetrics(profile: UserProfile): CalculatedMetrics {
   const rmr = Math.round(bmr * 1.1);
 
   // TDEE (Total Daily Energy Expenditure)
-  const tdee = Math.round(bmr * activityMultipliers[activityLevel]);
+  const tdee = Math.round(bmr * activityMultipliers[safeActivityLevel]);
 
   // Target calories based on goal
-  const targetCalories = Math.round(tdee + goalAdjustments[goal]);
+  const targetCalories = Math.round(tdee + goalAdjustments[safeGoal]);
 
   // ==================== MACRONUTRIENTS ====================
 
@@ -221,9 +229,9 @@ export function calculateMetrics(profile: UserProfile): CalculatedMetrics {
   // Sedentary: 0.8g/kg, Active: 1.2-1.6g/kg, Athlete/Gain: 1.6-2.2g/kg
   // Vegans may need +10% due to lower digestibility of plant proteins
   let proteinMultiplier: number;
-  if (goal === 'gain' || activityLevel === 'athlete') {
+  if (safeGoal === 'gain' || safeActivityLevel === 'athlete') {
     proteinMultiplier = 2.0;
-  } else if (activityLevel === 'active' || activityLevel === 'moderate') {
+  } else if (safeActivityLevel === 'active' || safeActivityLevel === 'moderate') {
     proteinMultiplier = 1.4;
   } else if (dietaryStyle === 'high-protein') {
     proteinMultiplier = 1.8;
@@ -232,13 +240,13 @@ export function calculateMetrics(profile: UserProfile): CalculatedMetrics {
   }
   // Add 10% for vegan protein digestibility
   proteinMultiplier *= 1.1;
-  const proteinGrams = Math.round(weight * proteinMultiplier);
+  const proteinGrams = Math.round(safeWeight * proteinMultiplier);
   const proteinCalories = proteinGrams * 4;
 
   // Fat: 25-35% of calories (9 kcal/g)
   // Lower for weight loss, higher for low-carb
   let fatPercent = 0.28;
-  if (goal === 'lose') fatPercent = 0.25;
+  if (safeGoal === 'lose') fatPercent = 0.25;
   if (dietaryStyle === 'low-carb') fatPercent = 0.40;
   const fatCalories = targetCalories * fatPercent;
   const fatGrams = Math.round(fatCalories / 9);
@@ -254,10 +262,10 @@ export function calculateMetrics(profile: UserProfile): CalculatedMetrics {
 
   // Daily water intake: 30-40ml per kg body weight
   // Athletes need more: 35-40ml per kg
-  const waterPerKg = activityLevel === 'athlete' ? 40 : 
-                     activityLevel === 'active' ? 35 : 
-                     activityLevel === 'moderate' ? 33 : 30;
-  const dailyWaterMl = Math.round(weight * waterPerKg);
+  const waterPerKg = safeActivityLevel === 'athlete' ? 40 : 
+                     safeActivityLevel === 'active' ? 35 : 
+                     safeActivityLevel === 'moderate' ? 33 : 30;
+  const dailyWaterMl = Math.round(safeWeight * waterPerKg);
 
   // ==================== VEGAN MICRONUTRIENTS (RDA) ====================
 
@@ -265,21 +273,21 @@ export function calculateMetrics(profile: UserProfile): CalculatedMetrics {
   const vitaminB12Mcg = 2.4;
 
   // Vitamin D: 600-1000 IU/day (higher in winter, for those with limited sun)
-  const vitaminDIU = age > 70 ? 800 : 600;
+  const vitaminDIU = safeAge > 70 ? 800 : 600;
 
   // Omega-3 (DHA + EPA from algae): 250-500mg/day
   const omega3Mg = activityLevel === 'athlete' ? 500 : 250;
 
   // Iron: 8mg men, 18mg women (vegans need 1.8x due to lower absorption)
   // Plant iron (non-heme) has ~5-12% absorption vs 15-35% for heme iron
-  const baseIron = sex === 'male' ? 8 : 18;
+  const baseIron = safeSex === 'male' ? 8 : 18;
   const ironMg = Math.round(baseIron * 1.8);
 
   // Calcium: 1000mg/day (1200mg for 50+ women)
-  const calciumMg = (sex === 'female' && age >= 50) ? 1200 : 1000;
+  const calciumMg = (safeSex === 'female' && safeAge >= 50) ? 1200 : 1000;
 
   // Zinc: 8mg women, 11mg men (vegans need +50% due to phytates)
-  const baseZinc = sex === 'male' ? 11 : 8;
+  const baseZinc = safeSex === 'male' ? 11 : 8;
   const zincMg = Math.round(baseZinc * 1.5);
 
   // Iodine: 150mcg/day (critical - use iodized salt or seaweed)
@@ -294,7 +302,7 @@ export function calculateMetrics(profile: UserProfile): CalculatedMetrics {
   const sodiumMaxMg = 2300;
 
   // Added sugar: max 25g women, 36g men (AHA recommendation)
-  const addedSugarMaxG = sex === 'male' ? 36 : 25;
+  const addedSugarMaxG = safeSex === 'male' ? 36 : 25;
 
   // ==================== RATIOS ====================
 

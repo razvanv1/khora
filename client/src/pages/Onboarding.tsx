@@ -187,6 +187,14 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                 <p className="text-white/60 text-xs mt-2">Folosim emailul pentru a-ți salva preferințele.</p>
               </div>
             </div>
+            
+            {/* Privacy Notice */}
+            <div className="mt-6 p-4 rounded-xl bg-white/5 border border-white/10">
+              <p className="text-white/50 text-xs leading-relaxed">
+                🔒 Datele tale sunt stocate local în browser și nu sunt partajate cu terți. 
+                Continuând, accepți <a href="/privacy" className="text-[#2dd4bf] hover:underline">Politica de Confidențialitate</a> și <a href="/terms" className="text-[#2dd4bf] hover:underline">Termenii și Condițiile</a>.
+              </p>
+            </div>
           </div>
         );
 
@@ -784,6 +792,21 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
           <p className="text-white/80 text-sm">
             De acum, rețetele, combinațiile, smoothie-urile și sugestiile tale sunt adaptate exact pe stilul tău. Poți modifica oricând aceste setări din Profil.
           </p>
+        </div>
+
+        {/* Disclaimer metodologic */}
+        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-amber-200/90 text-sm font-medium mb-1">Informații orientative</p>
+              <p className="text-white/60 text-xs leading-relaxed">
+                Calculele sunt bazate pe formule științifice generale (Mifflin-St Jeor, Harris-Benedict) și reprezintă estimări orientative. 
+                Aceste recomandări <strong className="text-white/80">nu înlocuiesc consultul medical sau nutrițional profesionist</strong>. 
+                Pentru nevoi specifice sau condiții medicale, consultă un specialist.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );
