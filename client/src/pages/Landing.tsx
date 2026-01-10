@@ -89,11 +89,11 @@ export default function Landing() {
           >
             <h1 className="text-6xl md:text-7xl font-light tracking-wider mb-2">
               <span aria-hidden="true">KH<span className="text-[#2dd4bf]">O</span>RA</span>
-              <span className="sr-only">KHORA - Aplicație de Nutriție Vegană România</span>
-              <span className="block text-lg md:text-xl font-normal text-white/60 mt-2">Aplicație de Nutriție Vegană</span>
+              <span className="sr-only">{t.landing.title} - {t.landing.subtitle}</span>
+              <span className="block text-lg md:text-xl font-normal text-white/60 mt-2">{t.landing.subtitle}</span>
             </h1>
             <p className="text-white/60 text-sm tracking-[0.3em] uppercase">
-              χώρα · Spațiul Transformării
+              χώρα · {language === 'en' ? 'Space of Transformation' : 'Spațiul Transformării'}
             </p>
           </motion.div>
 
@@ -104,9 +104,9 @@ export default function Landing() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-white/70 font-light mb-10 leading-relaxed"
           >
-            Dezvață ce ai crezut despre nutriția vegană.
+            {t.landing.tagline}
             <br />
-            <span className="text-[#d4a574]">Învață ce contează cu adevărat.</span>
+            <span className="text-[#d4a574]">{t.landing.taglineHighlight}</span>
           </motion.h2>
 
           {/* CTA Buttons */}
@@ -163,10 +163,10 @@ export default function Landing() {
             className="text-center mb-16"
           >
             <span className="text-[#2dd4bf]/80 text-sm tracking-wider uppercase mb-4 block">
-              Filosofie
+              {t.landing.philosophy}
             </span>
             <h2 className="text-3xl md:text-4xl font-light mb-6">
-              Ce este <span className="text-[#2dd4bf]">Khora</span>?
+              {language === 'en' ? 'What is' : 'Ce este'} <span className="text-[#2dd4bf]">Khora</span>?
             </h2>
           </motion.div>
 
@@ -183,13 +183,10 @@ export default function Landing() {
               </div>
               <div>
                 <p className="text-white/70 text-lg leading-relaxed mb-4">
-                  <strong className="text-white">Khora (χώρα)</strong> este un concept din filosofia greacă veche, 
-                  introdus de Plato. Înseamnă <em>"spațiul care oferă un loc pentru a fi"</em> - 
-                  un receptacul de transformare, locul în care devenirea are loc.
+                  <strong className="text-white">Khora (χώρα)</strong> {t.landing.khoraDescription1} <em>"{t.landing.khoraDescription2}"</em> {t.landing.khoraDescription3}
                 </p>
                 <p className="text-white/50 leading-relaxed">
-                  Pentru noi, Khora este spațiul în care te transformi prin alimentație conștientă. 
-                  Nu doar mănânci - <strong className="text-[#2dd4bf]">devii</strong>.
+                  {t.landing.khoraDescription4} <strong className="text-[#2dd4bf]">{t.landing.khoraDescription5}</strong>.
                 </p>
               </div>
             </div>
@@ -208,13 +205,13 @@ export default function Landing() {
             className="text-center mb-16"
           >
             <span className="text-[#f97316]/80 text-sm tracking-wider uppercase mb-4 block">
-              Dezvățare
+              {t.landing.unlearning}
             </span>
             <h2 className="text-3xl md:text-4xl font-light mb-6">
-              Vegan <span className="text-[#f97316]">≠</span> Sănătos
+              {language === 'en' ? 'Vegan' : 'Vegan'} <span className="text-[#f97316]">≠</span> {language === 'en' ? 'Healthy' : 'Sănătos'}
             </h2>
             <p className="text-white/50 text-lg max-w-2xl mx-auto">
-              Cea mai mare minciună a industriei alimentare: că orice e "plant-based" e automat bun pentru tine.
+              {t.landing.biggestLie}
             </p>
           </motion.div>
 
@@ -222,20 +219,20 @@ export default function Landing() {
           <div className="space-y-6 mb-12">
             {[
               {
-                myth: "Dacă e vegan, e sănătos",
-                truth: "Chips-urile vegane au aceleași calorii goale ca cele normale. Maioneza vegetală e 80% ulei rafinat. Cârnații vegani sunt ultra-procesați.",
+                myth: t.landing.myth1,
+                truth: t.landing.truth1,
                 icon: AlertTriangle,
                 color: "#ef4444"
               },
               {
-                myth: "Natural înseamnă sigur în orice cantitate",
-                truth: "Nucile sunt sănătoase, dar 100g = 650 calorii. Fructele uscate sunt concentrate de zahăr. Cantitățile contează, indiferent de sursă.",
+                myth: t.landing.myth2,
+                truth: t.landing.truth2,
                 icon: AlertTriangle,
                 color: "#f97316"
               },
               {
-                myth: "Dieta vegană e completă nutrițional",
-                truth: "Fără suplimentare, riști deficiențe de B12 (100% obligatoriu), vitamina D, fier (+80% necesar), zinc (+50% necesar), omega-3 DHA/EPA.",
+                myth: t.landing.myth3,
+                truth: t.landing.truth3,
                 icon: AlertTriangle,
                 color: "#eab308"
               }
@@ -277,7 +274,7 @@ export default function Landing() {
               className="px-8 py-4 rounded-full text-white font-medium flex items-center gap-3 mx-auto group"
               style={{ background: 'linear-gradient(135deg, #d4a574, #b8956a)' }}
             >
-              Începe Dezvățarea
+              {language === 'en' ? 'Start Unlearning' : 'Începe Dezvățarea'}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.div>
@@ -295,7 +292,7 @@ export default function Landing() {
             className="text-center mb-16"
           >
             <span className="text-white/60 text-sm tracking-wider uppercase mb-4 block">
-              Educație
+              {language === 'en' ? 'Education' : 'Educație'}
             </span>
             <h2 className="text-3xl md:text-4xl font-light mb-6">
               Junk Food vs Whole Food
@@ -315,7 +312,7 @@ export default function Landing() {
                 <div className="w-10 h-10 rounded-lg bg-[#ef4444]/20 flex items-center justify-center">
                   <X className="w-5 h-5 text-[#ef4444]" />
                 </div>
-                <h3 className="text-lg font-medium text-[#ef4444]">Evită</h3>
+                <h3 className="text-lg font-medium text-[#ef4444]">{language === 'en' ? 'Avoid' : 'Evită'}</h3>
               </div>
               <ul className="space-y-3">
                 {[
@@ -345,7 +342,7 @@ export default function Landing() {
                 <div className="w-10 h-10 rounded-lg bg-[#22c55e]/20 flex items-center justify-center">
                   <Check className="w-5 h-5 text-[#22c55e]" />
                 </div>
-                <h3 className="text-lg font-medium text-[#22c55e]">Alege</h3>
+                <h3 className="text-lg font-medium text-[#22c55e]">{language === 'en' ? 'Choose' : 'Alege'}</h3>
               </div>
               <ul className="space-y-3">
                 {[
@@ -398,10 +395,10 @@ export default function Landing() {
             className="text-center mb-16"
           >
             <span className="text-[#2dd4bf]/80 text-sm tracking-wider uppercase mb-4 block">
-              Funcționalități
+              {t.landing.features}
             </span>
             <h2 className="text-3xl md:text-4xl font-light mb-6">
-              Ce oferă <span className="text-[#2dd4bf]">Khora</span>
+              {language === 'en' ? 'What' : 'Ce oferă'} <span className="text-[#2dd4bf]">Khora</span> {language === 'en' ? 'offers' : ''}
             </h2>
           </motion.div>
 
@@ -533,10 +530,10 @@ export default function Landing() {
           className="max-w-2xl mx-auto text-center relative z-10"
         >
           <h2 className="text-3xl md:text-4xl font-light mb-6">
-            Gata să <span className="text-[#2dd4bf]">începi</span>?
+            {t.landing.readyToStart?.split(' ').slice(0, -1).join(' ')} <span className="text-[#2dd4bf]">{language === 'en' ? 'start' : 'începi'}</span>?
           </h2>
           <p className="text-white/50 text-lg mb-8">
-            În 2 minute îți creezi profilul personalizat. Apoi, Khora face restul.
+            {language === 'en' ? 'Create your personalized profile in 2 minutes. Then, Khora does the rest.' : 'În 2 minute îți creezi profilul personalizat. Apoi, Khora face restul.'}
           </p>
           
           <button
@@ -544,12 +541,12 @@ export default function Landing() {
             className="px-10 py-5 rounded-full text-white text-lg font-medium flex items-center gap-3 mx-auto group"
             style={{ background: 'linear-gradient(135deg, #d4a574, #b8956a)' }}
           >
-            Creează-ți Profilul Gratuit
+            {language === 'en' ? 'Create Your Free Profile' : 'Creează-ți Profilul Gratuit'}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
 
           <p className="text-white/60 text-sm mt-6">
-            Fără card. Fără spam. Doar nutriție vegană personalizată.
+            {language === 'en' ? 'No card. No spam. Just personalized vegan nutrition.' : 'Fără card. Fără spam. Doar nutriție vegană personalizată.'}
           </p>
         </motion.div>
       </section>
@@ -563,9 +560,9 @@ export default function Landing() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mx-auto text-center"
         >
-          <h3 className="text-2xl font-light mb-4">Îți place <span className="text-[#2dd4bf]">Khora</span>?</h3>
+          <h3 className="text-2xl font-light mb-4">{language === 'en' ? 'Do you like' : 'Îți place'} <span className="text-[#2dd4bf]">Khora</span>?</h3>
           <p className="text-white/50 mb-6">
-            Ajută-ne să ajungem la mai mulți oameni care vor să mănânce sănătos.
+            {language === 'en' ? 'Help us reach more people who want to eat healthy.' : 'Ajută-ne să ajungem la mai mulți oameni care vor să mănânce sănătos.'}
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <button 
@@ -579,13 +576,13 @@ export default function Landing() {
               className="px-6 py-3 rounded-full bg-[#2dd4bf]/20 text-[#2dd4bf] hover:bg-[#2dd4bf]/30 transition-colors flex items-center gap-2"
             >
               <ArrowRight className="w-4 h-4" />
-              Distribuie
+              {language === 'en' ? 'Share' : 'Distribuie'}
             </button>
             <a 
               href="mailto:hello@dezvatare.ro?subject=Feedback%20Khora"
               className="px-6 py-3 rounded-full bg-white/10 text-white/70 hover:bg-white/20 transition-colors flex items-center gap-2"
             >
-              Trimite feedback
+              {language === 'en' ? 'Send feedback' : 'Trimite feedback'}
             </a>
           </div>
         </motion.div>

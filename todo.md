@@ -116,3 +116,8 @@
 - [x] Lazy loading pentru pagini (React.lazy + Suspense)
 - [x] Code splitting pentru JavaScript (manual chunks in vite.config)
 - [x] Fix contrast culori (text-white/30,40 -> text-white/60)
+
+
+## BUG FIX - Traduceri EN
+- [x] Fix Landing.tsx să folosească traducerile i18n (hero, filosofie, unlearning, CTA)
+- [x] Traduceri complete RO/EN pentru toate secțiunile Landing
