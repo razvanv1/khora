@@ -125,7 +125,7 @@ export default function Supplements() {
   return (
     <div className="min-h-screen bg-[#0a1628] relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40" style={{ backgroundImage: 'url(/images/khora_supplements.png)' }} />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40" style={{ backgroundImage: 'url(/images/khora_supplements.webp)' }} />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/60 via-[#0a1628]/80 to-[#0a1628]" />
 
       <div className="relative z-10 min-h-screen px-6 pt-12 pb-32">
@@ -171,7 +171,7 @@ export default function Supplements() {
             sortedTimes.map((time) => (
               <div key={time} className="mb-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <Clock className="w-4 h-4 text-white/40" />
+                  <Clock className="w-4 h-4 text-white/60" />
                   <span className="text-white/60 text-sm">{time}</span>
                 </div>
                 <div className="space-y-2">
@@ -187,15 +187,15 @@ export default function Supplements() {
                             </div>
                             <div className="min-w-0 flex-1">
                               <p className={`font-medium text-sm truncate ${supplement.taken ? 'text-white/50 line-through' : 'text-white'}`}>{supplement.name}</p>
-                              <p className="text-white/40 text-xs truncate">{supplement.category}{supplement.note && ` • ${supplement.note}`}</p>
+                              <p className="text-white/60 text-xs truncate">{supplement.category}{supplement.note && ` • ${supplement.note}`}</p>
                             </div>
                           </div>
                           <div className="flex items-center gap-2 flex-shrink-0">
                             <button onClick={() => openFeedbackModal(supplement.name)} className="p-2 rounded-lg hover:bg-white/10" title="Adaugă feedback">
-                              <MessageSquare className={`w-4 h-4 ${feedback ? 'text-[#d4a574]' : 'text-white/30 hover:text-[#d4a574]'}`} />
+                              <MessageSquare className={`w-4 h-4 ${feedback ? 'text-[#d4a574]' : 'text-white/60 hover:text-[#d4a574]'}`} />
                             </button>
                             <button onClick={() => deleteSupplement(supplement.id)} className="p-2 rounded-lg hover:bg-white/10">
-                              <Trash2 className="w-4 h-4 text-white/30 hover:text-red-400" />
+                              <Trash2 className="w-4 h-4 text-white/60 hover:text-red-400" />
                             </button>
                             <button onClick={() => toggleSupplement(supplement.id)} className={`w-8 h-8 rounded-full flex items-center justify-center ${supplement.taken ? 'bg-[#2dd4bf]' : 'bg-white/10 border border-white/20'}`}>
                               {supplement.taken && <Check className="w-5 h-5 text-[#0a1628]" />}
@@ -206,7 +206,7 @@ export default function Supplements() {
                         {feedback && (
                           <div className="mt-2 pt-2 border-t border-white/5 flex items-center gap-2">
                             <StarRating rating={feedback.rating} readonly size="sm" />
-                            <span className="text-xs text-white/40">
+                            <span className="text-xs text-white/60">
                               {feedback.effectiveness === 'very_effective' ? 'Foarte eficient' : 
                                feedback.effectiveness === 'effective' ? 'Eficient' : 
                                feedback.effectiveness === 'neutral' ? 'Neutru' : 'Ineficient'}
@@ -222,7 +222,7 @@ export default function Supplements() {
           ) : (
             <div className="text-center py-8 rounded-xl mb-4" style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
               <Pill className="w-10 h-10 text-white/20 mx-auto mb-3" />
-              <p className="text-white/40">Niciun supliment adăugat</p>
+              <p className="text-white/60">Niciun supliment adăugat</p>
             </div>
           )}
 

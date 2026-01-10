@@ -445,10 +445,10 @@ export default function Blender() {
             ) : (
               <div className="text-center py-12">
                 <ChefHat className="w-12 h-12 text-white/20 mx-auto mb-4" />
-                <p className="text-white/40 mb-2">
+                <p className="text-white/60 mb-2">
                   Nu am găsit rețete potrivite
                 </p>
-                <p className="text-white/30 text-sm">
+                <p className="text-white/60 text-sm">
                   Încearcă să adaugi mai multe ingrediente din categorii diferite
                 </p>
               </div>
@@ -504,7 +504,7 @@ export default function Blender() {
 
           {/* Search */}
           <div className="relative mb-4">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" />
             <input
               type="text"
               placeholder="Caută ingrediente..."
@@ -612,7 +612,7 @@ export default function Blender() {
                     </motion.span>
                   ))}
                   {selectedItems.length > 10 && (
-                    <span className="text-white/40 text-xs px-2 py-1">
+                    <span className="text-white/60 text-xs px-2 py-1">
                       +{selectedItems.length - 10} altele
                     </span>
                   )}
@@ -628,7 +628,7 @@ export default function Blender() {
           animate={{ opacity: 1 }}
           className="px-6 pt-2"
         >
-          <p className="text-white/40 text-xs mb-3">
+          <p className="text-white/60 text-xs mb-3">
             {displayedIngredients.length} ingrediente disponibile
           </p>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
@@ -663,7 +663,7 @@ export default function Blender() {
                   )}
                   <span className="text-xl block mb-1">{ing.emoji}</span>
                   <span className="text-white text-xs font-medium block truncate">{ing.name}</span>
-                  <span className="text-white/30 text-[10px]">{ing.protein}g</span>
+                  <span className="text-white/60 text-[10px]">{ing.protein}g</span>
                   {ing.isJunkFood && (
                     <span 
                       className="absolute bottom-1 right-1 text-[8px] px-1 rounded"
@@ -679,7 +679,7 @@ export default function Blender() {
           
           {displayedIngredients.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-white/40">Nu s-au găsit ingrediente</p>
+              <p className="text-white/60">Nu s-au găsit ingrediente</p>
             </div>
           )}
         </motion.section>

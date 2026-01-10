@@ -108,3 +108,11 @@
 - [ ] Fix performanță: reducere JavaScript
 - [x] Fix accesibilitate: link-uri fără nume (adăugat aria-label)
 - [ ] Fix best practices: API-uri depreciate
+
+
+## Performance & Accessibility Fixes
+- [x] Conversie imagini PNG la WebP (13 imagini)
+- [x] Compresie imagini (reducere de la ~70MB la ~2.3MB)
+- [x] Lazy loading pentru pagini (React.lazy + Suspense)
+- [x] Code splitting pentru JavaScript (manual chunks in vite.config)
+- [x] Fix contrast culori (text-white/30,40 -> text-white/60)

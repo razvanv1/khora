@@ -117,7 +117,7 @@ export default function Pantry() {
   return (
     <div className="min-h-screen bg-[#0a1628] relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style={{ backgroundImage: 'url(/images/khora_home_pantry.png)' }} />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style={{ backgroundImage: 'url(/images/khora_home_pantry.webp)' }} />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/60 via-[#0a1628]/80 to-[#0a1628]" />
 
       <div className="relative z-10 min-h-screen px-4 pt-12 pb-32">
@@ -140,7 +140,7 @@ export default function Pantry() {
 
           {/* Search */}
           <div className="relative mb-4">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" />
             <input 
               type="text" 
               value={searchQuery} 
@@ -152,12 +152,12 @@ export default function Pantry() {
             <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
               {searchQuery && (
                 <button onClick={() => setSearchQuery("")}>
-                  <X className="w-5 h-5 text-white/30 hover:text-white/60" />
+                  <X className="w-5 h-5 text-white/60 hover:text-white/60" />
                 </button>
               )}
               <button 
                 onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-                className={`p-2 rounded-lg transition-colors ${showAdvancedFilters || hasActiveFilters ? 'bg-[#d4a574]/20 text-[#d4a574]' : 'text-white/40 hover:text-white/60'}`}
+                className={`p-2 rounded-lg transition-colors ${showAdvancedFilters || hasActiveFilters ? 'bg-[#d4a574]/20 text-[#d4a574]' : 'text-white/60 hover:text-white/60'}`}
               >
                 <SlidersHorizontal className="w-5 h-5" />
               </button>
@@ -322,7 +322,7 @@ export default function Pantry() {
         {/* Results Count & Active Filters Summary */}
         {(searchQuery || selectedCategory || hasActiveFilters) && (
           <div className="flex items-center justify-between mb-3">
-            <p className="text-white/40 text-xs">{displayedIngredients.length} rezultate</p>
+            <p className="text-white/60 text-xs">{displayedIngredients.length} rezultate</p>
             {hasActiveFilters && (
               <button onClick={resetFilters} className="text-[#d4a574] text-xs flex items-center gap-1 hover:underline">
                 <X className="w-3 h-3" />
@@ -406,7 +406,7 @@ export default function Pantry() {
         {displayedIngredients.length === 0 && (
           <div className="text-center py-12">
             <Leaf className="w-12 h-12 text-white/20 mx-auto mb-3" />
-            <p className="text-white/40 mb-2">Niciun ingredient găsit</p>
+            <p className="text-white/60 mb-2">Niciun ingredient găsit</p>
             {hasActiveFilters && (
               <button onClick={resetFilters} className="text-[#d4a574] text-sm hover:underline">
                 Resetează filtrele
@@ -498,18 +498,18 @@ export default function Pantry() {
               <div className="grid grid-cols-2 gap-3 mb-4">
                 <div className="p-3 rounded-xl text-center" style={{ background: 'rgba(255, 255, 255, 0.04)' }}>
                   <p className="text-2xl font-semibold text-white">{selectedIngredient.calories}</p>
-                  <p className="text-white/40 text-xs">kcal / 100g</p>
+                  <p className="text-white/60 text-xs">kcal / 100g</p>
                 </div>
                 <div className="p-3 rounded-xl text-center" style={{ background: 'rgba(45, 212, 191, 0.1)' }}>
                   <p className="text-2xl font-semibold text-[#2dd4bf]">{selectedIngredient.protein}g</p>
-                  <p className="text-white/40 text-xs">proteine</p>
+                  <p className="text-white/60 text-xs">proteine</p>
                 </div>
               </div>
 
               {/* Tags */}
               {selectedIngredient.tags.length > 0 && (
                 <div className="mb-4">
-                  <p className="text-white/40 text-xs mb-2">Etichete</p>
+                  <p className="text-white/60 text-xs mb-2">Etichete</p>
                   <div className="flex flex-wrap gap-2">
                     {selectedIngredient.tags.map(tag => (
                       <span 

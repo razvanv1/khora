@@ -101,7 +101,7 @@ export default function HealthBadge({ ingredient, size = "md", showDetails = fal
           >
             <Flame className="w-4 h-4 text-orange-400" />
             <div>
-              <p className="text-white/40 text-xs">Calorii</p>
+              <p className="text-white/60 text-xs">Calorii</p>
               <p className="text-white font-medium text-sm">{ingredient.calories} kcal</p>
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function HealthBadge({ ingredient, size = "md", showDetails = fal
           >
             <Dumbbell className="w-4 h-4 text-blue-400" />
             <div>
-              <p className="text-white/40 text-xs">Proteine</p>
+              <p className="text-white/60 text-xs">Proteine</p>
               <p className="text-white font-medium text-sm">{ingredient.protein}g</p>
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function HealthBadge({ ingredient, size = "md", showDetails = fal
       {/* Processing Level */}
       {showDetails && (
         <div className="flex items-center gap-2 text-xs">
-          <span className="text-white/40">Procesare:</span>
+          <span className="text-white/60">Procesare:</span>
           <span 
             className="px-2 py-0.5 rounded-full"
             style={{

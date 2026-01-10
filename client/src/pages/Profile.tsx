@@ -38,7 +38,7 @@ export default function Profile() {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
-        style={{ backgroundImage: 'url(/images/khora_profile.png)' }}
+        style={{ backgroundImage: 'url(/images/khora_profile.webp)' }}
       />
       
       {/* Gradient Overlay */}
@@ -166,10 +166,10 @@ export default function Profile() {
               </div>
               <div className="text-left">
                 <h3 className="text-white font-medium text-sm">Refă Quiz-ul</h3>
-                <p className="text-white/40 text-xs">Actualizează preferințele tale</p>
+                <p className="text-white/60 text-xs">Actualizează preferințele tale</p>
               </div>
             </div>
-            <ChevronRight className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors" />
+            <ChevronRight className="w-4 h-4 text-white/60 group-hover:text-white/60 transition-colors" />
           </button>
 
           {/* Blog */}
@@ -192,10 +192,10 @@ export default function Profile() {
                 </div>
                 <div>
                   <h3 className="text-white font-medium text-sm">Blog Nutriție</h3>
-                  <p className="text-white/40 text-xs">Articole educative vegane</p>
+                  <p className="text-white/60 text-xs">Articole educative vegane</p>
                 </div>
               </div>
-              <ChevronRight className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors" />
+              <ChevronRight className="w-4 h-4 text-white/60 group-hover:text-white/60 transition-colors" />
             </div>
           </Link>
 
@@ -218,10 +218,10 @@ export default function Profile() {
               </div>
               <div>
                 <h3 className="text-white font-medium text-sm">Setări</h3>
-                <p className="text-white/40 text-xs">În curând</p>
+                <p className="text-white/60 text-xs">În curând</p>
               </div>
             </div>
-            <ChevronRight className="w-4 h-4 text-white/30" />
+            <ChevronRight className="w-4 h-4 text-white/60" />
           </div>
 
           {/* Deconectare */}

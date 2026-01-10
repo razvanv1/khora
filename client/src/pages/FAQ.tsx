@@ -198,13 +198,13 @@ export default function FAQ() {
           className="mb-6"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" />
             <input
               type="text"
               placeholder="Caută întrebări..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-[#2dd4bf]/50"
+              className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/60 focus:outline-none focus:border-[#2dd4bf]/50"
             />
           </div>
         </motion.div>
@@ -264,7 +264,7 @@ export default function FAQ() {
                   <h3 className="text-white font-medium pr-8">{item.question}</h3>
                 </div>
                 <ChevronDown 
-                  className={`w-5 h-5 text-white/40 flex-shrink-0 transition-transform ${
+                  className={`w-5 h-5 text-white/60 flex-shrink-0 transition-transform ${
                     openItems.has(index) ? "rotate-180" : ""
                   }`} 
                 />
@@ -294,7 +294,7 @@ export default function FAQ() {
             <div className="text-center py-12">
               <HelpCircle className="w-12 h-12 text-white/20 mx-auto mb-4" />
               <p className="text-white/60">Nu am găsit întrebări pentru căutarea ta.</p>
-              <p className="text-white/40 text-sm mt-1">Încearcă alte cuvinte cheie.</p>
+              <p className="text-white/60 text-sm mt-1">Încearcă alte cuvinte cheie.</p>
             </div>
           )}
         </motion.div>

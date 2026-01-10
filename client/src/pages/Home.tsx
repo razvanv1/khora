@@ -57,7 +57,7 @@ export default function Home() {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
-        style={{ backgroundImage: 'url(/images/khora_hero_bg.png)' }}
+        style={{ backgroundImage: 'url(/images/khora_hero_bg.webp)' }}
       />
       
       {/* Gradient Overlay */}
@@ -135,7 +135,7 @@ export default function Home() {
                   <feature.icon className="w-5 h-5" style={{ color: feature.color }} />
                 </div>
                 <h3 className="text-white font-medium text-sm mb-1">{feature.title}</h3>
-                <p className="text-white/40 text-xs leading-relaxed">{feature.description}</p>
+                <p className="text-white/60 text-xs leading-relaxed">{feature.description}</p>
               </motion.div>
             </Link>
           ))}
@@ -168,10 +168,10 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-white font-medium text-sm">Blog Nutriție</h3>
-                  <p className="text-white/40 text-xs">Articole educative vegane</p>
+                  <p className="text-white/60 text-xs">Articole educative vegane</p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors" />
+              <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-white/60 transition-colors" />
             </div>
           </Link>
 
@@ -195,10 +195,10 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="text-white font-medium text-sm">Profilul Meu</h3>
-                  <p className="text-white/40 text-xs">Setări și personalizare</p>
+                  <p className="text-white/60 text-xs">Setări și personalizare</p>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors" />
+              <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-white/60 transition-colors" />
             </div>
           </Link>
         </motion.section>

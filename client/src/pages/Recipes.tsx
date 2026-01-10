@@ -204,7 +204,7 @@ export default function Recipes() {
                 <div className="pt-4 space-y-3">
                   {/* Categories */}
                   <div>
-                    <p className="text-white/40 text-xs mb-2 uppercase tracking-wider">Categorii</p>
+                    <p className="text-white/60 text-xs mb-2 uppercase tracking-wider">Categorii</p>
                     <div className="flex flex-wrap gap-2">
                       {categories.map(category => (
                         <button
@@ -224,7 +224,7 @@ export default function Recipes() {
 
                   {/* Tags */}
                   <div>
-                    <p className="text-white/40 text-xs mb-2 uppercase tracking-wider">Etichete</p>
+                    <p className="text-white/60 text-xs mb-2 uppercase tracking-wider">Etichete</p>
                     <div className="flex flex-wrap gap-2">
                       {tags.map(tag => (
                         <button
@@ -343,7 +343,7 @@ export default function Recipes() {
                     </div>
                     <div className="p-4">
                       <h3 className="text-white font-semibold text-lg" itemProp="name">{recipe.name}</h3>
-                      <p className="text-white/40 text-sm mt-1 line-clamp-2" itemProp="description">
+                      <p className="text-white/60 text-sm mt-1 line-clamp-2" itemProp="description">
                         {recipe.description}
                       </p>
                       <div className="flex items-center gap-4 mt-3 text-white/50 text-sm">
@@ -388,7 +388,7 @@ export default function Recipes() {
                 <>
                   <Heart className="w-16 h-16 text-white/20 mx-auto mb-4" />
                   <h3 className="text-white/60 text-lg mb-2">Nicio rețetă favorită</h3>
-                  <p className="text-white/40 text-sm mb-6">
+                  <p className="text-white/60 text-sm mb-6">
                     Apasă pe inimă pentru a salva rețetele preferate
                   </p>
                   <motion.button
@@ -407,7 +407,7 @@ export default function Recipes() {
                 <>
                   <ChefHat className="w-16 h-16 text-white/20 mx-auto mb-4" />
                   <h3 className="text-white/60 text-lg mb-2">Nicio rețetă găsită</h3>
-                  <p className="text-white/40 text-sm mb-6">Încearcă alt filtru</p>
+                  <p className="text-white/60 text-sm mb-6">Încearcă alt filtru</p>
                   <motion.button
                     onClick={() => setActiveFilter('all')}
                     whileHover={{ scale: 1.05 }}

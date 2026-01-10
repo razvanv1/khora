@@ -202,7 +202,7 @@ export default function FavoriteRecipes() {
 
                       <div className="p-4">
                         <h3 className="text-white font-semibold text-lg">{recipe.name}</h3>
-                        <p className="text-white/40 text-sm mt-1 line-clamp-2">
+                        <p className="text-white/60 text-sm mt-1 line-clamp-2">
                           {recipe.description}
                         </p>
                         <div className="flex items-center gap-4 mt-3 text-white/50 text-sm">
@@ -257,7 +257,7 @@ export default function FavoriteRecipes() {
               <h3 className="text-white/60 text-xl font-semibold mb-2">
                 Nicio rețetă favorită
               </h3>
-              <p className="text-white/40 text-sm mb-8 max-w-xs mx-auto">
+              <p className="text-white/60 text-sm mb-8 max-w-xs mx-auto">
                 Explorează rețetele noastre și apasă pe inimă pentru a le salva aici
               </p>
               <Link href="/recipes">
@@ -292,7 +292,7 @@ export default function FavoriteRecipes() {
                 border: '1px solid rgba(255, 255, 255, 0.08)',
               }}
             >
-              <h4 className="text-white/40 text-xs uppercase tracking-wider mb-3">
+              <h4 className="text-white/60 text-xs uppercase tracking-wider mb-3">
                 Sumar Nutrițional
               </h4>
               <div className="grid grid-cols-4 gap-4 text-center">
@@ -300,25 +300,25 @@ export default function FavoriteRecipes() {
                   <p className="text-[#00d4aa] text-lg font-bold">
                     {Math.round(sortedFavorites.reduce((sum, r) => sum + r.nutrition.calories, 0) / sortedFavorites.length)}
                   </p>
-                  <p className="text-white/40 text-xs">Cal/rețetă</p>
+                  <p className="text-white/60 text-xs">Cal/rețetă</p>
                 </div>
                 <div>
                   <p className="text-[#00d4aa] text-lg font-bold">
                     {Math.round(sortedFavorites.reduce((sum, r) => sum + r.nutrition.protein, 0) / sortedFavorites.length)}g
                   </p>
-                  <p className="text-white/40 text-xs">Proteine</p>
+                  <p className="text-white/60 text-xs">Proteine</p>
                 </div>
                 <div>
                   <p className="text-[#00d4aa] text-lg font-bold">
                     {Math.round(sortedFavorites.reduce((sum, r) => sum + r.nutrition.fiber, 0) / sortedFavorites.length)}g
                   </p>
-                  <p className="text-white/40 text-xs">Fibre</p>
+                  <p className="text-white/60 text-xs">Fibre</p>
                 </div>
                 <div>
                   <p className="text-[#00d4aa] text-lg font-bold">
                     {Math.round(sortedFavorites.reduce((sum, r) => sum + parseInt(r.displayTime), 0) / sortedFavorites.length)}
                   </p>
-                  <p className="text-white/40 text-xs">Min/rețetă</p>
+                  <p className="text-white/60 text-xs">Min/rețetă</p>
                 </div>
               </div>
             </div>

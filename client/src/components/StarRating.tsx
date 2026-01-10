@@ -44,7 +44,7 @@ export default function StarRating({
             className={`${sizes[size]} transition-colors ${
               star <= rating
                 ? "fill-[#d4a574] text-[#d4a574]"
-                : "fill-transparent text-white/30"
+                : "fill-transparent text-white/60"
             }`}
           />
         </motion.button>

@@ -28,7 +28,7 @@ function generateBlogSchema() {
       "url": "https://khora.manus.space",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://khora.manus.space/images/khora-logo.png"
+        "url": "https://khora.manus.space/images/khora-logo.webp"
       }
     },
     "blogPost": blogArticles.map(article => ({
@@ -75,7 +75,7 @@ function generateOrganizationSchema() {
     "name": "Khora",
     "alternateName": "Khora - Nutriție Vegană Personalizată",
     "url": "https://khora.manus.space",
-    "logo": "https://khora.manus.space/images/khora-logo.png",
+    "logo": "https://khora.manus.space/images/khora-logo.webp",
     "description": "Aplicație premium de nutriție vegană cu rețete personalizate, tracking hidratare și educație bazată pe știință",
     "sameAs": [
       "https://www.facebook.com/khora.manus.space",
@@ -227,7 +227,7 @@ export default function Blog() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <div className="flex items-center gap-4 mb-3 text-sm text-white/40">
+                  <div className="flex items-center gap-4 mb-3 text-sm text-white/60">
                     <span className="flex items-center gap-1">
                       <Clock className="w-4 h-4" />
                       {featuredArticle.readTime}
@@ -316,7 +316,7 @@ export default function Blog() {
 
                     {/* Content */}
                     <div className="p-4">
-                      <div className="flex items-center gap-2 mb-2 text-xs text-white/40">
+                      <div className="flex items-center gap-2 mb-2 text-xs text-white/60">
                         <Clock className="w-3 h-3" />
                         {article.readTime}
                         <span 
@@ -334,7 +334,7 @@ export default function Blog() {
                       <h3 className="text-white font-semibold text-sm mb-2 line-clamp-2 group-hover:text-[#00d4aa] transition-colors" itemProp="headline">
                         {article.title}
                       </h3>
-                      <p className="text-white/40 text-xs line-clamp-2" itemProp="description">
+                      <p className="text-white/60 text-xs line-clamp-2" itemProp="description">
                         {article.excerpt}
                       </p>
                       <meta itemProp="datePublished" content={article.publishDate} />

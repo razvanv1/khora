@@ -36,7 +36,7 @@ function generateArticleSchema(article: ReturnType<typeof getArticleBySlug>) {
       "name": "Khora",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://khora.manus.space/images/khora-logo.png"
+        "url": "https://khora.manus.space/images/khora-logo.webp"
       }
     },
     "mainEntityOfPage": {
@@ -260,7 +260,7 @@ export default function BlogArticle() {
             </div>
 
             {/* Meta Info */}
-            <div className="flex items-center gap-4 mb-4 text-sm text-white/40">
+            <div className="flex items-center gap-4 mb-4 text-sm text-white/60">
               <span className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
                 {article.readTime}
@@ -438,7 +438,7 @@ export default function BlogArticle() {
                           <h4 className="text-white font-medium text-sm mb-1 line-clamp-2">
                             {related.title}
                           </h4>
-                          <p className="text-white/40 text-xs">
+                          <p className="text-white/60 text-xs">
                             {related.readTime}
                           </p>
                         </div>

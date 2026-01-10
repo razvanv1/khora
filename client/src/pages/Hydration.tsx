@@ -108,7 +108,7 @@ export default function Hydration() {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
-        style={{ backgroundImage: 'url(/images/khora_hydration.png)' }}
+        style={{ backgroundImage: 'url(/images/khora_hydration.webp)' }}
       />
       
       {/* Gradient Overlay */}
@@ -239,7 +239,7 @@ export default function Hydration() {
               >
                 <drink.icon className="w-5 h-5" style={{ color: drink.color }} />
                 <span className="text-white/60 text-xs">{drink.label}</span>
-                <span className="text-white/30 text-[10px]">{drink.defaultAmount}ml</span>
+                <span className="text-white/60 text-[10px]">{drink.defaultAmount}ml</span>
               </motion.button>
             ))}
           </div>
@@ -260,11 +260,11 @@ export default function Hydration() {
           <div className="grid grid-cols-2 gap-3">
             <div className="text-center p-3 rounded-xl" style={{ background: 'rgba(96, 165, 250, 0.1)' }}>
               <p className="text-xl font-semibold text-[#60a5fa]">{totals.totalRaw}</p>
-              <p className="text-white/40 text-xs">ml consumat</p>
+              <p className="text-white/60 text-xs">ml consumat</p>
             </div>
             <div className="text-center p-3 rounded-xl" style={{ background: 'rgba(45, 212, 191, 0.1)' }}>
               <p className="text-xl font-semibold text-[#2dd4bf]">{Math.round(totals.totalEffective)}</p>
-              <p className="text-white/40 text-xs">ml hidratare</p>
+              <p className="text-white/60 text-xs">ml hidratare</p>
             </div>
           </div>
         </motion.div>
@@ -299,12 +299,12 @@ export default function Hydration() {
                       )}
                       <div>
                         <p className="text-white text-sm">{drinkType?.label}</p>
-                        <p className="text-white/40 text-xs">{entry.amount}ml • {entry.time}</p>
+                        <p className="text-white/60 text-xs">{entry.amount}ml • {entry.time}</p>
                       </div>
                     </div>
                     <button
                       onClick={() => removeEntry(entry.id)}
-                      className="text-white/30 hover:text-red-400 transition-colors"
+                      className="text-white/60 hover:text-red-400 transition-colors"
                     >
                       <X className="w-4 h-4" />
                     </button>

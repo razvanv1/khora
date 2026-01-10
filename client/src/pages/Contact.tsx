@@ -214,7 +214,7 @@ export default function Contact() {
                       Trimite mesajul
                     </button>
 
-                    <p className="text-white/40 text-xs text-center">
+                    <p className="text-white/60 text-xs text-center">
                       Prin trimiterea acestui formular, accepți{' '}
                       <Link href="/privacy" className="text-[#d4a574] hover:underline">
                         Politica de Confidențialitate

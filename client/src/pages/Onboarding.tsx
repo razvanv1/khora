@@ -184,7 +184,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                   placeholder="email@exemplu.com"
                   className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#d4a574]/50"
                 />
-                <p className="text-white/30 text-xs mt-2">Folosim emailul pentru a-ți salva preferințele.</p>
+                <p className="text-white/60 text-xs mt-2">Folosim emailul pentru a-ți salva preferințele.</p>
               </div>
             </div>
           </div>
@@ -250,7 +250,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                 max="100"
                 className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white text-center text-2xl placeholder-white/30 focus:outline-none focus:border-[#d4a574]/50"
               />
-              <p className="text-white/30 text-xs mt-2 text-center">ani</p>
+              <p className="text-white/60 text-xs mt-2 text-center">ani</p>
             </div>
           </div>
         );
@@ -280,7 +280,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                     placeholder="Ex: 65"
                     className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#d4a574]/50 pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40">kg</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60">kg</span>
                 </div>
               </div>
               <div>
@@ -293,7 +293,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                     placeholder="Ex: 170"
                     className="w-full px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-[#d4a574]/50 pr-12"
                   />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40">cm</span>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60">cm</span>
                 </div>
               </div>
             </div>
@@ -332,7 +332,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                   } border`}
                 >
                   <span className="text-white font-medium block">{option.label}</span>
-                  <span className="text-white/40 text-sm">{option.desc}</span>
+                  <span className="text-white/60 text-sm">{option.desc}</span>
                 </button>
               ))}
             </div>
@@ -371,7 +371,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                   } border`}
                 >
                   <span className="text-white font-medium block">{option.label}</span>
-                  <span className="text-white/40 text-sm">{option.desc}</span>
+                  <span className="text-white/60 text-sm">{option.desc}</span>
                 </button>
               ))}
             </div>
@@ -410,7 +410,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                   } border`}
                 >
                   <span className="text-white font-medium block">{option.label}</span>
-                  <span className="text-white/40 text-sm">{option.desc}</span>
+                  <span className="text-white/60 text-sm">{option.desc}</span>
                 </button>
               ))}
             </div>
@@ -611,7 +611,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                       } border`}
                     >
                       <span className="text-white text-sm block">{time.label}</span>
-                      <span className="text-white/40 text-xs">{time.desc}</span>
+                      <span className="text-white/60 text-xs">{time.desc}</span>
                     </button>
                   ))}
                 </div>
@@ -669,7 +669,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
               </div>
             </div>
             
-            <p className="text-white/30 text-xs text-center">
+            <p className="text-white/60 text-xs text-center">
               Poți sări acest pas dacă nu ai restricții alimentare.
             </p>
           </div>
@@ -706,7 +706,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
               </div>
               <div>
                 <p className="text-white font-medium">{isNaN(results.targetCalories) ? '2000' : Math.round(results.targetCalories)} kcal/zi</p>
-                <p className="text-white/40 text-xs">Energie zilnică</p>
+                <p className="text-white/60 text-xs">Energie zilnică</p>
               </div>
             </div>
             <p className="text-white/50 text-sm">
@@ -722,7 +722,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
               </div>
               <div>
                 <p className="text-white font-medium">{isNaN(results.dailyWaterMl) ? '2.0' : (results.dailyWaterMl / 1000).toFixed(1)} litri/zi</p>
-                <p className="text-white/40 text-xs">Hidratare</p>
+                <p className="text-white/60 text-xs">Hidratare</p>
               </div>
             </div>
             <p className="text-white/50 text-sm">
@@ -738,7 +738,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
               </div>
               <div>
                 <p className="text-white font-medium">{isNaN(results.proteinGrams) ? '60' : Math.round(results.proteinGrams)} g/zi</p>
-                <p className="text-white/40 text-xs">Proteine</p>
+                <p className="text-white/60 text-xs">Proteine</p>
               </div>
             </div>
             <p className="text-white/50 text-sm">
@@ -754,7 +754,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
               </div>
               <div>
                 <p className="text-white font-medium">{isNaN(results.fiberGrams) ? '28' : Math.round(results.fiberGrams)} g/zi</p>
-                <p className="text-white/40 text-xs">Fibre</p>
+                <p className="text-white/60 text-xs">Fibre</p>
               </div>
             </div>
             <p className="text-white/50 text-sm">
@@ -770,7 +770,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
               </div>
               <div>
                 <p className="text-white font-medium">{results.idealWeightMin.toFixed(0)} - {results.idealWeightMax.toFixed(0)} kg</p>
-                <p className="text-white/40 text-xs">Zonă orientativă</p>
+                <p className="text-white/60 text-xs">Zonă orientativă</p>
               </div>
             </div>
             <p className="text-white/50 text-sm">
@@ -794,7 +794,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
       {/* Background */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" 
-        style={{ backgroundImage: 'url(/images/khora_onboarding_bg.png)' }} 
+        style={{ backgroundImage: 'url(/images/khora_onboarding_bg.webp)' }} 
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/80 via-[#0a1628]/95 to-[#0a1628]" />
 
@@ -803,8 +803,8 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
         {!showResults && (
           <div className="mb-6">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-white/40 text-xs">Pasul {step + 1} din {totalSteps}</span>
-              <span className="text-white/40 text-xs">{Math.round(progress)}%</span>
+              <span className="text-white/60 text-xs">Pasul {step + 1} din {totalSteps}</span>
+              <span className="text-white/60 text-xs">{Math.round(progress)}%</span>
             </div>
             <div className="h-1 bg-white/10 rounded-full overflow-hidden">
               <motion.div
