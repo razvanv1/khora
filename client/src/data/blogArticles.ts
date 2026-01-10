@@ -17,6 +17,16 @@ export interface BlogArticle {
   excerpt: string;
   content: string[];
   tags: string[];
+  // SEO/AEO fields
+  metaTitle?: string;
+  metaDescription?: string;
+  keywords?: string[];
+  faq?: { question: string; answer: string }[];
+  tableOfContents?: { id: string; title: string; level: number }[];
+  author?: string;
+  authorBio?: string;
+  lastUpdated?: string;
+  wordCount?: number;
 }
 
 export const blogArticles: BlogArticle[] = [

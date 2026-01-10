@@ -88,9 +88,8 @@ export default function Landing() {
             className="mb-6"
           >
             <h1 className="text-6xl md:text-7xl font-light tracking-wider mb-2">
-              KH<span className="text-[#2dd4bf]">O</span>RA
-              <span className="block text-lg md:text-xl font-normal text-white/60 mt-2">{t.landing.subtitle}</span>
-              <span className="sr-only">Khora - Aplicație Premium de Nutriție Vegană pentru România</span>
+              <span aria-hidden="true">KH<span className="text-[#2dd4bf]">O</span>RA</span>
+              <span className="block text-lg md:text-xl font-normal text-white/60 mt-2">Aplicație de Nutriție Vegană</span>
             </h1>
             <p className="text-white/40 text-sm tracking-[0.3em] uppercase">
               χώρα · Spațiul Transformării
@@ -104,9 +103,9 @@ export default function Landing() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-white/70 font-light mb-10 leading-relaxed"
           >
-            {t.landing.tagline}
+            Dezvață ce ai crezut despre nutriția vegană.
             <br />
-            <span className="text-[#d4a574]">{t.landing.taglineHighlight}</span>
+            <span className="text-[#d4a574]">Învață ce contează cu adevărat.</span>
           </motion.h2>
 
           {/* CTA Buttons */}
