@@ -18,3 +18,10 @@
 - [x] Populare Cămară cu toate 500+ ingrediente din lista originală (430+ ingrediente adăugate)
 - [x] Filtre avansate: grăsimi, fibre, proteine, superaliment, calorii, etc.
 - [x] Schema.org markup pentru rețete și articole blog
+
+
+## Sistem Favorite Rețete
+- [x] Hook useFavoriteRecipes pentru gestionarea favoritelor cu localStorage
+- [x] Actualizare pagina Recipes cu buton favorite funcțional
+- [x] Creare pagină dedicată pentru rețete favorite
+- [x] Integrare în navigație (rută /recipes/favorites)

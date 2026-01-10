@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Pantry from "./pages/Pantry";
 import Blender from "./pages/Blender";
 import Recipes from "./pages/Recipes";
+import FavoriteRecipes from "./pages/FavoriteRecipes";
 import Hydration from "./pages/Hydration";
 import Supplements from "./pages/Supplements";
 import Profile from "./pages/Profile";
@@ -74,6 +75,7 @@ function AppContent() {
       <Route path={"/pantry"} component={Pantry} />
       <Route path={"/blender"} component={Blender} />
       <Route path={"/recipes"} component={Recipes} />
+      <Route path={"/recipes/favorites"} component={FavoriteRecipes} />
       <Route path={"/hydrate"} component={Hydration} />
       <Route path={"/supplements"} component={Supplements} />
       <Route path={"/profile"} component={Profile} />
