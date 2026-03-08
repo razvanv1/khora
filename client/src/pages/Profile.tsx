@@ -20,6 +20,7 @@ import {
   LogOut
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { useUserProfile, calculateMetrics } from "@/hooks/useUserProfile";
 
 export default function Profile() {
@@ -263,6 +264,7 @@ export default function Profile() {
 
       {/* Navigation */}
       <Navigation />
+      <Footer />
     </div>
   );
 }

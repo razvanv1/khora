@@ -61,7 +61,7 @@ function AppContent() {
     if (location === '/onboarding') {
       return (
         <Suspense fallback={<PageLoader />}>
-          <Onboarding onComplete={handleOnboardingComplete} />
+          <Onboarding />
         </Suspense>
       );
     }
@@ -102,9 +102,7 @@ function AppContent() {
         <Route path={"/settings"} component={Settings} />
         <Route path={"/blog"} component={Blog} />
         <Route path={"/blog/:slug"} component={BlogArticle} />
-        <Route path={"/onboarding"}>
-          <Onboarding onComplete={handleOnboardingComplete} />
-        </Route>
+        <Route path={'/onboarding'} component={Onboarding} />
         <Route path={"/admin"} component={Admin} />
         <Route path={"/terms"} component={Terms} />
         <Route path={"/privacy"} component={Privacy} />

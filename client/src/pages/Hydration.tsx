@@ -21,6 +21,7 @@ import {
   Zap
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { useUserProfile, calculateMetrics } from "@/hooks/useUserProfile";
 
 interface DrinkEntry {
@@ -339,6 +340,7 @@ export default function Hydration() {
 
       {/* Navigation */}
       <Navigation />
+      <Footer />
     </div>
   );
 }

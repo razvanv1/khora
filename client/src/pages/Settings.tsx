@@ -23,6 +23,7 @@ import {
   TestTube
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { useLanguage } from "@/i18n";
 import { useReminders } from "@/hooks/useReminders";
@@ -481,6 +482,7 @@ export default function Settings() {
       </div>
 
       <Navigation />
+      <Footer />
     </div>
   );
 }

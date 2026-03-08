@@ -147,3 +147,15 @@
 - [x] Setare ore remindere suplimente (B12, D3, Omega-3)
 - [x] Scheduler pentru notificări la orele setate (verificare la fiecare minut)
 - [x] UI pentru configurare remindere în Settings (toggle, oră, zile)
+
+
+## CRITICAL FIXES - AUTHENTICATION & NAVIGATION
+- [ ] Implement proper authentication system with Manus OAuth (replace localStorage)
+- [ ] Add login/logout functionality to Home page
+- [ ] Migrate Onboarding to use database instead of localStorage
+- [ ] Create universal Footer component with links to Landing, Blog, FAQ, Contact, Privacy
+- [ ] Add Footer to all internal pages (Home, Pantry, Recipes, Hydration, Supplements, Profile, Settings)
+- [ ] Fix navigation between public (Landing) and authenticated sections
+- [ ] Add "Back to Landing" or "About" link in authenticated app navigation
+- [ ] Implement real email sending (welcome email, confirmation email to users)
+- [ ] Test complete user journey: signup → email → onboarding → app → logout → login → data persists
