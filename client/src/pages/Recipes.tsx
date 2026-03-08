@@ -11,7 +11,6 @@ import { Clock, Flame, Heart, ChefHat, Users, Filter, Star } from "lucide-react"
 import { Link } from "wouter";
 import CosmicBackground from "@/components/CosmicBackground";
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import { recipes, Recipe, getAllCategories, getAllTags } from "@/data/recipes";
 import { useFavoriteRecipes } from "@/hooks/useFavoriteRecipes";
 
@@ -428,7 +427,6 @@ export default function Recipes() {
       </main>
 
       <Navigation />
-      <Footer />
     </div>
   );
 }

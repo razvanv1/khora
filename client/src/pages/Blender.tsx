@@ -10,7 +10,6 @@ import { ChefHat, Clock, Users, ArrowLeft, Plus, X, Search, Flame, Trash2, Check
 import { Link } from "wouter";
 import CosmicBackground from "@/components/CosmicBackground";
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import { ingredients, categories, searchIngredients, getIngredientsByCategory, type Ingredient } from "@/data/ingredients";
 
 // Recipe database
@@ -366,7 +365,6 @@ export default function Blender() {
           </motion.div>
         </main>
         <Navigation />
-      <Footer />
       </div>
     );
   }
@@ -458,7 +456,6 @@ export default function Blender() {
           </div>
         </main>
         <Navigation />
-      <Footer />
       </div>
     );
   }
@@ -689,7 +686,6 @@ export default function Blender() {
       </main>
 
       <Navigation />
-      <Footer />
     </div>
   );
 }

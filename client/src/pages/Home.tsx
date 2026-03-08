@@ -1,254 +1,211 @@
-/**
- * KHORA Home - Simple, Functional Dashboard
- * Clean FoodTech design with data persistence
+/*
+ * KHORA Home Page - Premium Apple VisionOS 2026
+ * Design: Cosmic Blue + Golden Accent + Glassmorphism
+ * Limba: Română
  */
 
-import { useEffect, useState } from "react";
-import { Link, useLocation } from "wouter";
-import { Leaf, Plus, LogOut, Settings, BookOpen, HelpCircle } from "lucide-react";
-import Footer from "@/components/Footer";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { motion } from "framer-motion";
+import { Link } from "wouter";
+import { 
+  Sparkles, 
+  ChefHat, 
+  Droplets, 
+  Pill, 
+  BookOpen,
+  ArrowRight,
+  User
+} from "lucide-react";
+import Navigation from "@/components/Navigation";
 
-interface UserData {
-  name: string;
-  email: string;
-  weight: number;
-  height: number;
-  age: number;
-  goal: string;
-}
+const features = [
+  {
+    icon: Sparkles,
+    title: "Cămara Digitală",
+    description: "Ingredientele tale organizate ca o constelație",
+    href: "/pantry",
+    color: "#2dd4bf"
+  },
+  {
+    icon: ChefHat,
+    title: "Generator Rețete",
+    description: "Combină ingrediente, descoperă rețete",
+    href: "/blender",
+    color: "#d4a574"
+  },
+  {
+    icon: Droplets,
+    title: "Hidratare",
+    description: "Tracking lichide cu recomandări personalizate",
+    href: "/hydrate",
+    color: "#60a5fa"
+  },
+  {
+    icon: Pill,
+    title: "Suplimente",
+    description: "Gestionează vitaminele și mineralele",
+    href: "/supplements",
+    color: "#a78bfa"
+  }
+];
 
 export default function Home() {
-  const [, setLocation] = useLocation();
-  const [user, setUser] = useState<UserData | null>(null);
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-
-  useEffect(() => {
-    // Load user data from localStorage
-    const saved = localStorage.getItem('khora_user_data');
-    if (saved) {
-      setUser(JSON.parse(saved));
-    } else {
-      // No user data - redirect to onboarding
-      setLocation('/onboarding');
-    }
-  }, [setLocation]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('khora_user_data');
-    setLocation('/landing');
-  };
-
-  const handleStartOnboarding = () => {
-    setLocation('/onboarding');
-  };
-
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-12 h-12 rounded-full border-4 border-green-200 border-t-green-600 animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">Se încarcă...</p>
-        </div>
-      </div>
-    );
-  }
+  const { user, isAuthenticated } = useAuth();
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      {/* Header */}
-      <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
-        <div className="container-max py-4 flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-2 cursor-pointer">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-600 to-amber-500 rounded-lg flex items-center justify-center">
-                <Leaf className="w-6 h-6 text-white" />
+    <div className="min-h-screen bg-[#0a1628] relative overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
+        style={{ backgroundImage: 'url(/images/khora_hero_bg.webp)' }}
+      />
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/40 via-transparent to-[#0a1628]" />
+
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex flex-col px-6 pt-12 pb-32">
+        
+        {/* Header */}
+        <motion.header 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8"
+        >
+          <h1 className="text-4xl font-light tracking-wider text-white mb-2">
+            Khora - Nutriție Vegană Premium
+          </h1>
+          <p className="text-white/60 text-sm tracking-wide">
+            Nutriție Holistică Vegană
+          </p>
+          {isAuthenticated && user && (
+            <p className="text-[#2dd4bf] text-xs mt-2">
+              Bine ai venit, {user.name || 'Utilizator'}
+            </p>
+          )}
+        </motion.header>
+
+        {/* Hero Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="text-center mb-10"
+        >
+          <h2 className="text-2xl font-light text-white mb-3 leading-relaxed">
+            Cămara Ta Digitală de Rețete Vegane
+          </h2>
+          <p className="text-white/50 text-sm max-w-xs mx-auto">
+            Transformă bucătăria într-o experiență de spatial computing. 
+            Descoperă rețete create din ingredientele tale.
+          </p>
+        </motion.section>
+
+        {/* Feature Cards */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="grid grid-cols-2 gap-4 mb-8"
+        >
+          {features.map((feature, index) => (
+            <Link key={feature.href} href={feature.href}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="p-5 rounded-2xl cursor-pointer group"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                }}
+              >
+                <div 
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-3 transition-all duration-300 group-hover:scale-110"
+                  style={{ 
+                    background: `${feature.color}15`,
+                    boxShadow: `0 0 20px ${feature.color}20`
+                  }}
+                >
+                  <feature.icon className="w-5 h-5" style={{ color: feature.color }} />
+                </div>
+                <h3 className="text-white font-medium text-sm mb-1">{feature.title}</h3>
+                <p className="text-white/60 text-xs leading-relaxed">{feature.description}</p>
+              </motion.div>
+            </Link>
+          ))}
+        </motion.section>
+
+        {/* Quick Actions */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
+          className="space-y-3"
+        >
+          {/* Blog Link */}
+          <Link href="/blog">
+            <div 
+              className="p-4 rounded-2xl flex items-center justify-between group cursor-pointer"
+              style={{
+                background: 'rgba(255, 255, 255, 0.04)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <div 
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ background: 'rgba(34, 197, 94, 0.15)' }}
+                >
+                  <BookOpen className="w-5 h-5 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-white font-medium text-sm">Blog Nutriție</h3>
+                  <p className="text-white/60 text-xs">Articole educative vegane</p>
+                </div>
               </div>
-              <span className="text-2xl font-bold text-gray-900">KHORA</span>
-            </a>
+              <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-white/60 transition-colors" />
+            </div>
           </Link>
 
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-600">
-              Bine ai venit, <strong>{user.name}</strong>!
-            </span>
-            <Link href="/settings">
-              <a className="btn btn-ghost">
-                <Settings className="w-5 h-5" />
-              </a>
-            </Link>
-            <button
-              onClick={() => setShowLogoutConfirm(true)}
-              className="btn btn-ghost"
+          {/* Profile Link */}
+          <Link href="/profile">
+            <div 
+              className="p-4 rounded-2xl flex items-center justify-between group cursor-pointer"
+              style={{
+                background: 'rgba(255, 255, 255, 0.04)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+              }}
             >
-              <LogOut className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="flex-1 container-max py-12">
-        <div className="max-w-4xl">
-          {/* Welcome Section */}
-          <div className="mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Bun venit la KHORA! 🌱
-            </h1>
-            <p className="text-lg text-gray-600">
-              Aplicația ta personală pentru nutriție vegană. Urmărește ingrediente, generează rețete, monitorizează sănătatea.
-            </p>
-          </div>
-
-          {/* Quick Stats */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="card">
-              <div className="text-sm text-gray-600 mb-2">Vârstă</div>
-              <div className="text-3xl font-bold text-gray-900">{user.age}</div>
-              <div className="text-xs text-gray-500 mt-2">ani</div>
-            </div>
-            <div className="card">
-              <div className="text-sm text-gray-600 mb-2">Greutate</div>
-              <div className="text-3xl font-bold text-gray-900">{user.weight}</div>
-              <div className="text-xs text-gray-500 mt-2">kg</div>
-            </div>
-            <div className="card">
-              <div className="text-sm text-gray-600 mb-2">Obiectiv</div>
-              <div className="text-xl font-bold text-green-600 capitalize">
-                {user.goal === 'lose' ? 'Slăbire' : user.goal === 'gain' ? 'Câștig Masă' : 'Menținere'}
+              <div className="flex items-center gap-3">
+                <div 
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ background: 'rgba(212, 165, 116, 0.15)' }}
+                >
+                  <User className="w-5 h-5 text-[#d4a574]" />
+                </div>
+                <div>
+                  <h3 className="text-white font-medium text-sm">Profilul Meu</h3>
+                  <p className="text-white/60 text-xs">Setări și personalizare</p>
+                </div>
               </div>
+              <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-white/60 transition-colors" />
             </div>
-          </div>
+          </Link>
+        </motion.section>
+      </div>
 
-          {/* Features Grid */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <Link href="/pantry">
-              <a className="card card-hover group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-200 transition">
-                    <Leaf className="w-6 h-6 text-green-600" />
-                  </div>
-                  <Plus className="w-5 h-5 text-gray-400 group-hover:text-green-600 transition" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  Cămara Digitală
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Urmărește 430+ ingrediente vegane cu date nutriționale complete.
-                </p>
-              </a>
-            </Link>
-
-            <Link href="/blender">
-              <a className="card card-hover group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center group-hover:bg-amber-200 transition">
-                    <span className="text-xl">🍽️</span>
-                  </div>
-                  <Plus className="w-5 h-5 text-gray-400 group-hover:text-amber-600 transition" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  Generator Rețete
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Creează rețete personalizate pe baza ingredientelor tale.
-                </p>
-              </a>
-            </Link>
-
-            <Link href="/hydrate">
-              <a className="card card-hover group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition">
-                    <span className="text-xl">💧</span>
-                  </div>
-                  <Plus className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  Hidratare
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Monitorizează consumul zilnic de apă cu recomandări personalizate.
-                </p>
-              </a>
-            </Link>
-
-            <Link href="/supplements">
-              <a className="card card-hover group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200 transition">
-                    <span className="text-xl">💊</span>
-                  </div>
-                  <Plus className="w-5 h-5 text-gray-400 group-hover:text-purple-600 transition" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  Suplimente
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Gestionează vitaminele și mineralele esențiale pentru vegani.
-                </p>
-              </a>
-            </Link>
-          </div>
-
-          {/* Info Links */}
-          <div className="grid md:grid-cols-2 gap-4 mb-12">
-            <Link href="/blog">
-              <a className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                <BookOpen className="w-5 h-5 text-green-600" />
-                <div>
-                  <div className="font-semibold text-gray-900">Blog</div>
-                  <div className="text-sm text-gray-600">Articole educative vegane</div>
-                </div>
-              </a>
-            </Link>
-            <Link href="/faq">
-              <a className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                <HelpCircle className="w-5 h-5 text-green-600" />
-                <div>
-                  <div className="font-semibold text-gray-900">FAQ</div>
-                  <div className="text-sm text-gray-600">Întrebări frecvente</div>
-                </div>
-              </a>
-            </Link>
-          </div>
-
-          {/* Disclaimer */}
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-900">
-            <strong>⚠️ Disclaimer:</strong> Recomandările din Khora sunt orientative și nu înlocuiesc consultul cu un profesionist de sănătate. Consultă întotdeauna cu un medic înainte de a face schimbări semnificative în dietă.
-          </div>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <Footer />
-
-      {/* Logout Confirmation Modal */}
-      {showLogoutConfirm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-sm mx-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Ești sigur că vrei să te deconectezi?
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Datele tale vor rămâne salvate în browser. Poți să te conectezi din nou oricând.
-            </p>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowLogoutConfirm(false)}
-                className="flex-1 btn btn-secondary"
-              >
-                Anulare
-              </button>
-              <button
-                onClick={handleLogout}
-                className="flex-1 btn btn-primary"
-              >
-                Deconectare
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Navigation */}
+      <Navigation />
     </div>
   );
 }

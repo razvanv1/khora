@@ -10,7 +10,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, Plus, X, ChefHat, AlertTriangle, Star, Leaf, Filter, SlidersHorizontal, Flame, Dumbbell, Wheat, Scan } from "lucide-react";
 import { Link } from "wouter";
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import BarcodeScanner from "@/components/BarcodeScanner";
 import { ingredients, categories, getIngredientsByCategory, searchIngredients, type Ingredient } from "@/data/ingredients";
 
@@ -588,7 +587,6 @@ export default function Pantry() {
       />
 
       <Navigation />
-      <Footer />
     </div>
   );
 }

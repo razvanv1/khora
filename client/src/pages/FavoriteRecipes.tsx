@@ -10,7 +10,6 @@ import { Clock, Flame, Heart, Users, ArrowLeft, Trash2, Share2 } from "lucide-re
 import { Link, useLocation } from "wouter";
 import CosmicBackground from "@/components/CosmicBackground";
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import { recipes, Recipe, getRecipesByIds } from "@/data/recipes";
 import { useFavoriteRecipes } from "@/hooks/useFavoriteRecipes";
 
@@ -328,7 +327,6 @@ export default function FavoriteRecipes() {
       </main>
 
       <Navigation />
-      <Footer />
     </div>
   );
 }

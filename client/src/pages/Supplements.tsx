@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Pill, Plus, Clock, Check, X, Trash2, Info, Sun, Zap, Brain, Heart, Leaf, MessageSquare, Star } from "lucide-react";
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import StarRating from "@/components/StarRating";
 import SupplementFeedbackModal from "@/components/SupplementFeedbackModal";
 import ShareButton from "@/components/ShareButton";
@@ -311,7 +310,6 @@ export default function Supplements() {
       />
 
       <Navigation />
-      <Footer />
     </div>
   );
 }
